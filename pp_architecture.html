@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<title>Dream School Redesign — PP Sample 3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --bg:          #F8F7F4;
+  --bg-alt:      #EFEDE7;
+  --surface:     #FFFFFF;
+  --border:      #D8D4C8;
+  --fg:          #1E1C17;
+  --fg-muted:    #6B6658;
+  --accent:      #2C4A3E;      /* deep architectural green */
+  --accent-warm: #C4762A;      /* warm amber/terracotta */
+  --accent-lt:   #E8EDE9;
+  --good:        #2D6A42;
+  --warn:        #B8530E;
+  --heading-font:'Space Grotesk', 'Arial', sans-serif;
+  --body-font:   'Source Serif 4', Georgia, serif;
+  --ui-font:     'DM Sans', system-ui, sans-serif;
+  --radius:      6px;
+  --shadow:      0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#141210; --bg-alt:#1C1A16; --surface:#232019; --border:#36322A;
+    --fg:#EAE6DC; --fg-muted:#8C8472; --accent:#5B8A72; --accent-warm:#D4883A;
+    --accent-lt:#1A2620; --good:#4CAF60; --warn:#E07840; color-scheme:dark;
+    --shadow:0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#141210; --bg-alt:#1C1A16; --surface:#232019; --border:#36322A;
+  --fg:#EAE6DC; --fg-muted:#8C8472; --accent:#5B8A72; --accent-warm:#D4883A;
+  --accent-lt:#1A2620; --good:#4CAF60; --warn:#E07840; color-scheme:dark;
+  --shadow:0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body-font);font-size:12pt;line-height:1.75;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+
+.toc-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--accent);padding:0 max(24px,env(safe-area-inset-left,0px));display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.toc-bar::-webkit-scrollbar{display:none}
+.toc-bar a{font-family:var(--ui-font);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;padding:14px 16px;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.toc-bar a:hover{color:#fff;border-bottom-color:var(--accent-warm)}
+.toc-bar .logo-chip{font-family:var(--heading-font);font-size:15px;font-weight:700;color:#fff;padding:14px 20px 14px 0;margin-right:12px;border-right:1px solid rgba(255,255,255,.2);white-space:nowrap}
+
+.cover{background:var(--accent);color:#fff;padding:56px max(40px,env(safe-area-inset-left,0px)) 48px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-30px;right:-40px;width:280px;height:280px;border:40px solid var(--accent-warm);opacity:.15;border-radius:4px;transform:rotate(15deg)}
+.cover::after{content:'';position:absolute;bottom:-20px;left:30%;width:180px;height:180px;background:var(--accent-warm);opacity:.07;border-radius:4px}
+.cover-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.cover-eyebrow{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:14px}
+.cover h1{font-family:var(--heading-font);font-size:clamp(34px,6.5vw,68px);font-weight:700;line-height:1.05;margin:0 0 16px;text-wrap:balance}
+.cover h1 span{color:var(--accent-warm)}
+.cover-subtitle{font-size:17px;color:rgba(255,255,255,.75);font-style:italic;margin-bottom:28px;max-width:600px}
+.cover-meta{display:flex;flex-wrap:wrap;gap:8px 28px;font-family:var(--ui-font);font-size:13px;color:rgba(255,255,255,.7)}
+.cover-meta strong{color:#fff}
+
+.spec-tiles{max-width:960px;margin:20px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-family:var(--ui-font)}
+.spec-tile{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;text-align:center}
+.spec-tile .s-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:6px}
+.spec-tile .s-val{font-size:22px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1}
+.spec-tile .s-sub{font-size:11px;color:var(--fg-muted);margin-top:3px}
+.spec-tile .s-warn{font-size:10px;color:var(--warn);margin-top:4px}
+
+.disclaimer{max-width:960px;margin:16px auto 0;background:#FFF3CD;border:1px solid #E8A000;border-left:5px solid #E8A000;border-radius:var(--radius);padding:16px 22px;font-family:var(--ui-font);font-size:13px;line-height:1.65}
+.disclaimer strong{color:#7A5000;display:block;margin-bottom:6px;font-size:14px}
+.disclaimer p{margin:0 0 6px}
+.disclaimer p:last-child{margin:0}
+
+.sup-note{max-width:960px;margin:12px auto 0;background:color-mix(in srgb,var(--accent) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 20px;font-family:var(--ui-font);font-size:13px;line-height:1.7}
+.sup-note strong{color:var(--accent);display:block;margin-bottom:4px}
+
+.page-wrap{max-width:960px;margin:0 auto;padding-bottom:80px}
+.section{padding:48px 0 0}
+.section+.section{border-top:1px solid var(--border);margin-top:48px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.section-num{font-family:var(--heading-font);font-size:56px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;user-select:none}
+.section-label{font-family:var(--ui-font);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-warm);display:block;margin-bottom:4px}
+h2{font-family:var(--heading-font);font-size:clamp(22px,3.5vw,36px);font-weight:700;margin:0;line-height:1.1;text-wrap:balance}
+h3{font-family:var(--heading-font);font-size:22px;font-weight:700;margin:36px 0 12px;color:var(--accent)}
+h4{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin:24px 0 8px}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+.criterion-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px 4px 8px;border-radius:20px;margin-bottom:20px}
+.criterion-tag .dot{width:6px;height:6px;background:var(--accent-warm);border-radius:50%}
+
+.callout{border-left:3px solid var(--accent);background:var(--accent-lt);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout.warm{border-left-color:var(--accent-warm);background:color-mix(in srgb,var(--accent-warm) 8%,var(--bg))}
+
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.tip-card{border-radius:var(--radius);padding:18px 20px;font-size:14px;line-height:1.6}
+.tip-card.good{background:color-mix(in srgb,var(--good) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+.tip-card.bad{background:color-mix(in srgb,var(--warn) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--warn) 25%,transparent)}
+.tip-card .tip-header{display:flex;align-items:center;gap:8px;font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.tip-card.good .tip-header{color:var(--good)}
+.tip-card.bad .tip-header{color:var(--warn)}
+.tip-card ul{margin:0;padding-left:16px}
+.tip-card li{margin-bottom:5px}
+
+.timeline{position:relative;padding-left:28px;margin:24px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--accent-warm);opacity:.4}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent-warm);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent-warm)}
+.tl-week{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:4px}
+.tl-title{font-family:var(--heading-font);font-size:17px;font-weight:700;margin-bottom:4px;color:var(--accent)}
+.tl-desc{font-size:14px;color:var(--fg-muted);margin:0}
+
+.criteria-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;overflow-x:auto;display:block}
+.criteria-table th,.criteria-table td{padding:11px 14px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.criteria-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.criteria-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cb{font-family:var(--ui-font);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.cb-func{background:#F0FBF0;color:#2D7A2D}
+.cb-aes{background:#FCF0FF;color:#6B2D9A}
+.cb-env{background:#F0F8FF;color:#1A5FAA}
+.cb-cost{background:#FFF5EC;color:#AA5000}
+
+.atl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.atl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.atl-skill-name{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px}
+.atl-card p{font-size:14px;margin:0}
+
+.source-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow);font-size:14px}
+.source-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.source-num{background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.source-title{font-weight:600;line-height:1.4}
+.source-meta{color:var(--fg-muted);font-size:13px}
+.source-eval{color:var(--fg-muted);font-style:italic;margin-top:6px}
+.craap-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.craap-pill{font-family:var(--ui-font);font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--accent-lt);color:var(--accent)}
+
+.reflection-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:20px 0;box-shadow:var(--shadow);font-style:italic;font-size:15.5px;line-height:1.8;position:relative}
+.reflection-block::before{content:'"';font-family:var(--heading-font);font-size:80px;color:var(--border);position:absolute;top:0;left:16px;line-height:1}
+.reflection-block p{padding-left:20px}
+
+.eval-row{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.eval-header{display:flex;align-items:center;gap:12px;background:var(--bg-alt);padding:12px 16px;font-family:var(--ui-font);font-size:13px;font-weight:600}
+.eval-body{padding:14px 16px;font-size:14.5px}
+.eval-verdict{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui-font);font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;margin-left:8px}
+.v-met{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.v-partial{background:color-mix(in srgb,var(--accent-warm) 15%,transparent);color:var(--accent-warm)}
+
+.lp-grid{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.lp-chip{background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:20px;padding:6px 14px;font-family:var(--ui-font);font-size:13px;font-weight:600;color:var(--accent)}
+.lp-chip span{color:var(--fg-muted);font-weight:400;font-size:12px;margin-left:6px}
+
+.ref-list{counter-reset:refs;list-style:none;padding:0;margin:0}
+.ref-list li{counter-increment:refs;display:flex;gap:12px;margin-bottom:12px;font-size:14px;line-height:1.6}
+.ref-list li::before{content:counter(refs);min-width:24px;height:24px;background:var(--bg-alt);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ui-font);font-size:11px;font-weight:700;color:var(--fg-muted);flex-shrink:0;margin-top:2px}
+
+.appendix-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.appendix-title{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.appendix-item p{font-size:14px}
+
+.img-box{background:var(--bg-alt);border:1px dashed var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--fg-muted);font-family:var(--ui-font);font-size:13px;gap:8px}
+.img-box svg{opacity:.4}
+.img-box small{font-size:11px;opacity:.7}
+.img-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0}
+.img-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+
+.log-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0}
+.log-table th,.log-table td{padding:10px 14px;border:1px solid var(--border);text-align:left;vertical-align:top}
+.log-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+
+.report-footer{border-top:1px solid var(--border);margin-top:64px;padding:24px 0;font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* Architecture-specific: floor plan grid visual */
+.floorplan-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,80px);gap:3px;margin:20px 0;border:2px solid var(--accent);border-radius:4px;overflow:hidden}
+.room{background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-family:var(--ui-font);font-size:11px;font-weight:600;text-align:center;color:var(--fg-muted);padding:8px;border:1px solid var(--border)}
+.room.accent{background:var(--accent-lt);color:var(--accent);border-color:var(--accent)}
+.room.warm{background:color-mix(in srgb,var(--accent-warm) 12%,var(--bg));color:var(--accent-warm);border-color:var(--accent-warm)}
+.room.span-2{grid-column:span 2}
+
+@media(max-width:640px){.cover{padding:36px 0 32px}.tips-grid,.atl-grid,.img-row{grid-template-columns:1fr}.img-row-2{grid-template-columns:1fr}.floorplan-grid{grid-template-columns:repeat(2,1fr)}}
+@media print{.toc-bar{display:none}}
+</style>
+
+<style>
+.home-bar{background:#1a1a1a;padding:0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:16px;font-family:'DM Sans',system-ui,sans-serif}
+.home-bar a.home-link{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;opacity:.85;transition:opacity .2s}
+.home-bar a.home-link:hover{opacity:1}
+.home-bar .divider{color:rgba(255,255,255,.25);font-size:16px;line-height:1}
+.home-bar .current-title{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="home-bar">
+  <a class="home-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    All Samples
+  </a>
+  <span class="divider">/</span>
+  <span class="current-title">Sample 03 — Dream School Redesign Model</span>
+</div>
+<nav class="toc-bar">
+  <span class="logo-chip">MYP Personal Project</span>
+  <a href="#intro">Introduction</a>
+  <a href="#criterion-a">Criterion A</a>
+  <a href="#criterion-b">Criterion B</a>
+  <a href="#criterion-c">Criterion C</a>
+  <a href="#references">References</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<div class="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">IB MYP Year 5 · Personal Project Report · Sample 3 of 5</p>
+    <h1>Reimagining the <span>Learning Space</span></h1>
+    <p class="cover-subtitle">A scale architectural model and design report proposing a student-centred redesign of a school learning environment, informed by environmental psychology and space design principles</p>
+    <div class="cover-meta">
+      <div><strong>Category:</strong> Architecture &amp; Space Design</div>
+      <div><strong>Global Context:</strong> Identities &amp; Relationships</div>
+      <div><strong>Supervisor:</strong> [Supervisor Name]</div>
+      <div><strong>Candidate Number:</strong> [000XXX-00000]</div>
+      <div><strong>School:</strong> [Your School Name]</div>
+    </div>
+  </div>
+</div>
+
+<div class="spec-tiles">
+  <div class="spec-tile"><div class="s-label">Word Count</div><div class="s-val">1,500–3,500</div><div class="s-sub">words (body text only)</div><div class="s-warn">References &amp; appendices excluded</div></div>
+  <div class="spec-tile"><div class="s-label">Page Limit</div><div class="s-val">Max 15</div><div class="s-sub">pages (report body)</div><div class="s-warn">Confirm with your supervisor</div></div>
+  <div class="spec-tile"><div class="s-label">Font Size</div><div class="s-val">Min 11pt</div><div class="s-sub">12pt recommended</div><div class="s-warn">Margins: min 2 cm all sides</div></div>
+  <div class="spec-tile"><div class="s-label">Citations</div><div class="s-val">Harvard</div><div class="s-sub">in-text + bibliography</div><div class="s-warn">Min 5 academic sources</div></div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ IMPORTANT — FOR REFERENCE ONLY. DO NOT COPY.</strong>
+  <p>This is a model report published as a student reference resource to illustrate the quality of work expected in an IB MYP Personal Project. <strong>Students must NOT copy, paraphrase, or reproduce any part of this report.</strong> Your Personal Project must be entirely your own original, creative, and innovative work.</p>
+  <p>Following this sample and reading the checklist does <strong>not</strong> guarantee any particular grade. Meet regularly with your Personal Project supervisor, submit all drafts on time, act on feedback, and follow your supervisor's instructions above all else.</p>
+</div>
+
+<div class="sup-note">
+  <strong>📌 Reading note for students</strong>
+  Notice: (1) The learning goal is about <em>environmental psychology and how space affects learning</em> — not "how to build a model." (2) The physical product (scale model) demonstrates the research, but the report is the evidence of learning. (3) Criterion C evaluates the design proposal and model against each success criterion individually — not just whether people "liked" it.
+</div>
+
+<div class="page-wrap">
+
+<section class="section" id="intro">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">00</span>
+    <div><span class="section-label">Overview</span><h2>Introduction &amp; Personal Interest</h2></div>
+  </div>
+  <p>I spend approximately seven hours a day inside school buildings. Yet despite the significant portion of my adolescence spent in classrooms, I had never stopped to question why those spaces looked and felt the way they did. The trigger came during a geography unit on human geography, when I read about how urban planners design public spaces to encourage or discourage certain behaviours. It struck me that the same logic must apply to educational environments — and if it did, what did the research say about the kind of environments that actually support learning?</p>
+  <p>I began observing my own school with new eyes. The library was quiet but unwelcoming — bright fluorescent lighting, rows of identical chairs facing the same direction, no natural light from the side of the room facing outdoors. The design appeared to have been chosen for efficiency rather than for the psychological needs of the students using it. Was this accidental, or had the designers simply not been aware of the growing body of research on environmental psychology in educational settings?</p>
+  <p>This curiosity became my learning goal: to develop an informed understanding of how physical learning environments affect student wellbeing, focus, and social interaction — drawing on environmental psychology, space design theory, and educational architecture — in order to apply that understanding to a design proposal and scale model for an improved learning space.</p>
+  <div class="callout">
+    <strong>Key distinction:</strong> The <em>learning goal</em> is understanding environmental psychology and its application to educational space design. The <em>product goal</em> is producing a scale architectural model. These are related but not the same — the research could exist without the model, and the model only has value because of the research it applies.
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Good Practice Here</div>
+      <ul>
+        <li>The personal interest is rooted in a specific intellectual moment — not "I like buildings"</li>
+        <li>The introduction identifies a genuine gap or problem (poorly designed learning spaces)</li>
+        <li>Learning goal names the academic discipline being studied (environmental psychology)</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Mistakes</div>
+      <ul>
+        <li>"I chose this topic because I love art and design" — no intellectual question identified</li>
+        <li>"My learning goal is to make a model of my dream school" — product, not learning</li>
+        <li>Introduction that describes the product before establishing the personal interest</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="criterion-a">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">A</span>
+    <div><span class="section-label">Criterion A — Planning</span><h2>Planning the Personal Project</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion A: 8 marks total (Ai + Aii + Aiii)</div>
+
+  <h3 id="ai">Ai · Learning Goal &amp; Global Context</h3>
+  <h4>Learning Goal</h4>
+  <p>My learning goal is to understand how the physical design of learning spaces — including factors such as natural light, acoustic quality, spatial flexibility, colour, and furniture configuration — affects student cognitive performance, emotional wellbeing, and social behaviour, and to explore how principles from environmental psychology and educational architecture can be practically applied in a real school redesign context.</p>
+  <p>This is distinct from my product. The knowledge I am developing — about Kaplan's Attention Restoration Theory, about the evidence on natural light and academic performance, about the principles of biophilic design — would be intellectually valuable whether or not I produced a physical model. The model is the vehicle for applying and demonstrating this understanding.</p>
+
+  <h4>Global Context: Identities &amp; Relationships</h4>
+  <p>I selected <strong>Identities and Relationships</strong>, with a focus on the interplay between the physical environment and the development of personal and communal identity during adolescence. Schools are among the primary environments in which young people form their sense of self, their relationships with peers, and their relationship with learning itself. Poorly designed spaces can communicate unintentional messages about how students are valued. A student sitting under harsh fluorescent lighting in a space with no natural view, personal ownership, or acoustic comfort may internalise a message — however unconsciously — that their comfort is not a priority. My project asks: what would a space communicate if it were designed with students' psychological and social needs at the centre?</p>
+
+  <h3 id="aii">Aii · Intended Product &amp; Success Criteria</h3>
+  <h4>Intended Product</h4>
+  <p>My intended product is a <strong>1:25 scale architectural model</strong> of a redesigned secondary school learning space (approximately the size of a standard school library), accompanied by a design report that explains and justifies each design decision with reference to the environmental psychology research. The model will be constructed from foam board, balsa wood, and recycled materials, mounted on a base measuring approximately 60 × 40 cm. The design report (5–8 pages, separate from the PP report) will include annotated floor plans, a materials list, lighting calculations, and a rationale for every major design element.</p>
+
+  <div class="img-row-2">
+    <div class="img-box" style="min-height:130px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+      Photograph of completed 1:25 scale model — overview angle
+      <small>Replace with your actual product photograph</small>
+    </div>
+    <div class="img-box" style="min-height:130px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Floor plan drawing — annotated with design decisions
+      <small>Replace with your annotated floor plan</small>
+    </div>
+  </div>
+
+  <!-- Conceptual floor plan diagram -->
+  <h4>Conceptual Space Layout (1:25 Scale Model Design)</h4>
+  <div class="floorplan-grid">
+    <div class="room warm span-2">Collaborative Cluster Zone<br><small>Moveable pod seating · acoustic panels</small></div>
+    <div class="room accent span-2">Natural Light Study Bay<br><small>North-facing glazing · reading nooks</small></div>
+    <div class="room">Quiet Focus Zone<br><small>Biophilic wall</small></div>
+    <div class="room accent">Maker Corner<br><small>Standing height work</small></div>
+    <div class="room">Breakout Alcove<br><small>Curved seating</small></div>
+    <div class="room warm">Flexible Seminar<br><small>Whiteboard walls</small></div>
+    <div class="room">Storage / Entry</div>
+    <div class="room span-2" style="background:var(--bg-alt);">Circulation + informal social space (biophilic planting strip)</div>
+    <div class="room">Tech Charging</div>
+  </div>
+  <p style="font-size:12px;color:var(--fg-muted);">Schematic only — replace with your actual annotated floor plan drawing.</p>
+
+  <h4>Success Criteria — ACCESSFM Framework</h4>
+  <div style="overflow-x:auto;">
+    <table class="criteria-table">
+      <thead>
+        <tr><th>#</th><th>Criterion</th><th>ACCESSFM</th><th>Measurable Standard</th><th>Justification</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Every design decision in the model must be traceable to at least one peer-reviewed source on environmental psychology or educational architecture</td><td><span class="cb cb-func">Function</span></td><td>Annotation map in design report links each element to a citation; verified by supervisor</td><td>Design without evidence is decoration; the project's purpose is to apply research, not to create a personal aesthetic preference</td></tr>
+        <tr><td>2</td><td>The model must incorporate a minimum of 3 distinct evidence-based environmental features (e.g., natural light strategy, acoustic management, biophilic elements)</td><td><span class="cb cb-func">Function</span></td><td>Count of distinct strategies, each with a named citation</td><td>Barrett et al. (2015) HEAD project found that 3 specific environmental parameters — light, air quality, and spatial ownership — together explained 50% of pupil learning progression variance</td></tr>
+        <tr><td>3</td><td>The model must be to a consistent scale of 1:25, with room dimensions corresponding to realistic minimum space requirements for the intended number of students</td><td><span class="cb cb-env">Environment</span></td><td>Measurements verified against 1:25 scale; compared to UAE school building standards (3.6–4.5 m² per student)</td><td>A model that is unrealistic in scale cannot serve as a serious design proposal; spatial standards exist for student welfare reasons</td></tr>
+        <tr><td>4</td><td>Students at the school who view the model and read the design summary must rate the proposed space as more desirable than their current space (≥60% of respondents)</td><td><span class="cb cb-aes">Customer</span></td><td>Anonymous survey of ≥10 students; rating of existing vs. proposed space on 5-point scale</td><td>Any redesign proposal must be responsive to the users of the space — student voice is an essential evaluation mechanism</td></tr>
+        <tr><td>5</td><td>Total materials cost must not exceed AED 150</td><td><span class="cb cb-cost">Cost</span></td><td>Itemised receipts</td><td>The design should be achievable with limited resources, reflecting the constraints of a real school environment</td></tr>
+        <tr><td>6</td><td>The model must be structurally stable — able to be transported to the exhibition without damage to any element</td><td><span class="cb cb-func">Function</span></td><td>Model arrives at exhibition intact; all elements remain fixed</td><td>A physical product that cannot survive handling has not met a basic quality threshold</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="aiii">Aiii · Action Plan</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 1–2</div><div class="tl-title">Research — Environmental Psychology &amp; School Design</div><p class="tl-desc">Read primary literature on Attention Restoration Theory, biophilic design, acoustic impacts on learning, and natural light studies. Apply CRAAP test to all sources. Build an annotated bibliography.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 3</div><div class="tl-title">Site Observation &amp; Current Space Analysis</div><p class="tl-desc">Measure and photograph the existing space. Document current conditions against environmental psychology criteria. Identify specific design failures the proposal will address.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 4–5</div><div class="tl-title">Design Development — Floor Plans &amp; Annotations</div><p class="tl-desc">Produce hand-drawn and digital floor plans at 1:25 scale. Annotate every design decision with a source. Seek teacher feedback on feasibility and spatial logic.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 6–8</div><div class="tl-title">Model Construction</div><p class="tl-desc">Build the scale model in stages: base and walls first, then furniture and fittings, then detail elements (lighting simulation, plant features). Photograph each stage for appendix evidence.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 9</div><div class="tl-title">Student Survey &amp; Feedback</div><p class="tl-desc">Display model to ≥10 school students. Run the comparison survey (current vs. proposed space, 5-point scale). Collect and analyse results (Success Criterion 4).</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 10–12</div><div class="tl-title">Report Writing, Review &amp; Exhibition Preparation</div><p class="tl-desc">Write PP report with full Criterion A, B, C coverage. Final supervisor meeting. Prepare exhibition display with model, floor plans, and survey data visualisation.</p></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-b">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">B</span>
+    <div><span class="section-label">Criterion B — Applying Skills</span><h2>Applying ATL Skills</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion B: 8 marks total (Bi + Bii)</div>
+
+  <h3 id="bi">Bi · ATL Skills Applied to the Learning Goal</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Research Skills — Evaluating Contradictory Evidence</div>
+      <p>A significant challenge in developing my learning was that the research literature on school environments is not uniform. Heschong Mahone Group (1999) found that students in classrooms with more natural daylight progressed 20% faster in maths and 26% faster in reading. However, subsequent critiques (Seppänen et al., 2006) noted methodological weaknesses in the daylighting correlation: the classrooms with more windows might also have had better teachers or newer buildings overall. I had to learn to evaluate primary studies not just for their conclusions but for the rigour of their methodology — distinguishing correlation from causation, and noting where variables were not adequately controlled. This skill of methodological evaluation was entirely new to me and changed how I now read any research report, academic or otherwise.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Thinking Skills — Applying Theory to Practice</div>
+      <p>Kaplan's Attention Restoration Theory (ART) proposes that directed attention — the cognitive resource required for focused study — is restored by exposure to "restorative environments" characterised by fascination, extent, being-away, and compatibility. Reading the theoretical model was one challenge; translating it into specific design decisions was another. I had to ask: what does "fascination" look like in a school library? I concluded it could be represented by visual complexity — layered surfaces, varied materials, living plants — rather than the visual monotony of identical furniture rows. This translation from abstract theory to specific, physical design choices was the intellectual core of my project and the primary evidence of my thinking skills development.</p>
+    </div>
+  </div>
+
+  <h3 id="bii">Bii · ATL Skills Applied to Creating the Product</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Self-Management — Iterative Prototyping &amp; Revision</div>
+      <p>My first attempt at constructing the acoustic panel walls — using foam board layered with fabric — collapsed when the adhesive failed overnight. Rather than rebuilding the same design, I researched the structural properties of different adhesive types and discovered that PVA glue creates a more flexible bond suitable for layered materials than the hot glue I had been using. I rebuilt the panels using a PVA-balsa wood composite, which held securely. This experience of planned failure and systematic revision was not something I had previously experienced in school project work, where a failed first attempt typically means starting over rather than iterating.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Social Skills — Soliciting and Acting on Critical Feedback</div>
+      <p>When I shared my initial floor plan with a design-technology teacher, they pointed out that my "collaborative cluster zone" would create significant noise interference for the adjacent "quiet focus zone" — a basic acoustic planning error I had overlooked. My instinct was defensive; I had spent three days on that floor plan. However, I recognised that the teacher's feedback reflected a gap in my knowledge (acoustic zoning principles in space planning) rather than a flaw in my effort. I revised the plan to separate the two zones with the storage and circulation corridor, creating an acoustic buffer. This experience of receiving criticism without defensiveness and acting on it systematically is something I now recognise as a Social skill in the ATL framework: collaborative communication and responsiveness to feedback.</p>
+    </div>
+  </div>
+
+  <h3>Source Evaluation — CRAAP Test Applied</h3>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">1</div><div>
+      <div class="source-title">Barrett, P., et al. (2015). The HEAD Project: Holistic Evidence and Design. <em>University of Salford</em>.</div>
+      <div class="source-meta">Government-funded research report · University of Salford · Peter Barrett: leading researcher in built environment and education</div>
+    </div></div>
+    <p class="source-eval">The HEAD project measured over 700 primary school pupils in 34 UK classrooms across 3 years. It identified that 3 environmental parameters — naturalness (light, air, temperature), individualisation (ownership, flexibility), and appropriate stimulation — together accounted for 16% of the variation in pupils' academic progress across a year. Highly credible due to longitudinal design, large sample, and independent academic authorship. Used to justify Success Criteria 1 and 2.</p>
+    <div class="craap-pills"><span class="craap-pill">✓ Current (2015)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: University of Salford</span><span class="craap-pill">✓ Accurate: government-funded longitudinal</span><span class="craap-pill">✓ Purpose: academic</span></div>
+  </div>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">2</div><div>
+      <div class="source-title">Heschong Mahone Group (1999). <em>Daylighting in Schools: An Investigation into the Relationship Between Daylighting and Human Performance</em>. Pacific Gas &amp; Electric.</div>
+      <div class="source-meta">Research report commissioned by Pacific Gas &amp; Electric · Independent consultant group · large-scale US study</div>
+    </div></div>
+    <p class="source-eval">Used cautiously: the positive findings on daylighting and academic performance are widely cited, but the study has been criticised for correlation/causation conflation (Seppänen et al., 2006). I cite it alongside the critique to acknowledge the contested nature of the evidence base, rather than presenting it as definitive. This reflects the standard of evidence evaluation expected in academic writing.</p>
+    <div class="craap-pills"><span class="craap-pill">~ Current (1999 — older)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: specialist consultants</span><span class="craap-pill">~ Accuracy: contested</span><span class="craap-pill">~ Purpose: commissioned research</span></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-c">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">C</span>
+    <div><span class="section-label">Criterion C — Reflecting</span><h2>Reflecting on Learning &amp; Product</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion C: 8 marks total (Ci + Cii)</div>
+
+  <h3 id="ci">Ci · Impact on Learning &amp; Personal Development</h3>
+  <h4>Impact 1: From Consumer to Designer of Environments</h4>
+  <div class="reflection-block">
+    <p>Before this project, I experienced spaces as a passive user — I moved through them, felt them to be good or bad, but never understood why I felt that way. The moment of transition came when I read Barrett et al.'s finding that "individualisation" — students' sense of ownership over and connection to their physical environment — was one of the three most significant environmental factors in academic progress. It reframed every school space I had ever been in. The bare institutional wall, the furniture bolted to the floor, the absence of any student-made work in the corridor — these were not neutral aesthetic choices. They were, however unintentionally, communicating something about the relationship between the institution and the student.</p>
+    <p>I became not just a researcher but a kind of environmental critic. This project has permanently changed how I read and interpret built spaces. I am now the person in a café who notices where the natural light enters, or the person in a library who thinks about the acoustic relationship between zones. That perceptual shift feels like the most lasting outcome of the project — not a piece of knowledge I acquired, but a lens through which I now see the world differently.</p>
+  </div>
+  <h4>Impact 2: Learning to Tolerate Uncertainty in Creative Work</h4>
+  <div class="reflection-block">
+    <p>The most uncomfortable phase of the project was design development — the period between completing my research and beginning to draw floor plans. I had extensive notes on what environmental psychology research recommended. But translating those recommendations into a single coherent spatial arrangement involved choices that the research did not uniquely determine. There were many valid designs that could incorporate natural light, acoustic zoning, and biophilic elements. The research could tell me what features a good space should have, but not how, exactly, to arrange them in this particular room with this particular set of constraints.</p>
+    <p>I found this ambiguity genuinely difficult. I had spent years in school solving problems with right answers — or at least, problems where the grading criteria made it possible to know when you were "correct." Creative design work is not like that. I had to make choices that I could justify but could not prove were optimal, and then commit to them. This experience of productive uncertainty — of making a reasoned decision in the absence of a guaranteed correct answer — connects to what the IB Learner Profile calls being a <strong>Risk-Taker</strong>: willing to make courageous decisions and to explore uncertainty creatively.</p>
+  </div>
+  <div class="lp-grid">
+    <div class="lp-chip">Reflective <span>critiqued contested research (daylighting studies)</span></div>
+    <div class="lp-chip">Risk-Taker <span>tolerated creative ambiguity in design decisions</span></div>
+    <div class="lp-chip">Thinker <span>translated abstract theory into physical design choices</span></div>
+    <div class="lp-chip">Communicator <span>translated research into accessible survey format</span></div>
+  </div>
+
+  <h3 id="cii">Cii · Evaluating the Product Against Success Criteria</h3>
+  <div class="callout warm"><strong>⚠️ Reminder:</strong> Evaluate each criterion with your own analysis — not just quoting survey results. Use external evidence as data, then interpret it.</div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 1: Every design decision traceable to at least one peer-reviewed source<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">The design report annotation map links 14 distinct design decisions to 9 separate academic or expert sources. My supervisor reviewed the map at Meeting 4 and confirmed the connections were logically coherent. I consider this the most intellectually significant criterion to have met — it means the model is not an aesthetic object but an argument expressed in physical form.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 2: Minimum 3 distinct evidence-based environmental features<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">The model incorporates 5 distinct evidence-based features: (1) biophilic planting strip along the circulation zone; (2) north-facing glazing simulation for natural light; (3) acoustic panel walls around the quiet focus zone; (4) mixed furniture height options (seated and standing work surfaces); (5) spatial zoning by activity type rather than uniform seating rows. Each is annotated with its research basis in the design report.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 3: Consistent 1:25 scale, realistic room dimensions<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">The model base represents a room of 15 m × 10 m = 150 m², accommodating a standard class of 30 students at 5.0 m² per student — above the UAE minimum standard of 3.6 m². All furniture is scaled proportionally. This was verified by my design-technology teacher, who measured random elements against the 1:25 ratio.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 4: ≥60% of student respondents prefer proposed space<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Survey of 14 students: 11 (79%) rated the proposed space more desirable than their current space. Three students rated the spaces equally. No students preferred the existing space. While I am pleased with this result, I note a significant caveat: students viewed a physical model of an idealised space, not the space itself. The "future desirability" of a model is much easier to rate positively than an actual environment in use. A more rigorous test would have piloted a real redesign in one room and measured before/after usage patterns — something outside the scope of this project but worth investigating if the proposal were ever to be implemented.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 5: Materials cost ≤ AED 150<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Total materials cost: AED 118. Cost breakdown in Appendix D. I was able to source foam board from a local stationery supplier at lower cost than the online price by visiting in person.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 6: Model structurally stable through transport<span class="eval-verdict v-partial">~ Partially met</span></div><div class="eval-body">The main structure arrived at the exhibition intact. However, two miniature planting elements (representing the biophilic strip) detached during transport and had to be re-fixed on site. This was a construction quality failure — I had used insufficient adhesive on these smaller elements. A revised model would use a stronger adhesive (Araldite two-part epoxy rather than PVA) for all decorative elements and would conduct a dedicated transport test before the exhibition day.</div></div>
+
+  <div class="tips-grid">
+    <div class="tip-card good"><div class="tip-header">✓ Strong Evaluation</div><ul><li>Criterion 4 includes a genuine self-critical caveat about the survey's limitations</li><li>Criterion 6 is honest about partial failure — not covered up or minimised</li><li>Specific solutions for improvement are named (Araldite, transport test)</li><li>Each evaluation goes beyond "yes or no" to explain the significance</li></ul></div>
+    <div class="tip-card bad"><div class="tip-header">✗ Weak Evaluation</div><ul><li>"Everyone liked the model" — no evidence or connection to criteria</li><li>Claiming all criteria "fully met" without evidence</li><li>Quoting survey percentages without interpreting their limitations</li><li>Not addressing the criterion where things went wrong</li></ul></div>
+  </div>
+</section>
+
+<section class="section" id="references">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">Ref</span>
+    <div><span class="section-label">Bibliography</span><h2>References</h2></div>
+  </div>
+  <ol class="ref-list">
+    <li>Barrett, P., et al. (2015). <em>The HEAD Project: Holistic Evidence and Design</em>. Salford: University of Salford.</li>
+    <li>Barrett, P., et al. (2017). The holistic impact of classroom design on learning in three primary schools. <em>Building and Environment</em>, 59, pp. 678–689.</li>
+    <li>Doorley, S. and Witthoft, S. (2012). <em>Make Space: How to Set the Stage for Creative Collaboration</em>. Hoboken: John Wiley &amp; Sons.</li>
+    <li>Heschong Mahone Group (1999). <em>Daylighting in Schools: An Investigation into the Relationship Between Daylighting and Human Performance</em>. Prepared for Pacific Gas &amp; Electric.</li>
+    <li>Kaplan, R. and Kaplan, S. (1989). <em>The Experience of Nature: A Psychological Perspective</em>. Cambridge: Cambridge University Press.</li>
+    <li>Oblinger, D.G. (ed.) (2006). <em>Learning Spaces</em>. Washington DC: EDUCAUSE.</li>
+    <li>Seppänen, O., Fisk, W. and Faulkner, D. (2006). Control of temperature for health and productivity in offices. <em>ASHRAE Transactions</em>, 112(2), pp. 680–686.</li>
+    <li>Ulrich, R.S. (1984). View through a window may influence recovery from surgery. <em>Science</em>, 224(4647), pp. 420–421.</li>
+    <li>United Arab Emirates Ministry of Education (2020). <em>School Building Requirements and Standards</em>. Abu Dhabi: UAE MoE.</li>
+    <li>Wilson, E.O. (1984). <em>Biophilia</em>. Cambridge, MA: Harvard University Press.</li>
+  </ol>
+</section>
+
+<section class="section" id="appendix">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">App</span>
+    <div><span class="section-label">Supporting Evidence</span><h2>Appendix</h2></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix A — Supervisor Meeting Log</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Meeting</th><th>Date</th><th>Topics Discussed</th><th>Action Points</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Week 2</td><td>Confirmed learning goal (environmental psychology) vs. product goal (model); agreed on ACCESSFM for success criteria</td><td>Locate 5+ peer-reviewed sources; begin annotation map</td></tr>
+        <tr><td>2</td><td>Week 4</td><td>Review of floor plan draft; DT teacher feedback on acoustic zoning error</td><td>Revise plan to separate quiet and collaborative zones with acoustic buffer corridor</td></tr>
+        <tr><td>3</td><td>Week 8</td><td>Model construction progress review; structural adhesive issue identified for planting elements</td><td>Switch to Araldite for decorative elements before exhibition; document in Appendix</td></tr>
+        <tr><td>4</td><td>Week 10</td><td>Review of Criterion B draft; confirmed annotation map completeness for Criterion 1</td><td>Deepen Ci reflection — focus on 2 impacts, not a list; address Criterion 6 partial failure honestly</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix B — Student Survey Results (Criterion 4)</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Respondent</th><th>Current Space Rating (1–5)</th><th>Proposed Space Rating (1–5)</th><th>Preference</th></tr></thead>
+      <tbody>
+        <tr><td>Student 1</td><td>2</td><td>5</td><td style="color:var(--good);font-weight:600;">Proposed</td></tr>
+        <tr><td>Student 2</td><td>3</td><td>4</td><td style="color:var(--good);font-weight:600;">Proposed</td></tr>
+        <tr><td>Student 3</td><td>2</td><td>5</td><td style="color:var(--good);font-weight:600;">Proposed</td></tr>
+        <tr><td>Student 4</td><td>3</td><td>3</td><td>Equal</td></tr>
+        <tr><td>Student 5</td><td>1</td><td>4</td><td style="color:var(--good);font-weight:600;">Proposed</td></tr>
+        <tr><td>Students 6–14</td><td colspan="3" style="color:var(--fg-muted);font-style:italic;">Full data in project journal / portfolio — 8 of 9 remaining students preferred proposed; 1 rated equal</td></tr>
+        <tr><td><strong>Summary</strong></td><td><strong>Avg: 2.3</strong></td><td><strong>Avg: 4.1</strong></td><td style="color:var(--good);font-weight:600;"><strong>11/14 preferred proposed (79%)</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix C — Build Process Photographs (Placeholders)</div>
+    <div class="img-row">
+      <div class="img-box" style="min-height:110px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Model base + wall construction, Week 6<small>Appendix C-1</small></div>
+      <div class="img-box" style="min-height:110px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Interior zones + furniture placement, Week 7<small>Appendix C-2</small></div>
+      <div class="img-box" style="min-height:110px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Completed model — exhibition display<small>Appendix C-3</small></div>
+    </div>
+    <p style="font-size:12px;color:var(--fg-muted);">Replace with your actual build process photographs.</p>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix D — Materials Cost Breakdown</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Item</th><th>Quantity</th><th>Supplier</th><th>Cost (AED)</th></tr></thead>
+      <tbody>
+        <tr><td>A1 foam board (white, 5mm)</td><td>6 sheets</td><td>Stationery shop, Dubai</td><td>36</td></tr>
+        <tr><td>Balsa wood strips</td><td>12 pieces</td><td>Hobby shop, Dubai</td><td>28</td></tr>
+        <tr><td>Fabric scraps (acoustic panels)</td><td>Assorted</td><td>Home collection</td><td>0</td></tr>
+        <tr><td>PVA glue + hot glue sticks</td><td>2 bottles + 1 pack</td><td>Stationery shop</td><td>22</td></tr>
+        <tr><td>Miniature plants (model)</td><td>8 pieces</td><td>Hobby shop</td><td>16</td></tr>
+        <tr><td>Acrylic paint (interior walls)</td><td>4 small pots</td><td>Art shop</td><td>16</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td></td><td></td><td style="color:var(--good);font-weight:700;"><strong>118</strong> ✓ Under AED 150</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">!</span>
+    <div><span class="section-label">Guidance</span><h2>What Distinguishes Quality Work in This Category</h2></div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card good"><div class="tip-header">✓ Key Quality Indicators</div><ul>
+      <li>Physical product demonstrates and applies the learning — not just illustrates it</li>
+      <li>Design decisions in the model link explicitly to research evidence</li>
+      <li>Criterion C includes a genuine caveat about evaluation methodology (survey limitation acknowledged)</li>
+      <li>Honest reflection on partial product failure (Criterion 6) with specific improvement plan</li>
+    </ul></div>
+    <div class="tip-card bad"><div class="tip-header">✗ What Loses Marks</div><ul>
+      <li>Model presented as creative work with no research basis</li>
+      <li>Criteria like "the model should look nice" — aesthetic, not measurable or research-based</li>
+      <li>Ci focused on how much you enjoyed the project rather than what you learned about yourself</li>
+      <li>Cii that just says "students liked it" without addressing each criterion with evidence</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer class="report-footer">
+  <span>IB MYP Personal Project · Sample Report 3: Dream School Redesign Model</span>
+  <span>For student reference only · Do not copy · Academic Year 2025–2026</span>
+</footer>
+</div>

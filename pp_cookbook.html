@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<title>Cultural Heritage Cookbook — PP Sample 5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=DM+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --bg:          #FAF6F0;
+  --bg-alt:      #F2EBE0;
+  --surface:     #FFFFFF;
+  --border:      #DDD0BC;
+  --fg:          #231A0E;
+  --fg-muted:    #7A6248;
+  --accent:      #8B2E10;      /* deep terracotta/saffron */
+  --accent-warm: #C47A1C;      /* turmeric gold */
+  --accent-lt:   #FAF0E6;
+  --good:        #2D6A42;
+  --warn:        #8B4500;
+  --heading-font:'Playfair Display', Georgia, serif;
+  --body-font:   'Lato', 'Arial', sans-serif;
+  --ui-font:     'DM Sans', system-ui, sans-serif;
+  --radius:      6px;
+  --shadow:      0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#160E06; --bg-alt:#1E1409; --surface:#251A0C; --border:#3A2A18;
+    --fg:#FAF0DC; --fg-muted:#B89468; --accent:#E06040; --accent-warm:#D4941C;
+    --accent-lt:#1E1206; --good:#4CAF60; --warn:#E07040; color-scheme:dark;
+    --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#160E06; --bg-alt:#1E1409; --surface:#251A0C; --border:#3A2A18;
+  --fg:#FAF0DC; --fg-muted:#B89468; --accent:#E06040; --accent-warm:#D4941C;
+  --accent-lt:#1E1206; --good:#4CAF60; --warn:#E07040; color-scheme:dark;
+  --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body-font);font-size:12pt;line-height:1.75;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+
+.toc-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--accent);padding:0 max(24px,env(safe-area-inset-left,0px));display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.toc-bar::-webkit-scrollbar{display:none}
+.toc-bar a{font-family:var(--ui-font);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;padding:14px 16px;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.toc-bar a:hover{color:#fff;border-bottom-color:var(--accent-warm)}
+.toc-bar .logo-chip{font-family:var(--heading-font);font-size:15px;font-weight:700;color:#fff;padding:14px 20px 14px 0;margin-right:12px;border-right:1px solid rgba(255,255,255,.2);white-space:nowrap}
+
+.cover{background:var(--accent);color:#fff;padding:56px max(40px,env(safe-area-inset-left,0px)) 48px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:0;right:0;bottom:0;width:40%;background:linear-gradient(135deg,transparent 40%,rgba(196,122,28,.2) 100%)}
+.cover::after{content:'◈';font-size:220px;position:absolute;top:-20px;right:-10px;opacity:.04;color:var(--accent-warm);line-height:1}
+.cover-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.cover-eyebrow{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:14px}
+.cover h1{font-family:var(--heading-font);font-size:clamp(34px,6.5vw,66px);font-weight:700;line-height:1.05;margin:0 0 16px;text-wrap:balance;font-style:italic}
+.cover h1 span{color:var(--accent-warm);font-style:normal}
+.cover-subtitle{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:28px;max-width:620px;font-style:italic}
+.cover-meta{display:flex;flex-wrap:wrap;gap:8px 28px;font-family:var(--ui-font);font-size:13px;color:rgba(255,255,255,.7)}
+.cover-meta strong{color:#fff}
+
+.spec-tiles{max-width:960px;margin:20px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-family:var(--ui-font)}
+.spec-tile{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;text-align:center}
+.spec-tile .s-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:6px}
+.spec-tile .s-val{font-size:22px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1}
+.spec-tile .s-sub{font-size:11px;color:var(--fg-muted);margin-top:3px}
+.spec-tile .s-warn{font-size:10px;color:var(--warn);margin-top:4px}
+
+.disclaimer{max-width:960px;margin:16px auto 0;background:#FFF3CD;border:1px solid #E8A000;border-left:5px solid #E8A000;border-radius:var(--radius);padding:16px 22px;font-family:var(--ui-font);font-size:13px;line-height:1.65}
+.disclaimer strong{color:#7A5000;display:block;margin-bottom:6px;font-size:14px}
+.disclaimer p{margin:0 0 6px}
+.disclaimer p:last-child{margin:0}
+
+.sup-note{max-width:960px;margin:12px auto 0;background:color-mix(in srgb,var(--accent) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 20px;font-family:var(--ui-font);font-size:13px;line-height:1.7}
+.sup-note strong{color:var(--accent);display:block;margin-bottom:4px}
+
+.page-wrap{max-width:960px;margin:0 auto;padding-bottom:80px}
+.section{padding:48px 0 0}
+.section+.section{border-top:1px solid var(--border);margin-top:48px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.section-num{font-family:var(--heading-font);font-size:56px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;user-select:none}
+.section-label{font-family:var(--ui-font);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-warm);display:block;margin-bottom:4px}
+h2{font-family:var(--heading-font);font-size:clamp(22px,3.5vw,36px);font-weight:700;margin:0;line-height:1.1;text-wrap:balance}
+h3{font-family:var(--heading-font);font-size:22px;font-weight:700;margin:36px 0 12px;color:var(--accent)}
+h4{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin:24px 0 8px}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+.criterion-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px 4px 8px;border-radius:20px;margin-bottom:20px}
+.criterion-tag .dot{width:6px;height:6px;background:var(--accent-warm);border-radius:50%}
+
+.callout{border-left:3px solid var(--accent);background:var(--accent-lt);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout.warm{border-left-color:var(--accent-warm);background:color-mix(in srgb,var(--accent-warm) 8%,var(--bg))}
+
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.tip-card{border-radius:var(--radius);padding:18px 20px;font-size:14px;line-height:1.6}
+.tip-card.good{background:color-mix(in srgb,var(--good) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+.tip-card.bad{background:color-mix(in srgb,var(--warn) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--warn) 25%,transparent)}
+.tip-card .tip-header{display:flex;align-items:center;gap:8px;font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.tip-card.good .tip-header{color:var(--good)}
+.tip-card.bad .tip-header{color:var(--warn)}
+.tip-card ul{margin:0;padding-left:16px}
+.tip-card li{margin-bottom:5px}
+
+.recipe-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0;overflow:hidden;margin:20px 0;box-shadow:var(--shadow)}
+.recipe-header{background:color-mix(in srgb,var(--accent-warm) 10%,var(--bg));border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:baseline;gap:12px}
+.recipe-number{font-family:var(--heading-font);font-size:28px;font-weight:700;color:var(--accent-warm);line-height:1}
+.recipe-name{font-family:var(--heading-font);font-size:20px;font-weight:700;color:var(--accent);font-style:italic}
+.recipe-origin{font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);margin-left:auto;white-space:nowrap}
+.recipe-body{padding:16px 20px;display:grid;grid-template-columns:1fr 2fr;gap:16px;font-size:14px}
+.recipe-section-label{font-family:var(--ui-font);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:8px}
+.recipe-body ul,.recipe-body ol{margin:0;padding-left:16px;line-height:1.8}
+.recipe-annotation{background:var(--bg-alt);border-radius:4px;padding:10px 14px;font-style:italic;font-size:13px;color:var(--fg-muted);border-left:3px solid var(--accent-warm);margin-top:12px}
+
+.interview-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:20px 0;box-shadow:var(--shadow)}
+.interview-speaker{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:8px}
+.interview-block blockquote{margin:0;font-style:italic;font-size:15px;line-height:1.8;border-left:3px solid var(--border);padding-left:16px;color:var(--fg)}
+
+.timeline{position:relative;padding-left:28px;margin:24px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--accent-warm);opacity:.4}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent-warm);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent-warm)}
+.tl-week{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:4px}
+.tl-title{font-family:var(--heading-font);font-size:17px;font-weight:700;margin-bottom:4px;color:var(--accent)}
+.tl-desc{font-size:14px;color:var(--fg-muted);margin:0}
+
+.criteria-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;overflow-x:auto;display:block}
+.criteria-table th,.criteria-table td{padding:11px 14px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.criteria-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.criteria-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cb{font-family:var(--ui-font);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.cb-func{background:#FFF5EC;color:#8B4500}
+.cb-aes{background:#FEF0F0;color:#8B2E10}
+.cb-cust{background:#F0F0FE;color:#2E108B}
+.cb-mat{background:#F0F8FF;color:#1A5FAA}
+
+.atl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.atl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.atl-skill-name{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px}
+.atl-card p{font-size:14px;margin:0}
+
+.source-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow);font-size:14px}
+.source-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.source-num{background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.source-title{font-weight:600;line-height:1.4}
+.source-eval{color:var(--fg-muted);font-style:italic;margin-top:6px}
+.craap-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.craap-pill{font-family:var(--ui-font);font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--accent-lt);color:var(--accent)}
+
+.reflection-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:20px 0;box-shadow:var(--shadow);font-style:italic;font-size:15.5px;line-height:1.8;position:relative}
+.reflection-block::before{content:'"';font-family:var(--heading-font);font-size:80px;color:var(--border);position:absolute;top:0;left:16px;line-height:1}
+.reflection-block p{padding-left:20px}
+
+.eval-row{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.eval-header{display:flex;align-items:center;gap:12px;background:var(--bg-alt);padding:12px 16px;font-family:var(--ui-font);font-size:13px;font-weight:600;flex-wrap:wrap}
+.eval-body{padding:14px 16px;font-size:14.5px}
+.eval-verdict{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui-font);font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;margin-left:8px}
+.v-met{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.v-partial{background:color-mix(in srgb,var(--accent-warm) 15%,transparent);color:var(--accent-warm)}
+
+.lp-grid{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.lp-chip{background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:20px;padding:6px 14px;font-family:var(--ui-font);font-size:13px;font-weight:600;color:var(--accent)}
+.lp-chip span{color:var(--fg-muted);font-weight:400;font-size:12px;margin-left:6px}
+
+.ref-list{counter-reset:refs;list-style:none;padding:0;margin:0}
+.ref-list li{counter-increment:refs;display:flex;gap:12px;margin-bottom:12px;font-size:14px;line-height:1.6}
+.ref-list li::before{content:counter(refs);min-width:24px;height:24px;background:var(--bg-alt);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ui-font);font-size:11px;font-weight:700;color:var(--fg-muted);flex-shrink:0;margin-top:2px}
+
+.appendix-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.appendix-title{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.appendix-item p{font-size:14px}
+.img-box{background:var(--bg-alt);border:1px dashed var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--fg-muted);font-family:var(--ui-font);font-size:13px;gap:8px}
+.img-box svg{opacity:.4}
+.img-box small{font-size:11px;opacity:.7}
+.img-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0}
+.img-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.log-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0}
+.log-table th,.log-table td{padding:10px 14px;border:1px solid var(--border);text-align:left;vertical-align:top}
+.log-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.report-footer{border-top:1px solid var(--border);margin-top:64px;padding:24px 0;font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){.cover{padding:36px 0 32px}.tips-grid,.atl-grid,.img-row{grid-template-columns:1fr}.img-row-2{grid-template-columns:1fr}.recipe-body{grid-template-columns:1fr}}
+@media print{.toc-bar{display:none}}
+</style>
+
+<style>
+.home-bar{background:#1a1a1a;padding:0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:16px;font-family:'DM Sans',system-ui,sans-serif}
+.home-bar a.home-link{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;opacity:.85;transition:opacity .2s}
+.home-bar a.home-link:hover{opacity:1}
+.home-bar .divider{color:rgba(255,255,255,.25);font-size:16px;line-height:1}
+.home-bar .current-title{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="home-bar">
+  <a class="home-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    All Samples
+  </a>
+  <span class="divider">/</span>
+  <span class="current-title">Sample 05 — Cultural Heritage Cookbook</span>
+</div>
+<nav class="toc-bar">
+  <span class="logo-chip">MYP Personal Project</span>
+  <a href="#intro">Introduction</a>
+  <a href="#criterion-a">Criterion A</a>
+  <a href="#criterion-b">Criterion B</a>
+  <a href="#criterion-c">Criterion C</a>
+  <a href="#references">References</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<div class="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">IB MYP Year 5 · Personal Project Report · Sample 5 of 5</p>
+    <h1><em>Recipes of</em> <span>Belonging</span></h1>
+    <p class="cover-subtitle">A physical, bound cookbook documenting the culinary heritage of a multicultural school community — grounded in anthropology of food and oral history research</p>
+    <div class="cover-meta">
+      <div><strong>Category:</strong> Art &amp; Culture</div>
+      <div><strong>Global Context:</strong> Personal &amp; Cultural Expression</div>
+      <div><strong>Supervisor:</strong> [Supervisor Name]</div>
+      <div><strong>Candidate Number:</strong> [000XXX-00000]</div>
+      <div><strong>School:</strong> [Your School Name]</div>
+    </div>
+  </div>
+</div>
+
+<div class="spec-tiles">
+  <div class="spec-tile"><div class="s-label">Word Count</div><div class="s-val">1,500–3,500</div><div class="s-sub">words (body text only)</div><div class="s-warn">References &amp; appendices excluded</div></div>
+  <div class="spec-tile"><div class="s-label">Page Limit</div><div class="s-val">Max 15</div><div class="s-sub">pages (report body)</div><div class="s-warn">Confirm with your supervisor</div></div>
+  <div class="spec-tile"><div class="s-label">Font Size</div><div class="s-val">Min 11pt</div><div class="s-sub">12pt recommended</div><div class="s-warn">Margins: min 2 cm all sides</div></div>
+  <div class="spec-tile"><div class="s-label">Citations</div><div class="s-val">Harvard</div><div class="s-sub">in-text + bibliography</div><div class="s-warn">Min 5 academic sources</div></div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ IMPORTANT — FOR REFERENCE ONLY. DO NOT COPY.</strong>
+  <p>This is a model report published as a student reference resource to illustrate the quality of work expected in an IB MYP Personal Project. <strong>Students must NOT copy, paraphrase, or reproduce any part of this report.</strong> Your Personal Project must be entirely your own original, creative, and innovative work.</p>
+  <p>Following this sample and reading the checklist does <strong>not</strong> guarantee any particular grade. Meet regularly with your Personal Project supervisor, submit all drafts on time, act on feedback, and follow your supervisor's instructions above all else.</p>
+</div>
+
+<div class="sup-note">
+  <strong>📌 Reading note for students</strong>
+  Notice: (1) The product is a physical printed and bound cookbook — not a digital document or recipe blog. (2) The learning goal is about <em>anthropology of food and oral history methodology</em>, not "how to cook" or "how to make a book." (3) This report shows how primary research (interviews with families) can be treated with academic rigour — not just quotes copied from relatives without context or analysis.
+</div>
+
+<div class="page-wrap">
+
+<section class="section" id="intro">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">00</span>
+    <div><span class="section-label">Overview</span><h2>Introduction &amp; Personal Interest</h2></div>
+  </div>
+  <p>I was eleven years old when I watched my grandmother demonstrate a dish — hands moving from memory, no measuring, no written instructions — while narrating in a language my mother only half-remembered and I barely understood at all. My grandmother died the following year. The recipe was not written down anywhere. I have never been able to reproduce it exactly, and now there is no one I can ask.</p>
+  <p>When I came to a school with students from over 60 nationalities, I realised my experience was not unusual. Many of my classmates described dishes, preparation techniques, and food traditions that existed only in living memory — in grandparents, aunts, parents who had emigrated and adapted — and were not preserved in any written form. This struck me as a genuine loss: not just personal, but anthropological. Food, as the scholar Carole Counihan (1999) argues, is one of the most powerful carriers of cultural identity and historical memory. When a dish is lost, something of the culture that produced it is lost too.</p>
+  <p>This became my learning goal: to develop an understanding of oral history methodology and the anthropology of food — how scholars collect, interpret, and present foodways as cultural documents — and to apply that understanding to produce a physical cookbook that preserves the culinary heritage of families from my school community, with each recipe contextualised not just as instructions but as a cultural artefact.</p>
+
+  <div class="callout">
+    <strong>A note on this topic:</strong> A cookbook Personal Project risks becoming simply a compilation of family recipes with no intellectual framework. The learning goal here — oral history methodology + anthropology of food — is what elevates the project. The product is a cookbook; the learning is how to treat food as cultural evidence.
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Good Practice Here</div>
+      <ul>
+        <li>The personal motivation connects to a genuine intellectual gap — not just "I love cooking"</li>
+        <li>An academic framework (anthropology of food) is named from the outset</li>
+        <li>The risk of the product type (mere recipe compilation) is acknowledged and addressed</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Mistakes</div>
+      <ul>
+        <li>"I chose to make a cookbook because I love food and my family are good cooks"</li>
+        <li>No academic framework mentioned — food as project topic, not food as cultural data</li>
+        <li>Recipes presented without cultural context or historical commentary</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="criterion-a">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">A</span>
+    <div><span class="section-label">Criterion A — Planning</span><h2>Planning the Personal Project</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion A: 8 marks total (Ai + Aii + Aiii)</div>
+
+  <h3 id="ai">Ai · Learning Goal &amp; Global Context</h3>
+  <h4>Learning Goal</h4>
+  <p>My learning goal is to understand: (1) the principles of oral history methodology — how to conduct ethical, rigorous interviews for cultural documentation purposes; (2) the academic discipline of food anthropology — how scholars use food practices as evidence of cultural identity, migration history, and community belonging; (3) how these two disciplines together can be used to design a cookbook that functions as a cultural document rather than a mere instruction set.</p>
+  <p>I am deliberately separating this from my product goal, which is to produce the physical cookbook. The learning goal would be valuable whether or not the cookbook existed: I would come away with a richer understanding of how oral history is conducted, of what makes a piece of cultural documentation rigorous versus superficial, and of how the scholarly treatment of everyday practices (food, dress, music) can illuminate aspects of human experience that conventional history overlooks.</p>
+
+  <h4>Global Context: Personal &amp; Cultural Expression</h4>
+  <p>I selected <strong>Personal and Cultural Expression</strong>, exploring the question: how do communities express and preserve cultural identity through food, and what happens to that identity when families migrate? The school community that contributed recipes to this cookbook represents a case study in cultural expression under conditions of diaspora. Every recipe submitted had adapted in some way — to available ingredients in the UAE, to the preferences of a second generation, to the nutritional knowledge of a parent who had read different information than their own parents had access to. These adaptations are not corruptions of authentic culture; they are the living record of culture responding to new conditions. The cookbook documents both what the dish was and what it has become, treating adaptation as evidence rather than error.</p>
+
+  <h3 id="aii">Aii · Intended Product &amp; Success Criteria</h3>
+  <h4>Intended Product</h4>
+  <p>My intended product is a <strong>physical, professionally printed and perfect-bound cookbook</strong> (A5 format, minimum 40 pages, printed on 120gsm matte paper with a laminated card cover), containing: (1) a minimum of <strong>12 recipes from 12 different family backgrounds</strong>, each with a photographic record of the dish; (2) for each recipe, a <strong>cultural context section</strong> (150–250 words) drawing on interview data and academic sources to contextualise the dish's origins, significance, and adaptation; (3) a <strong>foreword</strong> that discusses the oral history methodology used in collecting the recipes; (4) a printed <strong>contributor acknowledgements page</strong>. The cookbook will be printed in a limited edition of 5 copies for distribution to contributing families, plus one copy for school exhibition.</p>
+
+  <div class="img-row">
+    <div class="img-box" style="min-height:120px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Photograph of printed cookbook — cover<small>Replace with your product photograph</small></div>
+    <div class="img-box" style="min-height:120px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Interior spread — recipe + food photograph<small>Replace with your actual spread photograph</small></div>
+    <div class="img-box" style="min-height:120px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Family interview documentation<small>Replace with interview evidence</small></div>
+  </div>
+
+  <!-- Sample recipe layout preview -->
+  <h4>Sample Recipe Layout (from the cookbook)</h4>
+  <div class="recipe-card">
+    <div class="recipe-header">
+      <div class="recipe-number">01</div>
+      <div class="recipe-name">Mansaf الم‌نسف</div>
+      <div class="recipe-origin">Jordan | Al-Karak region</div>
+    </div>
+    <div class="recipe-body">
+      <div>
+        <p class="recipe-section-label">Ingredients (serves 6)</p>
+        <ul>
+          <li>1kg lamb shoulder, bone-in</li>
+          <li>500g jameed (dried fermented yoghurt)</li>
+          <li>500g long-grain rice</li>
+          <li>2 tbsp samneh (clarified butter)</li>
+          <li>Pine nuts and almonds to garnish</li>
+          <li>Flatbread (markook) to serve</li>
+        </ul>
+        <p class="recipe-section-label" style="margin-top:16px">Cultural Notes</p>
+        <p style="font-size:13px;color:var(--fg-muted);">[Contributor: Al-Karak family, 3rd generation]</p>
+      </div>
+      <div>
+        <p class="recipe-section-label">Method (contributor version)</p>
+        <ol>
+          <li>Dissolve jameed in warm water overnight until smooth</li>
+          <li>Simmer lamb in salted water until tender, reserve stock</li>
+          <li>Cook rice in lamb stock with samneh</li>
+          <li>Bring jameed sauce to simmer with stock, add lamb</li>
+          <li>Layer rice on flatbread, add lamb, pour sauce over</li>
+          <li>Garnish with toasted pine nuts and almonds</li>
+        </ol>
+        <div class="recipe-annotation">
+          <strong>Oral History Note:</strong> The contributor's family has made Mansaf for weddings and funerals for four generations. In the UAE context, jameed is sourced from a specialist supplier in Satwa, Dubai — an adaptation made necessary by local availability. The dish remains central to the family's identity: "When we make Mansaf, everyone comes home," the contributor told me (Interview Transcript 3, Appendix B).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Success Criteria — ACCESSFM Framework</h4>
+  <div style="overflow-x:auto;">
+    <table class="criteria-table">
+      <thead>
+        <tr><th>#</th><th>Criterion</th><th>ACCESSFM</th><th>Measurable Standard</th><th>Justification</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Cookbook must contain minimum 12 recipes from 12 different family/cultural backgrounds</td><td><span class="cb cb-cust">Customer</span></td><td>Count of recipes × distinct contributor nationality/cultural background</td><td>A cookbook that draws only from one or two cultures fails to document the school community's diversity — the product's stated purpose</td></tr>
+        <tr><td>2</td><td>Each recipe must include a cultural context section of 150–250 words, citing at least one academic or reputable source on the dish's cultural or historical significance</td><td><span class="cb cb-func">Function</span></td><td>Word count of each context section; at least one Harvard citation per section visible in endnotes</td><td>This distinguishes the cookbook as a cultural document (learning goal) from a simple recipe collection; without contextualisation, there is no evidence of the oral history and food anthropology learning</td></tr>
+        <tr><td>3</td><td>A minimum of 10 family interviews must be documented with ethical consent (verbal consent recorded; names anonymised if requested)</td><td><span class="cb cb-func">Function</span></td><td>Interview transcripts or summaries in Appendix B; consent documentation in Appendix C</td><td>Oral history methodology requires ethical data collection — participants must understand how their contribution will be used and must consent; this is a non-negotiable research ethics standard</td></tr>
+        <tr><td>4</td><td>Photography must accompany every recipe — minimum one dish photograph per recipe, taken by the student</td><td><span class="cb cb-aes">Aesthetics</span></td><td>12 original photographs, attributable to the student (not sourced from internet)</td><td>A cookbook without food photography is incomplete as a physical product; requiring original photographs rather than stock images ensures the cookbook is genuinely original work</td></tr>
+        <tr><td>5</td><td>Total production cost (printing, binding, photography) must not exceed AED 350 for 6 copies</td><td><span class="cb cb-mat">Cost</span></td><td>Itemised receipts; total ÷ 6 copies = per-copy cost ≤ AED 58</td><td>Maintaining a reasonable production cost ensures the project is replicable and demonstrates planning</td></tr>
+        <tr><td>6</td><td>At least 4 contributing families must indicate, in a brief follow-up, that the cookbook accurately represents their dish and its context</td><td><span class="cb cb-cust">Customer</span></td><td>Follow-up email or short survey of contributors; minimum 4 positive confirmations</td><td>A cookbook documenting other people's cultural heritage must be accountable to those people — accuracy and representation matter</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="aiii">Aiii · Action Plan</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 1–2</div><div class="tl-title">Research — Oral History Methodology &amp; Food Anthropology</div><p class="tl-desc">Read primary academic sources on oral history methodology (interviewing techniques, ethical principles, transcription standards) and food anthropology (Counihan; Mintz; Appadurai). Design interview protocol and consent form with supervisor review.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 3–5</div><div class="tl-title">Primary Research — Family Interviews</div><p class="tl-desc">Conduct minimum 10 family interviews (30–45 minutes each). Transcribe or summarise each. Photograph families cooking or presenting the dish. Collect recipe details and any written family records. Apply oral history methodology (probing questions, context-building, follow-up).</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 6–7</div><div class="tl-title">Cultural Context Writing</div><p class="tl-desc">Write 150–250 word cultural context section for each recipe, drawing on interview data and academic sources. Each section must cite at least one academic source on the dish or its cultural tradition. Send context drafts back to families for accuracy check.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 8</div><div class="tl-title">Food Photography</div><p class="tl-desc">Photograph all 12 dishes (either in families' homes during cooking, or in school food tech kitchen if families are unable to host). Apply basic food photography principles (natural light, plating, angle).</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 9–10</div><div class="tl-title">Design, Layout &amp; Print Preparation</div><p class="tl-desc">Design cookbook layout (A5, grid system, consistent typography). Design cover. Prepare files for professional print. Proof read all content. Order test copy before final print run.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 11–12</div><div class="tl-title">Final Print, Report Writing &amp; Exhibition</div><p class="tl-desc">Print and bind final copies. Distribute to contributing families; collect feedback (Criterion 6). Write PP report (Criteria A, B, C). Final supervisor meeting. Prepare exhibition display.</p></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-b">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">B</span>
+    <div><span class="section-label">Criterion B — Applying Skills</span><h2>Applying ATL Skills</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion B: 8 marks total (Bi + Bii)</div>
+
+  <h3 id="bi">Bi · ATL Skills Applied to the Learning Goal</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Research Skills — Applying Oral History Methodology</div>
+      <p>Before this project, I thought of interviewing as simply asking people questions and writing down their answers. Reading Yow (2005) on oral history methodology revealed that what sounds like a simple conversation is actually a highly structured research method with established ethical protocols, question design principles, and transcription standards. The most important lesson was the difference between a directive interview (where the interviewer's questions shape the narrative) and a semi-structured open interview (where the participant's own narrative takes precedence). For my first two interviews, I found myself interrupting with follow-up questions at the wrong moments, closing off more interesting tangents to ask my pre-planned questions. By Interview 4, I had learned to stay with a participant's direction and use my planned questions only as a scaffold rather than a script. The difference in the richness of data collected between early and later interviews is visible in the transcripts (Appendix B).</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Thinking Skills — Interpreting Food as Cultural Evidence</div>
+      <p>The most intellectually stimulating aspect of the research was learning to read recipes and cooking practices as evidence — not just descriptions of how to make something, but as records of migration, adaptation, economic constraint, and cultural negotiation. For example: the Mansaf recipe contributed by one family uses jameed sourced from a Dubai supplier, where the original Jordanian preparation would use locally produced jameed. This substitution is not a deviation; it is evidence of diaspora. As Mintz (1996) argues, "the history of food is inseparable from the history of people who ate it." Learning to think this way — to treat a substituted ingredient as a data point rather than a detail — was a genuinely new form of thinking for me, and one I did not possess before this project.</p>
+    </div>
+  </div>
+
+  <h3 id="bii">Bii · ATL Skills Applied to Creating the Product</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Social Skills — Navigating Cultural Sensitivity in Research</div>
+      <p>Two incidents tested my social skills during the data collection phase. In the first, a family declined to share their recipe in writing, explaining that it was traditionally passed down orally only — putting it in a printed cookbook felt wrong to them. Rather than trying to persuade them, I thanked them, adjusted my participant count, and found an additional contributor. This was the ethically correct response; Oral History Association guidelines (2009) are clear that participant withdrawal at any stage is their right and must be honoured without challenge. In the second incident, one family's cultural context review identified factual errors in my draft — I had attributed a dish to the "wrong" regional identity within a country (conflating a national dish with a specific regional one). Receiving this correction without defensiveness, and revising the text accordingly, was a social skill as much as a research skill.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Communication Skills — Writing for Multiple Audiences</div>
+      <p>The cookbook had to work for two distinct audiences simultaneously: the contributing families (who needed to recognise their dishes accurately and feel their culture was represented with respect) and a general reader from any background (who might be encountering the dish for the first time). These two demands sometimes conflict. A level of cultural specificity that a Jordanian reader would take for granted ("this is a dish of celebration in the Karak tradition") might be opaque to a reader unfamiliar with Jordanian regional geography. I developed a "dual-layer" writing approach for the context sections: one sentence for cultural insiders (naming the specific tradition), one sentence of general contextualisation for outsiders ("the Karak region of southern Jordan has historically been a centre of Bedouin culture"). Learning to write for multiple audiences without condescending to either was a communication skill I will use far beyond this project.</p>
+    </div>
+  </div>
+
+  <h3>Source Evaluation — CRAAP Test Applied</h3>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">1</div><div>
+      <div class="source-title">Counihan, C. (1999). <em>The Anthropology of Food and Body: Gender, Meaning and Power</em>. New York: Routledge.</div>
+    </div></div>
+    <p class="source-eval">Foundational academic text in food anthropology by Carole Counihan, one of the leading scholars in the field. Routledge academic press. Used to frame the theoretical argument that food practices carry cultural meaning beyond nutrition — directly supports my learning goal's intellectual framework. Slightly older (1999) but still a primary reference in food anthropology literature; later sources extensively cite it. Assessed as high-credibility and still current within its discipline.</p>
+    <div class="craap-pills"><span class="craap-pill">~ Current (1999, foundational)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: Routledge academic</span><span class="craap-pill">✓ Accurate: extensively cited</span><span class="craap-pill">✓ Purpose: academic</span></div>
+  </div>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">2</div><div>
+      <div class="source-title">Yow, V.R. (2005). <em>Recording Oral History: A Guide for the Humanities and Social Sciences</em>. 2nd edn. Walnut Creek: AltaMira Press.</div>
+    </div></div>
+    <p class="source-eval">Standard methodology reference for oral history practice — the equivalent of a research methods textbook for the discipline. Used to design interview protocol, consent form language, and transcription approach. AltaMira Press is an established academic publisher for qualitative research methods. Second edition (2005) well within an appropriate date range for methodology guidance (methods standards evolve slowly). Directly cited in my project design and in Criterion B Bi as the source that changed how I conducted interviews.</p>
+    <div class="craap-pills"><span class="craap-pill">✓ Current (2005, methodology)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: AltaMira academic</span><span class="craap-pill">✓ Accurate: standard reference</span><span class="craap-pill">✓ Purpose: academic</span></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-c">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">C</span>
+    <div><span class="section-label">Criterion C — Reflecting</span><h2>Reflecting on Learning &amp; Product</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion C: 8 marks total (Ci + Cii)</div>
+
+  <h3 id="ci">Ci · Impact on Learning &amp; Personal Development</h3>
+  <h4>Impact 1: The Practice of Ethical Listening</h4>
+  <div class="reflection-block">
+    <p>The deepest learning of this project was not academic; it was relational. Oral history methodology, as Yow (2005) frames it, is fundamentally about creating conditions for another person's story to be heard accurately — not shaped, not simplified, not interrupted. Practising this for 12 interviews over six weeks changed something in how I listen outside the project context too. I notice when I am formulating my response before someone has finished speaking. I notice when I am steering a conversation toward what I want to know rather than what the other person is able or willing to share. I notice when a silence that makes me uncomfortable is actually productive — when the person I am interviewing is reaching for something more considered, and my instinct to fill the space would have prevented them from finding it.</p>
+    <p>These are not skills that appear on a CV or a grade report. But they are, I believe, among the most practically useful things I have developed in five years of secondary school. The IB Learner Profile describes an <strong>Open-Minded</strong> learner as one who "seek[s] and evaluate[s] a range of points of view." Oral history methodology is, I now think, the most structured practice of open-mindedness that exists.</p>
+  </div>
+  <h4>Impact 2: Realising What I Did Not Know About My Own Heritage</h4>
+  <div class="reflection-block">
+    <p>I entered this project expecting to learn about other people's cultures. I did not expect to discover how much I did not know about my own. When I came to write the cultural context section for the dish contributed by my own family, I found myself unable to answer questions I had never thought to ask. I knew the recipe; I did not know its origin, its regional significance, or the circumstances in which my family had adapted it over three generations of migration. The academic framework I had built to analyse everyone else's recipes exposed the gaps in my own cultural knowledge.</p>
+    <p>I interviewed my own mother for the first time using the oral history protocol — structured questions, active listening, not interrupting. She told me things she had never mentioned in ordinary conversation: details about my grandmother's cooking during a period of economic hardship; adaptations she made when she arrived in a new country and certain ingredients were unavailable; the moment she realised she was making her mother's dish, but not her grandmother's. This conversation, generated by a research methodology I had never previously encountered, felt like recovering something I had not known was lost.</p>
+  </div>
+  <div class="lp-grid">
+    <div class="lp-chip">Open-Minded <span>practised structured ethical listening across 12 cultures</span></div>
+    <div class="lp-chip">Reflective <span>discovered gaps in own cultural knowledge through academic framework</span></div>
+    <div class="lp-chip">Caring <span>honoured contributor withdrawal with no challenge</span></div>
+    <div class="lp-chip">Principled <span>prioritised contributor accuracy review over "finished product" timeline</span></div>
+  </div>
+
+  <h3 id="cii">Cii · Evaluating the Product Against Success Criteria</h3>
+
+  <div class="eval-row"><div class="eval-header">Criterion 1: ≥12 recipes from ≥12 different family/cultural backgrounds<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Final cookbook contains 14 recipes from 14 different contributor families representing: Jordan, India (Tamil Nadu), Lebanon, Philippines, Pakistan, Kenya, Egypt, Nigeria, Iran, South Korea, Sri Lanka, Brazil, Ethiopia, and Ukraine. Two additional contributors were recruited after one family withdrew (Criterion 3 reference), bringing the total above the minimum.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 2: Cultural context section (150–250 words, ≥1 academic citation) per recipe<span class="eval-verdict v-partial">~ Mostly met</span></div><div class="eval-body">12 of 14 context sections are fully within the 150–250 word range and include at least one academic citation. Two sections (the Ethiopian recipe and the Ukrainian recipe) were more difficult to contextualise academically: the specific dish from Ethiopia was not covered in sources I could access within my timeline, and the academic literature on Ukrainian foodways in English is limited. For these two sections, I cited reputable cultural organisation websites (UNESCO Intangible Cultural Heritage entry and a peer-reviewed geography journal article respectively) rather than food anthropology texts. I consider this a partial achievement of the criterion — the contextualisation is present and credible, but at a lower academic standard than the other 12 sections.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 3: ≥10 interviews with documented ethical consent<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">14 interviews conducted and documented (12 in-person, 2 via video call). All participants received the consent information sheet before interview; verbal consent was recorded at the start of each session. Three contributors requested anonymisation (family names not used in the cookbook); this was honoured in all cases. Interview summaries and anonymised transcript excerpts are in Appendix B; consent documentation is in Appendix C.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 4: Original food photography for every recipe<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">14 dish photographs taken by the student. 11 photographs were taken in contributors' homes during or immediately after cooking; 3 were taken in the school food technology kitchen after the contributor helped the student prepare the dish on site. All photographs are original. I note that the quality of the 3 school-kitchen photographs is slightly lower than the home photographs — home cooking environments provided better natural light — but all 14 are usable and clearly original.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 5: Production cost ≤ AED 350 for 6 copies<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Total production cost: AED 312 for 6 copies (AED 52 per copy). This included professional printing (120gsm interior, laminated card cover) and perfect binding from a Dubai print shop. Itemised breakdown in Appendix D.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 6: ≥4 families confirm accurate representation<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">8 of the 14 contributing families responded to the accuracy check email. All 8 confirmed the dish was accurately represented. One family (Lebanon contributor) requested a small correction to the dialect transliteration of the dish name — this was corrected before the final print run. The 6 families who did not respond may reflect email inbox issues or busy schedules rather than dissatisfaction; none contacted me to raise a concern. I consider 8 responses an adequate sample, though a higher response rate would have provided stronger evidence.</div></div>
+
+  <div class="tips-grid">
+    <div class="tip-card good"><div class="tip-header">✓ What Makes This Evaluation Strong</div><ul>
+      <li>Criterion 2 is honestly reported as "mostly met" — not inflated to "fully met"</li>
+      <li>Specific explanation for why two sections are academically weaker (limited scholarly literature)</li>
+      <li>Criterion 4 note about photograph quality variation — shows critical eye</li>
+      <li>Ci Impact 2 connects personal discovery (own family history) to the intellectual framework of the project — not just "this was nice"</li>
+    </ul></div>
+    <div class="tip-card bad"><div class="tip-header">✗ What to Avoid</div><ul>
+      <li>"The cookbook turned out beautiful and everyone loved it" — aesthetic praise, no criterion evaluation</li>
+      <li>Claiming all criteria fully met without evidence</li>
+      <li>Ci that lists positive experiences only — IB moderators consistently note that reflections showing discomfort, challenge, or revision are more credible than uniformly positive ones</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="section" id="references">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">Ref</span>
+    <div><span class="section-label">Bibliography</span><h2>References</h2></div>
+  </div>
+  <ol class="ref-list">
+    <li>Appadurai, A. (1988). How to make a national cuisine: Cookbooks in contemporary India. <em>Comparative Studies in Society and History</em>, 30(1), pp. 3–24.</li>
+    <li>Counihan, C. (1999). <em>The Anthropology of Food and Body: Gender, Meaning and Power</em>. New York: Routledge.</li>
+    <li>Counihan, C. and Van Esterik, P. (eds.) (2013). <em>Food and Culture: A Reader</em>. 3rd edn. New York: Routledge.</li>
+    <li>Mintz, S.W. (1996). <em>Tasting Food, Tasting Freedom: Excursions into Eating, Culture, and the Past</em>. Boston: Beacon Press.</li>
+    <li>Oral History Association (2009). <em>Principles and Best Practices for Oral History</em>. Carlisle, PA: OHA. Available at: www.oralhistory.org (Accessed: [date]).</li>
+    <li>Pollan, M. (2013). <em>Cooked: A Natural History of Transformation</em>. London: Allen Lane.</li>
+    <li>Seremetakis, C.N. (1994). <em>The Senses Still: Perception and Memory as Material Culture in Modernity</em>. Chicago: University of Chicago Press.</li>
+    <li>Sutton, D.E. (2001). <em>Remembrance of Repasts: An Anthropology of Food and Memory</em>. Oxford: Berg.</li>
+    <li>UNESCO (2022). <em>Intangible Cultural Heritage: Food and Cuisine</em>. Paris: UNESCO. Available at: ich.unesco.org (Accessed: [date]).</li>
+    <li>Yow, V.R. (2005). <em>Recording Oral History: A Guide for the Humanities and Social Sciences</em>. 2nd edn. Walnut Creek: AltaMira Press.</li>
+  </ol>
+</section>
+
+<section class="section" id="appendix">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">App</span>
+    <div><span class="section-label">Supporting Evidence</span><h2>Appendix</h2></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix A — Supervisor Meeting Log</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Meeting</th><th>Date</th><th>Topics Discussed</th><th>Action Points</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Week 2</td><td>Confirmed learning goal (oral history + food anthropology) vs. product goal (cookbook); reviewed interview consent form design</td><td>Submit consent form for supervisor approval before first interview; read Yow (2005) Ch. 4 on interview technique before starting</td></tr>
+        <tr><td>2</td><td>Week 4</td><td>Reviewed first 4 interview transcripts; discussed directive vs. open interviewing; noted improvement from Interview 1–4</td><td>Continue refining interview technique; bring 2 context section drafts to next meeting</td></tr>
+        <tr><td>3</td><td>Week 7</td><td>Reviewed cultural context drafts; discussed how to handle limited academic sources for Ethiopian and Ukrainian entries</td><td>Accept peer-reviewed geography journal + UNESCO source for those two entries; note limitation honestly in Cii</td></tr>
+        <tr><td>4</td><td>Week 11</td><td>Reviewed full Criterion C draft; discussed how to connect Impact 2 (own family interview) to the academic framework</td><td>Revise Impact 2 to show how the oral history methodology — not just the curiosity — generated the discovery; make the academic connection explicit</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix B — Interview Documentation (Sample / Placeholder)</div>
+    <div class="interview-block">
+      <div class="interview-speaker">Interview Transcript 3 (Summary) — Mansaf Contributor, Jordan · Al-Karak family, third generation</div>
+      <blockquote>"We make Mansaf whenever someone comes home — for a wedding, when someone graduates, when someone comes back after a long time. Even here in Dubai, we make it the same way. My mother said the jameed used to come from a neighbour's farm. Here we buy it from a shop in Satwa. The taste is a little different. But the feeling is the same. When we make Mansaf, everyone comes home."</blockquote>
+    </div>
+    <p style="font-size:12px;color:var(--fg-muted);">Replace with full or summarised transcripts from your actual interviews. All contributor names should be anonymised if requested. Keep full recordings/transcripts in your portfolio.</p>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix C — Consent Form Template &amp; Signed Copies</div>
+    <div class="img-box" style="min-height:90px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Consent form template + 14 signed or verbally-recorded consent records<small>Replace with your actual consent documentation</small></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix D — Production Cost Breakdown</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Cost (AED)</th></tr></thead>
+      <tbody>
+        <tr><td>Professional printing (A5, 120gsm, full colour interior, 48 pages)</td><td>6 copies</td><td>168</td></tr>
+        <tr><td>Perfect binding with laminated card cover</td><td>6 copies</td><td>90</td></tr>
+        <tr><td>Photography props (plates, linen, bowls)</td><td>Assorted</td><td>32</td></tr>
+        <tr><td>Photo editing software (1 month subscription)</td><td>1 month</td><td>22</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td></td><td style="color:var(--good);font-weight:700;"><strong>312</strong> ✓ Under AED 350 (AED 52 per copy)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix E — Cookbook Interior Photograph Placeholders</div>
+    <div class="img-row">
+      <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Dish photograph: Mansaf<small>Appendix E-01</small></div>
+      <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Dish photograph: [Recipe 2]<small>Appendix E-02</small></div>
+      <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Interior spread — full layout<small>Appendix E-03</small></div>
+    </div>
+    <p style="font-size:12px;color:var(--fg-muted);">Replace with your 14 original dish photographs plus interior spread photographs of the finished cookbook.</p>
+  </div>
+</section>
+
+<footer class="report-footer">
+  <span>IB MYP Personal Project · Sample Report 5: Cultural Heritage Cookbook</span>
+  <span>For student reference only · Do not copy · Academic Year 2025–2026</span>
+</footer>
+</div>

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<title>Youth Sports Training Manual — PP Sample 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   IB MYP Personal Project — Sample 2: Youth Sports Training Manual
+   Design: bold athletic identity — navy + energetic orange
+   ============================================================ */
+
+:root {
+  --bg:          #F7F8FA;
+  --bg-alt:      #EEF0F5;
+  --surface:     #FFFFFF;
+  --border:      #D4D8E2;
+  --fg:          #181C2A;
+  --fg-muted:    #5A6077;
+  --accent:      #1A3C6E;      /* navy */
+  --accent-warm: #E8631A;      /* sport orange */
+  --accent-lt:   #E8EDF5;
+  --good:        #2D7A3A;
+  --warn:        #B85C20;
+  --heading-font:'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body-font:   'Source Serif 4', Georgia, serif;
+  --ui-font:     'DM Sans', system-ui, sans-serif;
+  --radius:      6px;
+  --shadow:      0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #12151F;
+    --bg-alt:      #191D2B;
+    --surface:     #1F2435;
+    --border:      #2E3448;
+    --fg:          #E8ECF5;
+    --fg-muted:    #8890AA;
+    --accent:      #4A7DC4;
+    --accent-warm: #F07A3A;
+    --accent-lt:   #1A2840;
+    --good:        #4CAF60;
+    --warn:        #E07840;
+    --shadow:      0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg:          #12151F;
+    --bg-alt:      #191D2B;
+    --surface:     #1F2435;
+    --border:      #2E3448;
+    --fg:          #E8ECF5;
+    --fg-muted:    #8890AA;
+    --accent:      #4A7DC4;
+    --accent-warm: #F07A3A;
+    --accent-lt:   #1A2840;
+    --good:        #4CAF60;
+    --warn:        #E07840;
+    --shadow:      0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+    color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font);
+  font-size: 12pt;
+  line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* NAV */
+.toc-bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--accent);
+  padding: 0 max(24px, env(safe-area-inset-left, 0px));
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.toc-bar::-webkit-scrollbar { display: none; }
+.toc-bar a {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  padding: 14px 16px;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.toc-bar a:hover { color: #fff; border-bottom-color: var(--accent-warm); }
+.toc-bar .logo-chip {
+  font-family: var(--heading-font);
+  font-size: 16px;
+  color: #fff;
+  padding: 14px 20px 14px 0;
+  margin-right: 12px;
+  border-right: 1px solid rgba(255,255,255,.2);
+  white-space: nowrap;
+  letter-spacing: .04em;
+}
+
+/* COVER */
+.cover {
+  background: var(--accent);
+  color: #fff;
+  padding: 56px max(40px, env(safe-area-inset-left, 0px)) 48px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  opacity: .12;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 40%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  opacity: .08;
+}
+.cover-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.cover-eyebrow {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 14px;
+}
+.cover h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 800;
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.cover h1 span { color: var(--accent-warm); }
+.cover-subtitle {
+  font-size: 17px;
+  color: rgba(255,255,255,.75);
+  font-style: italic;
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+.cover-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+}
+.cover-meta strong { color: #fff; }
+
+/* SPEC TILES */
+.spec-tiles {
+  max-width: 960px;
+  margin: 20px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 12px;
+  font-family: var(--ui-font);
+}
+.spec-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-align: center;
+}
+.spec-tile .s-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 6px; }
+.spec-tile .s-val { font-size: 22px; font-weight: 700; color: var(--accent); font-family: var(--heading-font); line-height: 1; }
+.spec-tile .s-sub { font-size: 11px; color: var(--fg-muted); margin-top: 3px; }
+.spec-tile .s-warn { font-size: 10px; color: var(--warn); margin-top: 4px; }
+
+/* DISCLAIMER */
+.disclaimer {
+  max-width: 960px;
+  margin: 16px auto 0;
+  background: #FFF3CD;
+  border: 1px solid #E8A000;
+  border-left: 5px solid #E8A000;
+  border-radius: var(--radius);
+  padding: 16px 22px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.disclaimer strong { color: #7A5000; display: block; margin-bottom: 6px; font-size: 14px; }
+.disclaimer p { margin: 0 0 6px; }
+.disclaimer p:last-child { margin: 0; }
+
+/* SUPERVISOR NOTE */
+.sup-note {
+  max-width: 960px;
+  margin: 12px auto 0;
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.sup-note strong { color: var(--accent); display: block; margin-bottom: 4px; }
+
+/* MAIN LAYOUT */
+.page-wrap { max-width: 960px; margin: 0 auto; padding-bottom: 80px; }
+
+.section { padding: 48px 0 0; }
+.section + .section { border-top: 1px solid var(--border); margin-top: 48px; }
+
+.section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; }
+.section-num {
+  font-family: var(--heading-font);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--border);
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+  letter-spacing: .02em;
+}
+.section-label {
+  font-family: var(--ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  display: block;
+  margin-bottom: 4px;
+}
+h2 {
+  font-family: var(--heading-font);
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--heading-font);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 36px 0 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+h4 {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin: 24px 0 8px;
+}
+p { margin: 0 0 16px; }
+p:last-child { margin-bottom: 0; }
+
+.criterion-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 8px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.criterion-tag .dot { width: 6px; height: 6px; background: var(--accent-warm); border-radius: 50%; }
+
+/* CALLOUTS */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-lt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 15px;
+}
+.callout.warm {
+  border-left-color: var(--accent-warm);
+  background: color-mix(in srgb, var(--accent-warm) 8%, var(--bg));
+}
+
+/* TIPS GRID */
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.tip-card { border-radius: var(--radius); padding: 18px 20px; font-size: 14px; line-height: 1.6; }
+.tip-card.good { background: color-mix(in srgb, var(--good) 8%, var(--bg)); border: 1px solid color-mix(in srgb, var(--good) 25%, transparent); }
+.tip-card.bad  { background: color-mix(in srgb, var(--warn) 8%, var(--bg)); border: 1px solid color-mix(in srgb, var(--warn) 25%, transparent); }
+.tip-card .tip-header { display: flex; align-items: center; gap: 8px; font-family: var(--ui-font); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+.tip-card.good .tip-header { color: var(--good); }
+.tip-card.bad  .tip-header { color: var(--warn); }
+.tip-card ul { margin: 0; padding-left: 16px; }
+.tip-card li { margin-bottom: 5px; }
+
+/* SMART TABLE */
+.smart-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; }
+.smart-table th, .smart-table td { padding: 12px 16px; border: 1px solid var(--border); vertical-align: top; text-align: left; }
+.smart-table th { background: var(--bg-alt); font-family: var(--ui-font); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); width: 20%; }
+.smart-table td:first-child { font-family: var(--heading-font); font-weight: 700; color: var(--accent-warm); width: 6%; text-align: center; font-size: 20px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 24px 0; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--accent-warm); opacity: .4; }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-warm); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent-warm); }
+.tl-week { font-family: var(--ui-font); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 4px; }
+.tl-title { font-family: var(--heading-font); font-weight: 700; font-size: 17px; margin-bottom: 4px; color: var(--accent); letter-spacing: .02em; }
+.tl-desc { font-size: 14px; color: var(--fg-muted); margin: 0; }
+
+/* CRITERIA TABLE */
+.criteria-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; overflow-x: auto; display: block; }
+.criteria-table th, .criteria-table td { padding: 11px 14px; border: 1px solid var(--border); vertical-align: top; text-align: left; }
+.criteria-table th { background: var(--bg-alt); font-family: var(--ui-font); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+.criteria-table tr:nth-child(even) td { background: var(--bg-alt); }
+.criteria-badge { font-family: var(--ui-font); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.cb-func   { background: #F0FBF0; color: #2D7A2D; }
+.cb-aes    { background: #FCF0FF; color: #6B2D9A; }
+.cb-safe   { background: #FFF5EC; color: #AA5000; }
+.cb-access { background: #EEF2FF; color: #3B4FCC; }
+
+/* ATL CARDS */
+.atl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+.atl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+.atl-skill-name { font-family: var(--ui-font); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 6px; }
+.atl-card p { font-size: 14px; margin: 0; }
+
+/* SOURCE CARDS */
+.source-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 12px; box-shadow: var(--shadow); font-size: 14px; }
+.source-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.source-num { background: var(--accent); color: #fff; font-family: var(--ui-font); font-size: 11px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.source-title { font-weight: 600; line-height: 1.4; }
+.source-meta { color: var(--fg-muted); font-size: 13px; }
+.source-eval { color: var(--fg-muted); font-style: italic; margin-top: 6px; }
+.craap-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.craap-pill { font-family: var(--ui-font); font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent-lt); color: var(--accent); }
+
+/* REFLECTION */
+.reflection-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0; box-shadow: var(--shadow); font-style: italic; font-size: 15.5px; line-height: 1.8; position: relative; }
+.reflection-block::before { content: '"'; font-family: var(--heading-font); font-size: 80px; color: var(--border); position: absolute; top: 0; left: 16px; line-height: 1; }
+.reflection-block p { padding-left: 20px; }
+
+/* EVAL ROWS */
+.eval-row { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+.eval-header { display: flex; align-items: center; gap: 12px; background: var(--bg-alt); padding: 12px 16px; font-family: var(--ui-font); font-size: 13px; font-weight: 600; }
+.eval-score { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.eval-body { padding: 14px 16px; font-size: 14.5px; }
+.eval-verdict { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ui-font); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 10px; margin-left: 8px; }
+.v-met { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); }
+.v-partial { background: color-mix(in srgb, var(--accent-warm) 15%, transparent); color: var(--accent-warm); }
+
+/* LEARNER PROFILE */
+.lp-grid { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.lp-chip { background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 20px; padding: 6px 14px; font-family: var(--ui-font); font-size: 13px; font-weight: 600; color: var(--accent); }
+.lp-chip span { color: var(--fg-muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+
+/* REFERENCES */
+.ref-list { counter-reset: refs; list-style: none; padding: 0; margin: 0; }
+.ref-list li { counter-increment: refs; display: flex; gap: 12px; margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
+.ref-list li::before { content: counter(refs); min-width: 24px; height: 24px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ui-font); font-size: 11px; font-weight: 700; color: var(--fg-muted); flex-shrink: 0; margin-top: 2px; }
+
+/* APPENDIX */
+.appendix-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.appendix-title { font-family: var(--ui-font); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.appendix-item p { font-size: 14px; }
+
+/* IMAGE PLACEHOLDERS */
+.img-box { background: var(--bg-alt); border: 1px dashed var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; color: var(--fg-muted); font-family: var(--ui-font); font-size: 13px; gap: 8px; }
+.img-box svg { opacity: .4; }
+.img-box small { font-size: 11px; opacity: .7; }
+.img-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 20px 0; }
+.img-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+
+/* LOG TABLE */
+.log-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+.log-table th, .log-table td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+.log-table th { background: var(--bg-alt); font-family: var(--ui-font); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+
+/* FOOTER */
+.report-footer { border-top: 1px solid var(--border); margin-top: 64px; padding: 24px 0; font-family: var(--ui-font); font-size: 12px; color: var(--fg-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 640px) {
+  .cover { padding: 36px 0 32px; }
+  .tips-grid, .atl-grid, .img-row { grid-template-columns: 1fr; }
+  .img-row-2 { grid-template-columns: 1fr; }
+}
+@media print { .toc-bar { display: none; } }
+</style>
+
+<!-- NAV -->
+<style>
+.home-bar{background:#1a1a1a;padding:0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:16px;font-family:'DM Sans',system-ui,sans-serif}
+.home-bar a.home-link{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;opacity:.85;transition:opacity .2s}
+.home-bar a.home-link:hover{opacity:1}
+.home-bar .divider{color:rgba(255,255,255,.25);font-size:16px;line-height:1}
+.home-bar .current-title{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="home-bar">
+  <a class="home-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    All Samples
+  </a>
+  <span class="divider">/</span>
+  <span class="current-title">Sample 02 — Youth Sports Training Manual</span>
+</div>
+<nav class="toc-bar">
+  <span class="logo-chip">MYP Personal Project</span>
+  <a href="#intro">Introduction</a>
+  <a href="#criterion-a">Criterion A</a>
+  <a href="#criterion-b">Criterion B</a>
+  <a href="#criterion-c">Criterion C</a>
+  <a href="#references">References</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">IB MYP Year 5 · Personal Project Report · Sample 2 of 5</p>
+    <h1>The Young <span>Athlete's</span><br>Training Manual</h1>
+    <p class="cover-subtitle">How I learned the science of youth athletic development to create an evidence-based training guide for 12–16 year olds</p>
+    <div class="cover-meta">
+      <div><strong>Category:</strong> Sports</div>
+      <div><strong>Global Context:</strong> Identities &amp; Relationships</div>
+      <div><strong>Supervisor:</strong> [Supervisor Name]</div>
+      <div><strong>Candidate Number:</strong> [000XXX-00000]</div>
+      <div><strong>School:</strong> [Your School Name]</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPEC TILES -->
+<div class="spec-tiles">
+  <div class="spec-tile"><div class="s-label">Word Count</div><div class="s-val">1,500–3,500</div><div class="s-sub">words (body text only)</div><div class="s-warn">References &amp; appendices excluded</div></div>
+  <div class="spec-tile"><div class="s-label">Page Limit</div><div class="s-val">Max 15</div><div class="s-sub">pages (report body)</div><div class="s-warn">Confirm with your supervisor</div></div>
+  <div class="spec-tile"><div class="s-label">Font Size</div><div class="s-val">Min 11pt</div><div class="s-sub">12pt recommended</div><div class="s-warn">Margins: min 2 cm all sides</div></div>
+  <div class="spec-tile"><div class="s-label">Citations</div><div class="s-val">Harvard</div><div class="s-sub">in-text + bibliography</div><div class="s-warn">Min 5 academic sources</div></div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <strong>⚠️ IMPORTANT — FOR REFERENCE ONLY. DO NOT COPY.</strong>
+  <p>This is a model report published as a student reference resource to illustrate the quality of work expected in an IB MYP Personal Project. <strong>Students must NOT copy, paraphrase, or reproduce any part of this report.</strong> Your Personal Project must be entirely your own original, creative, and innovative work.</p>
+  <p>Following this checklist and reading samples does <strong>not</strong> guarantee any particular grade. Meet regularly with your Personal Project supervisor, submit drafts on time, seek feedback frequently, and always follow your supervisor's instructions above all else.</p>
+</div>
+
+<!-- SUPERVISOR NOTE -->
+<div class="sup-note">
+  <strong>📌 How to read this sample</strong>
+  Notice: (1) The learning goal is about <em>sports science and youth development principles</em> — not just "how to write a training plan." (2) ATL skills are explored in depth — 1–2 per strand with specific evidence. (3) Criterion C evaluation addresses each success criterion individually with the student's own analysis. Orange warning boxes throughout show the most common student mistakes to avoid.
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+<!-- INTRODUCTION -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">00</span>
+    <div>
+      <span class="section-label">Overview</span>
+      <h2>Introduction &amp; Personal Interest</h2>
+    </div>
+  </div>
+
+  <p>I have played football since the age of eight. Over the years, I have trained with three different clubs and noticed something that troubled me: the training methods used for 12–16 year olds were almost identical to those used for adults. We ran the same drills, lifted the same relative loads, and recovered on the same schedules. Yet I had heard coaches and sports science teachers mention that adolescent bodies respond differently to training — that young athletes face specific risks, including growth plate injuries and overtraining syndrome, that are far less common in adults.</p>
+
+  <p>This observation sparked a question that I could not let go of: <em>What does sports science actually say about training adolescents?</em> I wanted to understand the physiological principles behind youth athletic development — not just the exercises, but the reasoning: why certain training methods are appropriate or harmful for young bodies, how rest and recovery function biologically, and how these principles should inform the design of a training programme for my age group.</p>
+
+  <p>My personal interest therefore lies at the intersection of <strong>sports performance and youth physiology</strong>. This led directly to my learning goal: to develop a scientifically grounded understanding of youth athletic development principles that I could apply to create a practical, evidence-based training manual for athletes aged 12–16.</p>
+
+  <div class="callout">
+    <strong>Why this matters:</strong> According to the World Health Organisation (2022), physical inactivity among adolescents is a global health crisis, with 81% of school-aged children failing to meet recommended activity levels. At the same time, inappropriate training leads to increasing rates of youth sports injuries. Understanding the evidence base behind safe, effective youth training is both personally meaningful and socially relevant.
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Good Practice Shown Here</div>
+      <ul>
+        <li>The personal interest is grounded in a real observation, not a vague hobby mention</li>
+        <li>The introduction builds logically to a specific question that drives the learning</li>
+        <li>The learning goal (sports science principles) is distinct from the product goal (training manual)</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Student Mistakes</div>
+      <ul>
+        <li>"I like football so I made a training plan" — no learning goal identified</li>
+        <li>Writing "My learning goal is to create a training manual" — this is the product, not the learning</li>
+        <li>An introduction that describes the product before explaining the personal interest</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CRITERION A -->
+<section class="section" id="criterion-a">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">A</span>
+    <div>
+      <span class="section-label">Criterion A — Planning</span>
+      <h2>Planning the Personal Project</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion A: 8 marks total (Ai + Aii + Aiii)</div>
+
+  <h3 id="ai">Ai · Learning Goal &amp; Global Context</h3>
+
+  <h4>Learning Goal</h4>
+  <p>My learning goal is to <strong>understand the key principles of youth athletic development from a sports science perspective</strong>, specifically: the physiological differences between adolescent and adult training responses; the concept of Long-Term Athlete Development (LTAD); the role of rest, recovery, and periodisation in preventing overtraining; and how to design a training programme that respects growth plate safety while building speed, strength, and endurance progressively.</p>
+
+  <p>This learning goal is distinct from my product goal. Creating the training manual is how I will demonstrate and apply this learning — but the scientific understanding I develop is the actual learning outcome of the project.</p>
+
+  <div class="callout warm">
+    <strong>⚠️ Key Warning:</strong> Do not write "My learning goal is to learn how to write a training manual." That is the product goal. The learning goal must describe the <em>knowledge or understanding</em> you gain — the "so what?" that remains even if the product were never made.
+  </div>
+
+  <h4>Global Context: Identities &amp; Relationships</h4>
+  <p>I selected the global context of <strong>Identities and Relationships</strong>, specifically the exploration of how physical activity, sport, and the body shape personal identity during adolescence. Sport plays a significant role in how many young people understand themselves — their confidence, their peer relationships, and their sense of achievement. By creating a training manual grounded in science rather than inherited adult practices, I aim to contribute to a healthier relationship between young athletes and their own physical development.</p>
+
+  <p>This global context also connects to questions of wellbeing, the ethics of coaching young people, and the responsibility coaches and athletes have to train safely — themes that are personally meaningful given my years of experience in competitive football.</p>
+
+  <h3 id="aii">Aii · Intended Product &amp; Success Criteria</h3>
+
+  <h4>Intended Product</h4>
+  <p>My intended product is a <strong>printed and bound Youth Athlete Training Manual</strong> — a professionally designed, A5-format guide of approximately 24–30 pages, aimed at athletes aged 12–16 and their coaches. The manual includes: a scientific introduction to youth physiology; a 12-week progressive training programme structured around the LTAD framework; illustrated exercise descriptions with correct form guidance; recovery and nutrition principles; and a weekly self-monitoring log. The manual will be produced in physical print form as a finished, usable resource, displayed at the project exhibition alongside a sample training session demonstration.</p>
+
+  <div class="img-row-2">
+    <div class="img-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+      Photograph of the final printed manual — cover and sample spread
+      <small>Replace with your actual product photo</small>
+    </div>
+    <div class="img-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Photograph of athlete demonstrating an exercise from the manual
+      <small>Replace with your actual process photo</small>
+    </div>
+  </div>
+
+  <h4>Success Criteria — ACCESSFM Framework</h4>
+
+  <div style="overflow-x:auto;">
+    <table class="criteria-table">
+      <thead>
+        <tr><th>#</th><th>Criterion</th><th>ACCESSFM</th><th>Measurable Standard</th><th>Justification from Research</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>The training programme must follow LTAD stage-appropriate loading for the 12–16 age group (no maximum-load strength training)</td>
+          <td><span class="criteria-badge cb-safe">Safety</span></td>
+          <td>Verified against LTAD framework by supervisor and a sports science reference (Balyi et al., 2013)</td>
+          <td>Growth plate injuries in adolescents are strongly associated with maximum-load training (Caine et al., 2006); LTAD specifies age-appropriate load progression</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>The manual must include at least 3 evidence-based recovery strategies with the physiological reasoning behind each</td>
+          <td><span class="criteria-badge cb-func">Function</span></td>
+          <td>Minimum 3 recovery methods present; each includes a cited scientific rationale</td>
+          <td>Recovery is as important as training stimulus for adaptation (Kellmann et al., 2018); many youth training resources omit the science of recovery entirely</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>The manual must be readable and understood by a 12-year-old without adult assistance, as confirmed by at least 3 student testers aged 12–13</td>
+          <td><span class="criteria-badge cb-aes">Customer</span></td>
+          <td>Flesch-Kincaid readability test score; feedback from 3 testers aged 12–13</td>
+          <td>A resource is only effective if its target audience can actually use it independently (Doak et al., 1996)</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Each exercise must include a clear diagram or photograph showing correct form, plus a listed common mistake</td>
+          <td><span class="criteria-badge cb-func">Function</span></td>
+          <td>100% of exercises have visual + error guidance</td>
+          <td>Poor exercise technique is a leading cause of training injuries; visual guidance significantly reduces technique errors (McCambridge &amp; Stricker, 2008)</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>The 12-week programme must build progressively — each 4-week block must show measurable increase in load, volume, or complexity</td>
+          <td><span class="criteria-badge cb-func">Function</span></td>
+          <td>Programme design reviewed against progressive overload principle; load tables documented in Appendix</td>
+          <td>Progressive overload is the foundational principle of athletic adaptation (Kraemer &amp; Ratamess, 2004)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Production cost must not exceed AED 80 per printed copy</td>
+          <td><span class="criteria-badge cb-access">Cost</span></td>
+          <td>Cost breakdown spreadsheet tracking design, printing, and binding costs</td>
+          <td>To be a genuinely useful product, the manual must be affordable enough for a school or club to reproduce for a team</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ What Makes These Criteria Strong</div>
+      <ul>
+        <li>Each criterion is specific to THIS product — not generic quality statements</li>
+        <li>Safety criterion (1) is backed by a named framework (LTAD), not just "it should be safe"</li>
+        <li>Readability (3) uses an actual test method — Flesch-Kincaid — not just "easy to read"</li>
+        <li>Cost criterion (6) explains the functional reason for the budget limit</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak Criteria to Avoid</div>
+      <ul>
+        <li>"The manual should be well-designed" — not measurable</li>
+        <li>"I will complete my training programme" — a task, not a quality criterion</li>
+        <li>"The manual should be useful for athletes" — too vague; useful in what specific way?</li>
+        <li>Criteria that describe the process ("I will interview a coach") not the product outcome</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="aiii">Aiii · Action Plan</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 1–2</div>
+      <div class="tl-title">Research Phase — Sports Science &amp; LTAD</div>
+      <p class="tl-desc">Research youth physiology, growth plate development, LTAD framework, periodisation, and recovery science. Apply CRAAP test to all sources. Build an evidence file. <em>Links to: Learning goal; Success criteria 1, 2, 5</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 3</div>
+      <div class="tl-title">Content Planning &amp; Programme Design</div>
+      <p class="tl-desc">Design the 12-week training programme structure (3 × 4-week blocks with progressive overload). Map each week's exercises, sets, and recovery days. Verify design against LTAD criteria. <em>Links to: Success criteria 1, 5</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 4–5</div>
+      <div class="tl-title">Draft Manual — First Version</div>
+      <p class="tl-desc">Write all sections: introduction, physiology chapter, exercise library with form guides, training programme tables, recovery chapter, self-monitoring log. <em>Links to: Success criteria 2, 3, 4</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 6</div>
+      <div class="tl-title">Supervisor Review &amp; Expert Feedback</div>
+      <p class="tl-desc">Share draft with supervisor and a PE teacher for technical accuracy feedback. Identify gaps or errors in sports science content. Record changes in project journal.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 7–8</div>
+      <div class="tl-title">Readability Testing &amp; Visual Design</div>
+      <p class="tl-desc">Test readability with 3 students aged 12–13 (criterion 3). Redesign any sections scoring below target. Add exercise diagrams and layout design. <em>Links to: Success criteria 3, 4</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 9</div>
+      <div class="tl-title">Print Production &amp; Cost Tracking</div>
+      <p class="tl-desc">Finalise layout for print. Obtain printing quotes. Print and bind two copies (one for exhibition, one for submission). Record all costs (criterion 6). <em>Links to: Success criterion 6</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 10–11</div>
+      <div class="tl-title">Write Personal Project Report</div>
+      <p class="tl-desc">Draft the full PP report, focusing on depth in ATL skills (Criterion B) and genuine personal reflection in Criterion C. Reference all appendix evidence in the text.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 12</div>
+      <div class="tl-title">Final Review &amp; Exhibition Preparation</div>
+      <p class="tl-desc">Final supervisor meeting. Proofread report. Prepare exhibition display with printed manual, training session demonstration plan, and process portfolio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CRITERION B -->
+<section class="section" id="criterion-b">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">B</span>
+    <div>
+      <span class="section-label">Criterion B — Applying Skills</span>
+      <h2>Applying ATL Skills</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion B: 8 marks total (Bi + Bii)</div>
+
+  <div class="callout">
+    <strong>IB Moderator Insight:</strong> "More successful reports focused on <em>one or two carefully selected ATL skills</em>, providing richer explanations supported by specific, clearly referenced evidence." Go deep on 1–2 skills per strand — do not list 6+ skills briefly.
+  </div>
+
+  <h3 id="bi">Bi · ATL Skills Applied to the Learning Goal</h3>
+  <p>To develop a genuine understanding of youth athletic development science, two ATL skills were central to my learning process:</p>
+
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Research Skills — Critical Thinking about Evidence</div>
+      <p>Much of the publicly available content on youth training — websites, YouTube channels, club coaching manuals — is based on adult sports science transferred to younger athletes without modification. To develop genuine understanding, I had to go beyond these sources and read primary sports science literature on youth physiology. A key moment came when I found three popular coaching websites recommending 1-repetition maximum (1RM) testing for adolescents to establish strength baselines. Reading Caine et al. (2006) in the <em>British Journal of Sports Medicine</em>, I discovered that maximum-load testing in athletes with open growth plates carries a documented risk of epiphyseal fracture — a growth plate injury that can permanently damage bone development. This was directly contradicted by the popular guidance.</p>
+      <p style="margin-top:10px;">This experience transformed my understanding of how to distinguish evidence-based practice from culturally inherited coaching habit. It also shaped Success Criterion 1 of my product — the prohibition of maximum-load strength training is not a personal preference but a conclusion drawn from primary sports science research.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Thinking Skills — Transfer of Knowledge</div>
+      <p>Understanding the Long-Term Athlete Development (LTAD) framework required me to translate abstract physiological concepts into practical programme design decisions. For example, the research on periodisation (Kraemer &amp; Ratamess, 2004) explains how training load must fluctuate to avoid adaptation plateaus — but the academic presentation assumes adult athletic contexts. I had to critically adapt this principle for a 12–16 year old audience: substituting percentage of 1RM (inappropriate for youth) with Rate of Perceived Exertion (RPE) as the load measurement tool, and reducing overall training volume relative to the adult models by approximately 30%, in line with Balyi et al.'s (2013) LTAD guidance.</p>
+      <p style="margin-top:10px;">This transfer of academic knowledge into age-appropriate application was the most intellectually demanding part of my learning. It required me to hold two bodies of knowledge simultaneously — the general principle and its youth-specific modification — and make reasoned adaptations rather than simple translations.</p>
+    </div>
+  </div>
+
+  <h3 id="bii">Bii · ATL Skills Applied to Creating the Product</h3>
+
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Communication Skills — Writing for a Specific Audience</div>
+      <p>Writing a training manual for 12-year-olds requires a fundamentally different voice from writing an academic report. My first draft of the physiology chapter was flagged in readability testing as "too textbook-like" by two of my three young testers. I measured this using the Flesch-Kincaid Grade Level formula, which produced a score of Grade 10 — two grade levels above my target audience. I systematically revised the chapter: replacing passive voice with active voice, replacing Latin-root words with Anglo-Saxon equivalents ("insufficient" became "not enough", "approximately" became "about"), and breaking long paragraphs into shorter units with subheadings. After revision, the Flesch-Kincaid score dropped to Grade 7.5, and all three re-testers reported understanding the content without difficulty.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Self-Management Skills — Reflection in Action</div>
+      <p>Creating the 12-week programme required me to regularly revise my own plans as I learned more. I kept a project journal in which I noted each decision point: when I changed the Week 4 plyometric volume after learning it exceeded LTAD guidelines, or when I restructured the recovery chapter after realising I had included sleep science but omitted nutrition timing — a gap flagged by my PE teacher in the Week 6 review. The journal allowed me to track my own reasoning across the project, making my decision-making visible and reviewable. This habit of recording rationale — not just actions — is something I intend to continue in future projects and in my academic study.</p>
+    </div>
+  </div>
+
+  <h3>Source Evaluation — CRAAP Test Applied</h3>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">1</div>
+      <div>
+        <div class="source-title">Balyi, I., Way, R. and Higgs, C. (2013). <em>Long-Term Athlete Development</em>. Human Kinetics.</div>
+        <div class="source-meta">Academic book · Human Kinetics (leading sports science publisher) · Authors: leading LTAD researchers, Canadian Sport for Life</div>
+      </div>
+    </div>
+    <p class="source-eval">Highly credible: the foundational academic text on LTAD, authored by the researchers who developed the framework. Directly relevant to my learning goal and to Success Criteria 1 and 5. Used as the primary framework reference throughout my training programme design.</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current (2013)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: LTAD founders</span><span class="craap-pill">✓ Accurate: peer-reviewed</span><span class="craap-pill">✓ Purpose: academic</span>
+    </div>
+  </div>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">2</div>
+      <div>
+        <div class="source-title">Caine, D., Maffulli, N. and Caine, C. (2006). Epidemiology of injury in child and adolescent sports. <em>British Journal of Sports Medicine</em>, 40(3), pp. 201–212.</div>
+        <div class="source-meta">Peer-reviewed journal article · BMJ Publishing · High-impact sports medicine journal</div>
+      </div>
+    </div>
+    <p class="source-eval">Highly credible: published in one of the most respected sports medicine journals globally, by researchers with extensive peer-reviewed publication records in paediatric sports medicine. Directly relevant to my learning goal and to Success Criterion 1 (growth plate safety). The findings directly challenged common coaching practices I had encountered.</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current (2006)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: BMJ journal</span><span class="craap-pill">✓ Accurate: peer-reviewed</span><span class="craap-pill">✓ Purpose: academic</span>
+    </div>
+  </div>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">3</div>
+      <div>
+        <div class="source-title">Stack Sports (2023). "10 Best Exercises for Young Athletes." <em>stack.com</em>.</div>
+        <div class="source-meta">Sports coaching website · Commercial platform · No author credentials listed</div>
+      </div>
+    </div>
+    <p class="source-eval"><strong>Partially rejected after CRAAP evaluation.</strong> The exercise list was useful for generating ideas, but no scientific rationale or citations were provided for any recommendation. Several exercises (including 1RM back squat testing for under-14s) contradicted what I had found in peer-reviewed sources on growth plate safety. I used the exercise names as search terms to find primary literature but did not cite this source in my manual, as it could not be verified as accurate.</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current (2023)</span><span class="craap-pill">~ Relevant (partially)</span><span class="craap-pill">✗ Authority: no credentials</span><span class="craap-pill">✗ Accurate: no citations</span><span class="craap-pill">✗ Purpose: commercial</span>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong ATL Evidence</div>
+      <ul>
+        <li>ATL skills are named using IB terminology and described with specific project examples</li>
+        <li>Bi (learning goal) and Bii (product creation) are clearly separated</li>
+        <li>Evidence is directly connected: "I used this skill when I discovered X"</li>
+        <li>Source evaluation shows genuine critical analysis — not just ticking boxes</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak ATL Coverage</div>
+      <ul>
+        <li>"I used research skills to find information" — circular; what did you find?</li>
+        <li>Listing 8 ATL skills in one paragraph without exploring any in depth</li>
+        <li>Mixing Bi and Bii — describing product creation skills under the learning goal strand</li>
+        <li>CRAAP test applied in a table without any written interpretation or conclusion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CRITERION C -->
+<section class="section" id="criterion-c">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">C</span>
+    <div>
+      <span class="section-label">Criterion C — Reflecting</span>
+      <h2>Reflecting on Learning &amp; Product</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion C: 8 marks total (Ci + Cii)</div>
+
+  <h3 id="ci">Ci · Impact on Learning &amp; Personal Development</h3>
+  <p>I focus on two significant impacts from this project, exploring each in depth rather than listing many briefly.</p>
+
+  <h4>Impact 1: Questioning What I Thought I Already Knew</h4>
+  <div class="reflection-block">
+    <p>I entered this project believing I understood youth training because I had been doing it for seven years. What I actually had was seven years of accumulated habit that I had never questioned. The moment this belief was challenged was when I read the Caine et al. (2006) study on adolescent sports injuries and realised that exercises I had been performing routinely — including heavy back squats at maximum load, which my club coaches had introduced at age 14 — carried documented risks that my coaches had apparently not considered, or had not known about.</p>
+    <p>This was an uncomfortable discovery. It required me to hold two contradictory ideas simultaneously: that my coaches meant well and had genuine expertise, and that their practice in this specific area was not aligned with current sports science. Processing this discomfort — not dismissing it, and not catastrophising it — was itself a form of learning. I became what the IB Learner Profile calls <strong>Reflective</strong>: able to thoughtfully consider the evidence for my own practices and honestly assess where they needed to change.</p>
+    <p>I now approach received wisdom — in sport and beyond — as something to verify rather than simply accept. This shift in intellectual habit feels like one of the most durable outcomes of the entire project.</p>
+  </div>
+
+  <h4>Impact 2: Understanding the Gap Between Knowing and Communicating</h4>
+  <div class="reflection-block">
+    <p>Halfway through drafting the manual, I realised I was writing for myself — not for a 12-year-old. My chapter on periodisation was accurate but impenetrable for its target audience. The readability test confirmed this. Revising it forced me to confront a gap I had not previously noticed: understanding something deeply and being able to explain it clearly to someone else are entirely different skills.</p>
+    <p>This connected to an insight from my research: the most effective coaches are not always those with the most technical knowledge, but those who can translate that knowledge into language and tasks their athletes can actually use. The process of simplifying without distorting — cutting jargon while preserving accuracy — was far more intellectually demanding than I had expected. I now understand why good communication is listed as a distinct ATL category: it is not a soft skill but a rigorous discipline in itself. This connects to the Learner Profile attribute of being a <strong>Communicator</strong>.</p>
+  </div>
+
+  <div class="lp-grid">
+    <div class="lp-chip">Reflective <span>challenged own assumptions about training</span></div>
+    <div class="lp-chip">Communicator <span>adapted complex content for young audiences</span></div>
+    <div class="lp-chip">Inquirer <span>pursued primary literature beyond surface sources</span></div>
+    <div class="lp-chip">Risk-Taker <span>challenged practices of experienced coaches</span></div>
+  </div>
+
+  <h3 id="cii">Cii · Evaluating the Product Against Success Criteria</h3>
+
+  <div class="callout warm">
+    <strong>⚠️ Key Moderator Reminder:</strong> Evaluation must be <em>your own critical analysis</em> — not a summary of what testers said. Use external feedback as evidence, then interpret it. Always address criteria that were not fully met.
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 1: LTAD-compliant training loads — no maximum-load strength training
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">The programme uses RPE (Rate of Perceived Exertion) as its load metric throughout, with no reference to 1RM testing or maximum-load protocols. This was verified by my PE teacher, who confirmed alignment with LTAD "Train to Train" stage guidelines. I consider this the most important criterion because it is the one with direct safety implications — a training manual that recommended inappropriate loads could cause real harm to real young athletes.</div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 2: Minimum 3 evidence-based recovery strategies with physiological reasoning
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">The manual includes five recovery strategies: sleep hygiene (with reference to Kellmann et al., 2018), active recovery protocols, nutrition timing, cold-water immersion cautions, and psychological recovery through mindfulness. Each includes a one-paragraph explanation of the physiological mechanism — not just "do this," but "this works because…" My PE teacher commented in the Week 6 review that this was stronger than most adult-oriented coaching resources she had encountered. I interpret this as evidence that the criterion was met and the content approach was appropriate.</div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 3: Readable by a 12-year-old without adult assistance
+      <span class="eval-verdict v-partial">~ Partially met</span>
+      <span class="eval-score" style="color:var(--accent-warm)">Met for 7 of 8 chapters</span>
+    </div>
+    <div class="eval-body">Seven of the eight manual chapters achieved a Flesch-Kincaid Grade Level of 7.5 or below after revision. The exception was the nutrition timing chapter, which remained at Grade 8.2 due to the technical vocabulary required (glycogen replenishment, protein synthesis). Two of three testers understood it with minor difficulty; one tester required adult help for two specific paragraphs. I added a glossary box to this chapter defining the technical terms, which I believe partially resolves the issue — but I acknowledge the chapter did not fully meet the criterion. In a revised edition, I would restructure this chapter to introduce technical terms through analogy before using them in context.</div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 4: All exercises include diagram + listed common mistake
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">All 24 exercises in the library include a hand-drawn diagram (photographed and embedded digitally), a step-by-step instruction, and a "Common Mistake" callout box. Creating the diagrams was more time-consuming than planned — each took approximately 45 minutes to draw and photograph — but I am satisfied that the visual consistency across the exercise library gives the manual a professional quality that matches its content.</div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 5: Progressive overload — measurable increase across 4-week blocks
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">Block 1 (Weeks 1–4) establishes movement patterns at RPE 6–7. Block 2 (Weeks 5–8) increases volume by 20% and introduces plyometric complexity. Block 3 (Weeks 9–12) reduces volume by 15% (deload week 11) and increases intensity to RPE 7–8. This design follows the undulating periodisation model adapted from Kraemer &amp; Ratamess (2004) for the youth context. The progression tables are documented in Appendix C.</div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">Criterion 6: Production cost ≤ AED 80 per copy
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">Final cost per copy: AED 62 (design software subscription: AED 18; A5 colour printing, 28 pages: AED 31; spiral binding: AED 13). This was below the AED 80 threshold by 22%. I achieved this by using a free student design tool for the layout and by obtaining three printing quotes, selecting the most competitive. The cost breakdown is in Appendix D.</div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong Evaluation Features</div>
+      <ul>
+        <li>Each criterion is evaluated individually with specific evidence</li>
+        <li>Criterion 3 is honest about partial non-achievement and explains why</li>
+        <li>External feedback (PE teacher's comment) is interpreted, not just quoted</li>
+        <li>Improvements for a revised edition are specific and realistic</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak Evaluation</div>
+      <ul>
+        <li>"Everyone liked the manual" — doesn't address whether criteria were met</li>
+        <li>Reporting survey averages without any student interpretation</li>
+        <li>Claiming all criteria were fully met without evidence for each one</li>
+        <li>Not addressing any limitations or areas for improvement</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section class="section" id="references">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">Ref</span>
+    <div>
+      <span class="section-label">Bibliography</span>
+      <h2>References</h2>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--fg-muted);">All references in Harvard style. A minimum of 5 credible academic sources is expected.</p>
+
+  <ol class="ref-list">
+    <li>Balyi, I., Way, R. and Higgs, C. (2013). <em>Long-Term Athlete Development</em>. Champaign, IL: Human Kinetics.</li>
+    <li>Caine, D., Maffulli, N. and Caine, C. (2006). Epidemiology of injury in child and adolescent sports: injury rates, risk factors, and prevention. <em>Clinics in Sports Medicine</em>, 25(1), pp. 1–27.</li>
+    <li>Doak, C.C., Doak, L.G. and Root, J.H. (1996). <em>Teaching Patients with Low Literacy Skills</em>. 2nd edn. Philadelphia: Lippincott.</li>
+    <li>Kellmann, M., et al. (2018). Recovery and performance in sport: consensus statement. <em>International Journal of Sports Physiology and Performance</em>, 13(2), pp. 240–245.</li>
+    <li>Kraemer, W.J. and Ratamess, N.A. (2004). Fundamentals of resistance training: progression and exercise prescription. <em>Medicine and Science in Sports and Exercise</em>, 36(4), pp. 674–688.</li>
+    <li>McCambridge, T.M. and Stricker, P.R. (2008). Strength training by children and adolescents. <em>Pediatrics</em>, 121(4), pp. 835–840.</li>
+    <li>Myer, G.D., et al. (2011). When to initiate integrative neuromuscular training to reduce sports-related injuries in youth. <em>Current Sports Medicine Reports</em>, 10(3), pp. 155–166.</li>
+    <li>Rumpf, M.C., et al. (2016). Effect of age and maturation on speed, agility and power in youth athletes. <em>Sports Medicine</em>, 46(4), pp. 547–557.</li>
+    <li>World Health Organisation (2022). <em>Physical Activity Factsheet: Adolescents</em>. Geneva: WHO.</li>
+    <li>Zwolski, C., Quatman-Yates, C. and Paterno, M.V. (2017). Resistance training in youth: laying the foundation for injury prevention and physical literacy. <em>Sports Health</em>, 9(5), pp. 436–443.</li>
+  </ol>
+</section>
+
+<!-- APPENDIX -->
+<section class="section" id="appendix">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">App</span>
+    <div>
+      <span class="section-label">Supporting Evidence</span>
+      <h2>Appendix</h2>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--fg-muted);">All appendix items are referenced in the main report body.</p>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix A — Supervisor Meeting Log</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead><tr><th>Meeting</th><th>Date</th><th>Topics Discussed</th><th>Action Points</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Week 2</td><td>Clarified distinction between learning goal (sports science) and product goal (manual); confirmed LTAD as core framework</td><td>Refine learning goal; begin research on LTAD stages</td></tr>
+          <tr><td>2</td><td>Week 6</td><td>Review of first draft manual; PE teacher feedback on nutrition chapter; identified readability issues</td><td>Apply Flesch-Kincaid test; revise physiology and nutrition chapters</td></tr>
+          <tr><td>3</td><td>Week 8</td><td>Readability test results; progress on exercise diagram completion; cost tracking</td><td>Add glossary box to nutrition chapter; finalise print quote</td></tr>
+          <tr><td>4</td><td>Week 11</td><td>Report draft review; discussion of Criterion C reflection depth</td><td>Focus Ci on 2 deep impacts; ensure each success criterion addressed in Cii</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix B — Readability Test Results (Flesch-Kincaid)</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead><tr><th>Chapter</th><th>FK Grade Level (Draft 1)</th><th>FK Grade Level (Final)</th><th>Target</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Introduction</td><td>8.4</td><td>6.8</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>Youth Physiology</td><td>10.2</td><td>7.1</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>LTAD Overview</td><td>9.6</td><td>7.4</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>Exercise Library</td><td>7.0</td><td>6.2</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>Nutrition Timing</td><td>11.4</td><td>8.2</td><td>≤7.5</td><td style="color:var(--warn);font-weight:700;">✗ Not met (glossary added)</td></tr>
+          <tr><td>Recovery Chapter</td><td>9.1</td><td>7.3</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>Training Programme</td><td>7.8</td><td>6.9</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+          <tr><td>Self-Monitoring Log</td><td>6.4</td><td>5.8</td><td>≤7.5</td><td style="color:var(--good);font-weight:700;">✓ Met</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix C — Training Programme Load Progression Summary</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead><tr><th>Block</th><th>Weeks</th><th>Focus</th><th>RPE Range</th><th>Volume vs. Block 1</th><th>Key Exercises</th></tr></thead>
+        <tbody>
+          <tr><td>Block 1</td><td>1–4</td><td>Movement foundations &amp; body control</td><td>RPE 6–7</td><td>Baseline (100%)</td><td>Bodyweight squat, split squat, push-up, plank</td></tr>
+          <tr><td>Block 2</td><td>5–8</td><td>Strength &amp; power introduction</td><td>RPE 7–8</td><td>+20% volume</td><td>Goblet squat, banded hip hinge, box jump (low), lateral bounds</td></tr>
+          <tr><td>Block 3</td><td>9–12</td><td>Sport-specific speed &amp; agility (deload wk 11)</td><td>RPE 7–8 (wk 11: RPE 5)</td><td>+10% (wk 11: −30%)</td><td>Cone agility drills, reactive sprint starts, medicine ball rotations</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix D — Production Cost Breakdown</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead><tr><th>Item</th><th>Supplier</th><th>Cost (AED)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Design software (student plan, 1 month)</td><td>Canva Pro student</td><td>18</td><td>Used for layout and typography</td></tr>
+          <tr><td>A5 colour printing, 28 pages × 2 copies</td><td>Local print shop, Dubai</td><td>62</td><td>AED 31 per copy; 3 quotes obtained</td></tr>
+          <tr><td>Spiral binding × 2</td><td>Local print shop</td><td>26</td><td>AED 13 per copy</td></tr>
+          <tr><td><strong>Total per copy</strong></td><td></td><td><strong>62</strong></td><td style="color:var(--good);font-weight:700;">✓ Under AED 80 threshold</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix E — Sample Manual Pages (Photograph Placeholders)</div>
+    <div class="img-row">
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Manual cover page — printed and bound
+        <small>Appendix E-1</small>
+      </div>
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Sample exercise page — diagram + instructions
+        <small>Appendix E-2</small>
+      </div>
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Training programme table — Week 1 spread
+        <small>Appendix E-3</small>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--fg-muted);">Replace placeholder boxes with actual photographs of your printed manual pages.</p>
+  </div>
+</section>
+
+<!-- FINAL TEACHER NOTES -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">!</span>
+    <div>
+      <span class="section-label">Guidance</span>
+      <h2>Summary: What Makes or Breaks a Personal Project</h2>
+    </div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ 5 THINGS THAT SHOW QUALITY WORK</div>
+      <ul>
+        <li>Learning goal describes <strong>knowledge gained</strong>, clearly separate from the product goal</li>
+        <li>ATL skills explored in <strong>depth</strong> with specific, named examples from your project</li>
+        <li>Success criteria are <strong>measurable, product-specific, and research-justified</strong></li>
+        <li>Criterion C reflects on <strong>1–2 deep personal impacts</strong> with specific moments described</li>
+        <li>Evaluation uses <strong>your own analysis</strong> — not just what others said about your product</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ 5 MOST COMMON REASONS FOR LOST MARKS</div>
+      <ul>
+        <li>Learning goal = product goal ("I learned how to make the manual")</li>
+        <li>Listing many ATL skills with no depth or specific evidence</li>
+        <li>Generic success criteria ("the manual should be good quality")</li>
+        <li>Criterion C lists many brief impacts instead of exploring 1–2 deeply</li>
+        <li>Evaluation only reports test results without the student's own interpretation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="report-footer">
+  <span>IB MYP Personal Project · Sample Report 2: Youth Sports Training Manual</span>
+  <span>For student reference only · Do not copy · Academic Year 2025–2026</span>
+</footer>
+
+</div>

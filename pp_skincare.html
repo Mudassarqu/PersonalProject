@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<title>Natural Skincare PP — Sample 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   IB MYP Personal Project — Sample 1: Natural Skincare Line
+   Layout: elegant academic document with editorial botanical identity
+   ============================================================ */
+
+/* === DESIGN TOKENS === */
+:root {
+  --bg:          #FAFAF7;
+  --bg-alt:      #F2F0EA;
+  --surface:     #FFFFFF;
+  --border:      #D8D4C8;
+  --fg:          #1C1A16;
+  --fg-muted:    #6B6558;
+  --accent:      #5C7A4E;      /* sage green — botanical */
+  --accent-warm: #A0703A;      /* amber — ingredient warmth */
+  --accent-lt:   #E8EDE5;
+  --good:        #4A7C40;
+  --warn:        #B85C20;
+  --heading-font: 'Playfair Display', Georgia, serif;
+  --body-font:   'Source Serif 4', Georgia, serif;
+  --ui-font:     'DM Sans', system-ui, sans-serif;
+  --radius:      6px;
+  --shadow:      0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #17160F;
+    --bg-alt:      #1E1D16;
+    --surface:     #252418;
+    --border:      #3A3830;
+    --fg:          #EDE9DF;
+    --fg-muted:    #9A9485;
+    --accent:      #7EA96C;
+    --accent-warm: #C48C55;
+    --accent-lt:   #263320;
+    --good:        #72B460;
+    --warn:        #E07840;
+    --shadow:      0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg:          #17160F;
+    --bg-alt:      #1E1D16;
+    --surface:     #252418;
+    --border:      #3A3830;
+    --fg:          #EDE9DF;
+    --fg-muted:    #9A9485;
+    --accent:      #7EA96C;
+    --accent-warm: #C48C55;
+    --accent-lt:   #263320;
+    --good:        #72B460;
+    --warn:        #E07840;
+    --shadow:      0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+    color-scheme: dark;
+}
+
+/* === BASE === */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font);
+  font-size: 12pt;   /* IB minimum: 11pt — set to 12pt for readability */
+  line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* === NAVIGATION / TOC === */
+.toc-bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 max(24px, env(safe-area-inset-left, 0px));
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
+}
+.toc-bar::-webkit-scrollbar { display: none; }
+.toc-bar a {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: 14px 16px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.toc-bar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.toc-bar .logo-chip {
+  font-family: var(--heading-font);
+  font-size: 13px;
+  color: var(--accent);
+  padding: 14px 16px 14px 0;
+  margin-right: 8px;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* === COVER === */
+.cover {
+  background: var(--accent-lt);
+  border-bottom: 1px solid var(--border);
+  padding: 60px max(40px, env(safe-area-inset-left, 0px));
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.cover-text {}
+.cover-eyebrow {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.cover h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin: 0 0 20px;
+  color: var(--fg);
+}
+.cover h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.cover-subtitle {
+  font-size: 17px;
+  color: var(--fg-muted);
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.cover-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+}
+.cover-meta dt { color: var(--fg-muted); font-weight: 500; }
+.cover-meta dd { margin: 0; font-weight: 600; color: var(--fg); }
+
+.cover-badge {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-shrink: 0;
+  font-family: var(--heading-font);
+  box-shadow: var(--shadow);
+}
+.cover-badge .big { font-size: 28px; font-weight: 700; line-height: 1; }
+.cover-badge .small { font-size: 10px; font-weight: 400; letter-spacing: .08em; opacity: .85; margin-top: 4px; }
+
+/* === TEACHER NOTICE === */
+.teacher-box {
+  background: linear-gradient(135deg, #FFF9E6, #FFF3CC);
+  border: 1px solid #E8C84A;
+  border-left: 4px solid #D4A800;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  max-width: 960px;
+  margin: 32px auto;
+  font-family: var(--ui-font);
+  font-size: 13.5px;
+}
+:root[data-theme="dark"] .teacher-box,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .teacher-box {
+    background: linear-gradient(135deg, #2A2400, #1E1A00);
+    border-color: #6B5400;
+    border-left-color: #A88000;
+  }
+}
+.teacher-box strong { color: #7A5A00; display: block; margin-bottom: 6px; }
+:root[data-theme="dark"] .teacher-box strong { color: #F0C040; }
+.teacher-box ul { margin: 8px 0 0 0; padding-left: 18px; }
+.teacher-box li { margin-bottom: 4px; color: var(--fg); }
+
+/* === MAIN LAYOUT === */
+.page-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+/* === SECTION WRAPPER === */
+.section {
+  padding: 48px 0 0;
+}
+.section + .section { border-top: 1px solid var(--border); margin-top: 48px; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.section-num {
+  font-family: var(--heading-font);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+}
+.section-label {
+  font-family: var(--ui-font);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+h2 {
+  font-family: var(--heading-font);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--heading-font);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  color: var(--fg);
+}
+h4 {
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 24px 0 8px;
+}
+p { margin: 0 0 16px; }
+p:last-child { margin-bottom: 0; }
+
+/* === CRITERION BADGE === */
+.criterion-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 8px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.criterion-tag .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; opacity: .7; }
+
+/* === CALLOUT BOXES === */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-lt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 15px;
+}
+.callout.warm {
+  border-left-color: var(--accent-warm);
+  background: #FAF3EC;
+}
+:root[data-theme="dark"] .callout.warm,
+.callout.warm {
+  background: color-mix(in srgb, var(--accent-warm) 8%, var(--bg));
+}
+
+/* === GOOD / BAD POINTS === */
+.tips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.tip-card {
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.tip-card.good {
+  background: color-mix(in srgb, var(--good) 8%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--good) 25%, transparent);
+}
+.tip-card.bad {
+  background: color-mix(in srgb, var(--warn) 8%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--warn) 25%, transparent);
+}
+.tip-card .tip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.tip-card.good .tip-header { color: var(--good); }
+.tip-card.bad .tip-header { color: var(--warn); }
+.tip-card ul { margin: 0; padding-left: 16px; }
+.tip-card li { margin-bottom: 5px; }
+
+/* === SMART GOAL TABLE === */
+.smart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  margin: 20px 0;
+}
+.smart-table th, .smart-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  text-align: left;
+}
+.smart-table th {
+  background: var(--bg-alt);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  width: 20%;
+}
+.smart-table td:first-child {
+  font-family: var(--ui-font);
+  font-weight: 700;
+  color: var(--accent);
+  width: 8%;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* === ACTION PLAN === */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: 24px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-dot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.tl-week {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.tl-title {
+  font-family: var(--ui-font);
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.tl-desc { font-size: 14px; color: var(--fg-muted); margin: 0; }
+
+/* === SUCCESS CRITERIA TABLE === */
+.criteria-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 20px 0;
+  overflow-x: auto;
+  display: block;
+}
+.criteria-table th, .criteria-table td {
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  text-align: left;
+}
+.criteria-table th {
+  background: var(--bg-alt);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.criteria-table tr:nth-child(even) td { background: var(--bg-alt); }
+.criteria-badge {
+  font-family: var(--ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.cb-access { background: #EEF2FF; color: #3B4FCC; }
+.cb-func   { background: #F0FBF0; color: #2D7A2D; }
+.cb-safe   { background: #FFF5EC; color: #AA5000; }
+.cb-aes    { background: #FCF0FF; color: #6B2D9A; }
+
+/* === ATL SKILLS === */
+.atl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+.atl-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.atl-skill-name {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.atl-card p { font-size: 14px; margin: 0; }
+
+/* === SOURCE EVALUATION === */
+.source-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+.source-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.source-num {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.source-title { font-weight: 600; line-height: 1.4; }
+.source-meta { color: var(--fg-muted); font-size: 13px; }
+.source-eval { color: var(--fg-muted); font-style: italic; margin-top: 6px; }
+.craap-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.craap-pill {
+  font-family: var(--ui-font);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--accent-lt);
+  color: var(--accent);
+}
+
+/* === REFLECTION SECTION === */
+.reflection-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.8;
+  position: relative;
+}
+.reflection-block::before {
+  content: '"';
+  font-family: var(--heading-font);
+  font-size: 72px;
+  color: var(--accent-lt);
+  position: absolute;
+  top: 0;
+  left: 16px;
+  line-height: 1;
+}
+.reflection-block p { padding-left: 20px; }
+
+/* === PRODUCT EVALUATION CRITERIA === */
+.eval-row {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.eval-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-alt);
+  padding: 12px 16px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 600;
+}
+.eval-score {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.eval-body { padding: 14px 16px; font-size: 14.5px; }
+.eval-verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-left: 8px;
+}
+.v-met { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); }
+.v-partial { background: color-mix(in srgb, var(--accent-warm) 15%, transparent); color: var(--accent-warm); }
+
+/* === LEARNER PROFILE === */
+.lp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.lp-chip {
+  background: var(--accent-lt);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.lp-chip span { color: var(--fg-muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+
+/* === REFERENCES === */
+.ref-list { counter-reset: refs; list-style: none; padding: 0; margin: 0; }
+.ref-list li {
+  counter-increment: refs;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.ref-list li::before {
+  content: counter(refs);
+  min-width: 24px;
+  height: 24px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* === APPENDIX === */
+.appendix-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.appendix-title {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.appendix-item p { font-size: 14px; }
+
+/* === IMAGE PLACEHOLDERS === */
+.img-box {
+  background: var(--bg-alt);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--fg-muted);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  gap: 8px;
+}
+.img-box svg { opacity: .4; }
+.img-box small { font-size: 11px; opacity: .7; }
+
+.img-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 20px 0; }
+.img-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+
+/* === SUPERVISOR LOG === */
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin: 16px 0;
+}
+.log-table th, .log-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.log-table th {
+  background: var(--bg-alt);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* === SCORE DISPLAY === */
+.score-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+.score-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  min-width: 120px;
+}
+.score-label { font-family: var(--ui-font); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 8px; }
+.score-num { font-family: var(--heading-font); font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+.score-max { font-family: var(--ui-font); font-size: 13px; color: var(--fg-muted); }
+.score-total { background: var(--accent); border-color: var(--accent); }
+.score-total .score-label { color: rgba(255,255,255,.8); }
+.score-total .score-num { color: #fff; }
+.score-total .score-max { color: rgba(255,255,255,.7); }
+
+/* === FOOTER === */
+.report-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 64px;
+  padding: 24px 0;
+  font-family: var(--ui-font);
+  font-size: 12px;
+  color: var(--fg-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* === DIVIDER === */
+.rule { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .cover { grid-template-columns: 1fr; padding: 36px 0; }
+  .cover-badge { display: none; }
+  .tips-grid, .atl-grid, .img-row { grid-template-columns: 1fr; }
+  .img-row-2 { grid-template-columns: 1fr; }
+  .score-grid { justify-content: center; }
+  .cover-meta { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .toc-bar { display: none; }
+}
+</style>
+
+<!-- ===== STICKY NAV ===== -->
+<style>
+.home-bar{background:#1a1a1a;padding:0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:16px;font-family:'DM Sans',system-ui,sans-serif}
+.home-bar a.home-link{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;opacity:.85;transition:opacity .2s}
+.home-bar a.home-link:hover{opacity:1}
+.home-bar .divider{color:rgba(255,255,255,.25);font-size:16px;line-height:1}
+.home-bar .current-title{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="home-bar">
+  <a class="home-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    All Samples
+  </a>
+  <span class="divider">/</span>
+  <span class="current-title">Sample 01 — Natural Skincare Product Line</span>
+</div>
+<nav class="toc-bar" aria-label="Report navigation">
+  <span class="logo-chip">MYP Personal Project</span>
+  <a href="#intro">Introduction</a>
+  <a href="#criterion-a">Criterion A</a>
+  <a href="#criterion-b">Criterion B</a>
+  <a href="#criterion-c">Criterion C</a>
+  <a href="#references">References</a>
+  <a href="#appendix">Appendix</a>
+  <a href="#teacher-notes">For Teachers</a>
+</nav>
+
+<!-- ===== COVER ===== -->
+<div style="background:var(--accent-lt); border-bottom:1px solid var(--border);">
+  <div class="cover page-wrap">
+    <div class="cover-text">
+      <p class="cover-eyebrow">IB MYP Year 5 · Personal Project Report</p>
+      <h1>Botanical Beauty:<br><em>Creating a Natural Skincare Line</em></h1>
+      <p class="cover-subtitle">How I learned the science of plant-based formulation to create clean, effective skincare products</p>
+      <dl class="cover-meta">
+        <dt>Category</dt><dd>Fashion &amp; Beauty</dd>
+        <dt>School</dt><dd>[Your School Name]</dd>
+        <dt>Global Context</dt><dd>Identities &amp; Relationships</dd>
+        <dt>Supervisor</dt><dd>[Supervisor Name]</dd>
+        <dt>Candidate Number</dt><dd>[000XXX-00000]</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="page-wrap">
+
+<!-- ===== DISCLAIMER BANNER ===== -->
+<div style="background:#FFF3CD;border:1px solid #E8A000;border-left:5px solid #E8A000;border-radius:6px;padding:18px 24px;max-width:960px;margin:24px auto 0;font-family:var(--ui-font);font-size:13.5px;line-height:1.7;">
+  <strong style="color:#7A5000;display:block;font-size:15px;margin-bottom:8px;">⚠️ IMPORTANT — READ BEFORE USING THIS RESOURCE</strong>
+  <p style="margin:0 0 10px;">This document is a <strong>model example created for learning and reference purposes only</strong>, published as a student reference resource. It is intended to help students understand the structure, language, and quality of work expected in an IB MYP Personal Project report.</p>
+  <p style="margin:0 0 10px;"><strong>Students must NOT copy, paraphrase, or reproduce any part of this report in their own submission.</strong> Doing so would constitute academic misconduct under IB regulations and may result in the cancellation of your Personal Project grade.</p>
+  <p style="margin:0;"><strong>Your Personal Project must be entirely your own original work.</strong> Use this sample only to understand what a high-quality report looks like — then create something completely new based on YOUR OWN topic, research, product, and reflection. The IB values creative, original, and innovative thinking. Show yours.</p>
+</div>
+
+<!-- ===== SUBMISSION SPECS ===== -->
+<div style="max-width:960px;margin:16px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-family:var(--ui-font);">
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:6px;padding:16px 18px;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:8px;">Word Count</div>
+    <div style="font-size:26px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1;">1,500 – 3,500</div>
+    <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">words (body text only)</div>
+    <div style="font-size:11px;color:var(--warn);margin-top:6px;">References &amp; appendices excluded</div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:6px;padding:16px 18px;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:8px;">Page Limit</div>
+    <div style="font-size:26px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1;">Max 15</div>
+    <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">pages (report body)</div>
+    <div style="font-size:11px;color:var(--warn);margin-top:6px;">Check your school's specific requirement</div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:6px;padding:16px 18px;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:8px;">Font Size</div>
+    <div style="font-size:26px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1;">Min 11pt</div>
+    <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">body text (12pt recommended)</div>
+    <div style="font-size:11px;color:var(--warn);margin-top:6px;">Margins: min 2 cm on all sides</div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:6px;padding:16px 18px;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:8px;">Language</div>
+    <div style="font-size:26px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1;">English</div>
+    <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">first person throughout</div>
+    <div style="font-size:11px;color:var(--warn);margin-top:6px;">Harvard citation style required</div>
+  </div>
+</div>
+<p style="max-width:960px;margin:10px auto 0;font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);padding:0 2px;">⚠️ Always confirm exact submission requirements with your Personal Project supervisor — school-specific rules may differ.</p>
+
+<!-- ===== RUBRIC CHECKLIST ===== -->
+<div style="max-width:960px;margin:20px auto 0;border:1px solid var(--border);border-radius:6px;overflow:hidden;font-family:var(--ui-font);font-size:13.5px;">
+  <div style="background:var(--accent);color:#fff;padding:14px 20px;font-weight:700;font-size:14px;letter-spacing:.04em;">📋 IB MYP PERSONAL PROJECT — OFFICIAL RUBRIC CHECKLIST</div>
+  <div style="padding:18px 20px;background:var(--surface);">
+    <p style="margin:0 0 14px;font-size:13px;color:var(--fg-muted);">Use this checklist as you write your own report. Every point below is drawn directly from the IB MYP Personal Project Assessment Criteria (2020 onwards). Tick each box when your report clearly addresses it. Reference: <a href="https://www.ibo.org/programmes/middle-years-programme/assessment-and-exams/personal-project/" target="_blank" rel="noopener" style="color:var(--accent);">IBO.org — Personal Project</a></p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <!-- Criterion A -->
+      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:16px;">
+        <div style="font-weight:700;color:var(--accent);margin-bottom:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Criterion A — Planning (8 marks)</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-bottom:8px;font-style:italic;">Ai — Goal &amp; Global Context</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have stated a clear <strong>learning goal</strong> (what I want to learn/understand, NOT just what I will make)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My learning goal is clearly <strong>different</strong> from my product goal</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have chosen a <strong>global context</strong> and explained how it relates to my project</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have explained my <strong>personal interest</strong> and why I chose this topic</span></label>
+        <div style="font-size:12px;color:var(--fg-muted);margin:12px 0 8px;font-style:italic;">Aii — Product &amp; Success Criteria</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have described my <strong>intended product</strong> in detail</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have at least <strong>5–6 success criteria</strong> that are specific to my product (not generic)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each success criterion is <strong>measurable</strong> — I can clearly test whether I achieved it</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each criterion is <strong>justified</strong> with reasoning or a research source</span></label>
+        <div style="font-size:12px;color:var(--fg-muted);margin:12px 0 8px;font-style:italic;">Aiii — Action Plan</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My action plan was created <strong>before</strong> I started the project (not written after)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each step in my plan focuses on <strong>product development</strong> activities</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My plan links tasks to <strong>specific success criteria</strong></span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My plan includes time for <strong>testing, revision, and supervisor meetings</strong></span></label>
+      </div>
+
+      <!-- Criterion B -->
+      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:16px;">
+        <div style="font-weight:700;color:var(--accent);margin-bottom:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Criterion B — Applying Skills (8 marks)</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-bottom:8px;font-style:italic;">Bi — ATL Skills for the Learning Goal</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have selected <strong>1–2 ATL skills</strong> most relevant to achieving my <em>learning goal</em></span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each ATL skill is described in <strong>depth</strong> with specific examples from my project</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I explain <strong>how</strong> using this skill helped me achieve my learning goal</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have evaluated at least 3 sources using a formal evaluation method (e.g. CRAAP test)</span></label>
+        <div style="font-size:12px;color:var(--fg-muted);margin:12px 0 8px;font-style:italic;">Bii — ATL Skills for Creating the Product</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have selected <strong>1–2 different ATL skills</strong> most relevant to <em>making the product</em></span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each skill is described with specific evidence from the product-making process</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I keep Bi (learning goal skills) and Bii (product skills) <strong>clearly separate</strong></span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Evidence (photos, logs, drafts) is <strong>explicitly referenced</strong> in the text (e.g. "see Appendix B")</span></label>
+        <div style="font-size:12px;color:var(--fg-muted);margin:12px 0 8px;font-style:italic;">ATL Skill Categories (choose from):</div>
+        <p style="font-size:12px;margin:0;color:var(--fg-muted);">Research · Communication · Self-Management · Thinking (Critical &amp; Creative) · Social</p>
+      </div>
+
+      <!-- Criterion C -->
+      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:16px;">
+        <div style="font-weight:700;color:var(--accent);margin-bottom:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Criterion C — Reflecting (8 marks)</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-bottom:8px;font-style:italic;">Ci — Impact on Learning &amp; Personal Development</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I reflect on <strong>1–2 key impacts</strong> the project had on me as a learner (not a list of many)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Each impact is explained in <strong>depth</strong> — I describe specific moments and what changed</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I connect my growth to at least <strong>2 IB Learner Profile attributes</strong> with justification</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I explain how my learning relates to the <strong>global context</strong> I chose</span></label>
+        <div style="font-size:12px;color:var(--fg-muted);margin:12px 0 8px;font-style:italic;">Cii — Evaluating the Product Against Success Criteria</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I evaluate <strong>each success criterion</strong> individually with specific evidence</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My evaluation is <strong>honest</strong> — I acknowledge criteria that were not fully met</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I use survey / external feedback as <strong>evidence I interpret</strong> — not just numbers I report</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>For any unmet criterion, I suggest <strong>specific, realistic improvements</strong></span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>The evaluation is written in <strong>my own critical voice</strong> — not a summary of what others said</span></label>
+      </div>
+
+      <!-- Report Quality -->
+      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:16px;">
+        <div style="font-weight:700;color:var(--accent);margin-bottom:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Report Quality &amp; Presentation</div>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>All sources are cited <strong>in-text</strong> (author, year) using Harvard style</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>A full <strong>References / Bibliography</strong> is included at the end using Harvard format</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>All appendix items are <strong>referenced in the body text</strong> (not just attached)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have included a <strong>supervisor meeting log</strong> (at least 3 meetings) in the appendix</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have included <strong>images / photographs</strong> of the product and process</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>I have used <strong>IB command terms</strong> correctly (state, describe, explain, evaluate, justify)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My report is written in <strong>first person</strong> ("I researched…", "I found that…")</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>My report is <strong>proofread</strong> — no spelling or grammar errors</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Word count is <strong>1,500–3,500 words</strong> (body text only; references &amp; appendices not counted)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-top:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Report is a <strong>maximum of 15 pages</strong> (confirm with your supervisor)</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-top:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;flex-shrink:0;"><span>Font size is <strong>minimum 11pt</strong> (12pt recommended); margins at least 2 cm on all sides</span></label>
+      </div>
+
+    </div>
+    <div style="background:color-mix(in srgb,var(--accent) 10%,var(--bg));border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-left:4px solid var(--accent);border-radius:6px;padding:16px 20px;margin-top:16px;"><strong style="color:var(--accent);display:block;margin-bottom:8px;">⚠️ Important: Completing this checklist does NOT guarantee high grades.</strong><p style="font-size:13px;margin:0 0 8px;">The rubric is a guide — not a formula. Following it carefully is necessary but not sufficient. To give yourself the best chance of achieving your potential:</p><ul style="font-size:13px;margin:0;padding-left:18px;line-height:1.8;"><li><strong>Meet regularly with your Personal Project supervisor</strong> and act on every piece of feedback they give you. Your supervisor knows the IB expectations for your school and subject area.</li><li><strong>Submit all drafts and check-ins on time.</strong> Late submissions reduce the time you have to improve your work before the final deadline.</li><li><strong>Ask for feedback early and often</strong> — do not wait until the final week to show your supervisor your report. Each review is an opportunity to improve.</li><li><strong>Follow your supervisor's instructions above all else.</strong> If your supervisor's guidance differs from anything you read here, always follow your supervisor.</li><li><strong>Review your own work critically</strong> between supervisor meetings. Re-read each section and ask: <em>Have I actually explained this, or just described it?</em></li></ul></div>    <p style="font-size:12px;color:var(--fg-muted);margin:14px 0 0;">Checkboxes are interactive on this page but are not saved. Print this checklist or copy it to a document to track your progress. Official IB rubric: <a href="https://www.ibo.org/globalassets/new-structure/programmes/myp/personal-project/personal-project-criteria-2020.pdf" target="_blank" rel="noopener" style="color:var(--accent);">IBO Personal Project Criteria (PDF)</a></p>
+  </div>
+</div>
+
+<!-- ===== TEACHER NOTICE ===== -->
+<div id="teacher-notes" class="teacher-box" role="note" style="margin-top:20px;">
+  <strong>📌 FOR TEACHERS &amp; STUDENTS: How to read this sample</strong>
+  This is a <em>model</em> report written to illustrate the quality of work expected in an IB MYP Personal Project. <strong>Your project must be entirely your own original work.</strong> Use this only to understand the expected structure, depth, and language — not to copy content.
+  Key features to notice:
+  <ul>
+    <li>✅ Learning goal is clearly <strong>separate</strong> from the product goal — the student learns <em>plant-based formulation science</em>, not just "how to make a product"</li>
+    <li>✅ Each ATL skill section focuses on <strong>1–2 skills only</strong>, explained in depth with specific evidence (IB moderators penalise shallow coverage of many skills)</li>
+    <li>✅ Success criteria are <strong>specific to this product</strong> and justified by research — not generic templates</li>
+    <li>✅ Criterion C evaluation is <strong>student-led</strong> — external feedback is interpreted, not just reported</li>
+    <li>✅ The learning goal and product goal remain <strong>distinct throughout</strong> the entire report</li>
+    <li>⚠️ RED FLAGS students must avoid are highlighted throughout in orange boxes</li>
+  </ul>
+</div>
+
+<!-- ===== INTRODUCTION ===== -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">00</span>
+    <div>
+      <span class="section-label">Overview</span>
+      <h2>Introduction &amp; Personal Interest</h2>
+    </div>
+  </div>
+
+  <p>I have always been fascinated by the ingredients list on my skincare products. Growing up, my mother kept a small collection of traditional herbal remedies — rosewater for toning, coconut oil for moisturising, and turmeric paste for blemishes. Watching her blend these natural ingredients made me curious: <em>why do these work?</em> What is the actual chemistry behind plant-based skincare?</p>
+
+  <p>This curiosity intensified when I began researching the skincare industry for a school debate on environmental sustainability. I discovered that many commercial products contain synthetic preservatives and chemical emulsifiers that can irritate sensitive skin, and that the cosmetics industry generates significant plastic waste. I wanted to understand whether natural formulation could offer a genuinely effective alternative — not just a marketing claim.</p>
+
+  <p>My personal interest, therefore, is the intersection of <strong>natural chemistry and sustainable beauty</strong>. This interest led directly to my learning goal: I want to learn the science of plant-based cosmetic formulation — understanding emulsification, pH balance, preservative systems, and active botanical ingredients — so that I can create skincare products that are both scientifically sound and genuinely effective.</p>
+
+  <div class="callout">
+    <strong>Why this matters:</strong> According to the Global Cosmetics Market Report (2024), the natural skincare sector is growing at 8.1% annually, driven by consumer demand for transparency and sustainability. Understanding the science behind these products equips me with knowledge relevant to chemistry, biology, and environmental science — disciplines I plan to study further.
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Good Practice Shown Here</div>
+      <ul>
+        <li>Personal interest is specific and authentic, not generic</li>
+        <li>The connection between interest and learning goal is clearly explained</li>
+        <li>The introduction shows <em>why</em> the student wants to learn, not just what they made</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Student Mistakes</div>
+      <ul>
+        <li>Writing only about childhood stories without connecting to a learning goal</li>
+        <li>Making the learning goal simply "learn how to make the product"</li>
+        <li>Confusing the product goal ("create a skincare line") with the learning goal ("understand plant-based formulation science")</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CRITERION A ===== -->
+<section class="section" id="criterion-a">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">A</span>
+    <div>
+      <span class="section-label">Criterion A — Planning</span>
+      <h2>Planning the Personal Project</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion A: 8 marks total (Ai + Aii + Aiii)</div>
+
+  <!-- Ai -->
+  <h3 id="ai">Ai · Learning Goal &amp; Global Context</h3>
+
+  <h4>Learning Goal</h4>
+  <p>My learning goal is to <strong>develop an understanding of the science of plant-based cosmetic formulation</strong>, specifically: how natural emulsifiers create stable oil-water emulsions; how pH levels affect skincare efficacy and safety; which botanical active ingredients (such as aloe vera, rosehip oil, and green tea extract) have evidence-based benefits; and how natural preservative systems function to extend shelf life without synthetic chemicals.</p>
+
+  <p>This is a distinct learning goal from my product goal. Creating the skincare product <em>is the means</em> by which I will demonstrate and apply my learning — but the knowledge I gain about formulation chemistry is the actual learning outcome.</p>
+
+  <div class="callout warm">
+    <strong>⚠️ Student Warning:</strong> Do not write "My learning goal is to learn how to make a natural skincare product." This confuses the learning goal with the product goal. Your learning goal must be the <em>knowledge or understanding</em> you gain through the project — the "so what?" beyond making the thing.
+  </div>
+
+  <h4>Global Context: Identities &amp; Relationships</h4>
+  <p>I chose the global context of <strong>Identities and Relationships</strong>, specifically the exploration of how individuals relate to their own bodies, health, and cultural practices. Skincare is deeply tied to cultural identity — different communities have traditions of plant-based beauty rituals passed down through generations. My project explores how scientific understanding can honour and elevate these cultural practices, helping me understand the relationship between traditional knowledge and modern science.</p>
+
+  <p>This context also connects to questions of self-image, health choices, and the ethical responsibilities of consumer culture — all relevant to my own identity as a young person navigating beauty standards and environmental values.</p>
+
+  <!-- Aii -->
+  <h3 id="aii">Aii · Intended Product &amp; Success Criteria</h3>
+
+  <h4>Intended Product</h4>
+  <p>My intended product is a <strong>set of three natural skincare products</strong>: (1) a botanical facial cleanser, (2) a rosehip &amp; aloe vera moisturising serum, and (3) a green tea &amp; kaolin clay face mask. The products will be housed in labelled, recyclable glass jars and accompanied by a written formulation guide explaining the science behind each ingredient. The products are designed for combination to sensitive skin types, appropriate for the 15–25 age group.</p>
+
+  <div class="img-row-2">
+    <div class="img-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/></svg>
+      Product photograph: Three glass jars arranged on a marble surface with botanical garnish
+      <small>Replace with your actual product photo</small>
+    </div>
+    <div class="img-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+      Photograph of ingredient labels and formulation notes
+      <small>Replace with your actual planning photo</small>
+    </div>
+  </div>
+
+  <h4>Success Criteria — ACCESSFM Framework</h4>
+  <p>The following success criteria were developed using the ACCESSFM framework (Aesthetics, Cost, Customer, Environment, Size, Safety, Function, Materials) and justified through research into cosmetic formulation standards. Each criterion applies specifically to this product — they are not generic.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="criteria-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Criterion</th>
+          <th>ACCESSFM</th>
+          <th>Measurable Standard</th>
+          <th>Justification from Research</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>The products must have a pH between 4.5 and 6.0</td>
+          <td><span class="criteria-badge cb-safe">Safety</span></td>
+          <td>Tested with pH strips; all three products within range</td>
+          <td>Skin's natural pH is 4.5–5.5 (Lambers et al., 2006); products outside this range cause irritation and disrupt the acid mantle</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>The moisturising serum must form a stable emulsion showing no separation after 72 hours at room temperature</td>
+          <td><span class="criteria-badge cb-func">Function</span></td>
+          <td>Visual inspection at 24h, 48h, and 72h; photos documented</td>
+          <td>Emulsion stability is the primary quality indicator for water-in-oil formulations (Aulton, 2022)</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Each product must contain at least two evidence-based botanical active ingredients</td>
+          <td><span class="criteria-badge cb-func">Function</span></td>
+          <td>Ingredient list verified against peer-reviewed literature</td>
+          <td>Research confirms efficacy of aloe vera (Surjushe et al., 2008), rosehip oil (Valerón-Almazán et al., 2015), and green tea polyphenols (Katiyar, 2011)</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Packaging must use only recyclable or biodegradable materials</td>
+          <td><span class="criteria-badge cb-safe">Environment</span></td>
+          <td>All containers certified recyclable; no single-use plastic</td>
+          <td>Dubai Packaging Sustainability Guidelines (2023) and cosmetics environmental impact studies support glass as the most sustainable primary packaging</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Products must achieve a minimum rating of 4/5 from at least 5 independent testers on texture, scent, and application experience</td>
+          <td><span class="criteria-badge cb-aes">Aesthetics</span></td>
+          <td>Structured 5-point evaluation form administered to 5 testers</td>
+          <td>Consumer sensory evaluation is a standard step in cosmetic product development (Cosméticos Naturais, 2023)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Total material cost must not exceed AED 150 per product batch of 50ml</td>
+          <td><span class="criteria-badge cb-access">Cost</span></td>
+          <td>Cost spreadsheet tracking all ingredient and packaging expenses</td>
+          <td>Comparable natural skincare products retail at AED 80–200; production cost below retail price confirms commercial viability</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ What Makes These Criteria Strong</div>
+      <ul>
+        <li>Each criterion is <em>measurable</em> — you can check if it was achieved</li>
+        <li>Each criterion is justified by research or an external standard</li>
+        <li>Criteria relate specifically to THIS product, not a generic product</li>
+        <li>Tools to be used are stated (e.g. pH strips) but listed under measurement — not as criteria themselves</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak Criteria to Avoid</div>
+      <ul>
+        <li>"The product should look nice" — not measurable</li>
+        <li>"I will complete my research" — this is a planning task, not a product quality</li>
+        <li>"The product should be natural" — not specific enough; what does natural mean?</li>
+        <li>Listing "use a Gantt chart" as a success criterion — this is a tool, not a quality</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Aiii -->
+  <h3 id="aiii">Aiii · Action Plan</h3>
+  <p>The following action plan was created at the start of the project. Each phase is directly linked to achieving specific success criteria, showing how the planned work builds toward the intended product.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 1–2</div>
+      <div class="tl-title">Research Phase — Learning Goal</div>
+      <p class="tl-desc">Study plant-based formulation chemistry: read academic papers on emulsification, pH science, and botanical actives. Complete CRAAP test on all sources. Create ingredient research file. <em>Links to: Learning goal; Success criteria 1, 2, 3</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 3</div>
+      <div class="tl-title">Formulation Design</div>
+      <p class="tl-desc">Draft initial formulas for all three products based on research findings. Calculate ingredient ratios. Source suppliers and compare costs. <em>Links to: Success criterion 6 (cost)</em></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 4–5</div>
+      <div class="tl-title">Prototype Batch 1</div>
+      <p class="tl-desc">Produce first trial batch of all three products. Test pH (criterion 1) and emulsion stability (criterion 2). Document with photographs. Identify failures and improvements.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 6</div>
+      <div class="tl-title">Supervisor Meeting &amp; Review</div>
+      <p class="tl-desc">Present prototype to supervisor. Analyse what the testing revealed. Adjust formulas where criteria were not yet met. Record reflections in project journal.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 7–8</div>
+      <div class="tl-title">Prototype Batch 2 &amp; Label Design</div>
+      <p class="tl-desc">Produce revised batch. Repeat stability testing. Design recyclable packaging and labels that clearly list all ingredients (links to criterion 4). Photograph process and final product.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 9</div>
+      <div class="tl-title">User Testing</div>
+      <p class="tl-desc">Administer 5-point sensory evaluation forms to 5 independent testers. Collect and analyse results (criterion 5). Note qualitative feedback for Criterion C evaluation.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Weeks 10–11</div>
+      <div class="tl-title">Write Formulation Guide &amp; Report</div>
+      <p class="tl-desc">Write the scientific formulation guide that accompanies the products, applying all research findings. Draft the personal project report, focusing on deep reflection for Criterion C.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-week">Week 12</div>
+      <div class="tl-title">Final Review &amp; Exhibition Preparation</div>
+      <p class="tl-desc">Final supervisor meeting. Proofread report. Prepare exhibition display. Review all citations using Harvard format. Submit report.</p>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong Action Plan Features</div>
+      <ul>
+        <li>Each week's work is linked to specific success criteria</li>
+        <li>The plan focuses on <em>product development</em>, not just generic project tasks</li>
+        <li>Iteration is built in (Batch 1 → Review → Batch 2)</li>
+        <li>Plan is forward-looking — not just a description of what already happened</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak Action Plans</div>
+      <ul>
+        <li>"Week 1: Do research" — not specific enough; what will you research?</li>
+        <li>Plans that include "Meet supervisor" but no mention of what product work happens</li>
+        <li>Plans submitted <em>after</em> the project is done and written as a diary</li>
+        <li>Not linking planned activities to specific success criteria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CRITERION B ===== -->
+<section class="section" id="criterion-b">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">B</span>
+    <div>
+      <span class="section-label">Criterion B — Applying Skills</span>
+      <h2>Applying ATL Skills</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion B: 8 marks total (Bi + Bii)</div>
+
+  <div class="callout">
+    <strong>IB Moderator Insight (June 2026 Subject Report):</strong> "More successful reports typically focused on <em>one or two carefully selected ATL skills</em>, allowing students to provide richer explanations supported by specific and clearly referenced evidence." Do not list 8 ATL skills briefly — go deep on 2 skills per strand.
+  </div>
+
+  <!-- Bi -->
+  <h3 id="bi">Bi · ATL Skills Applied to the Learning Goal</h3>
+  <p>To achieve my learning goal — understanding plant-based cosmetic formulation science — I selected two ATL skills that were most central to this intellectual work:</p>
+
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Research Skills — Information Literacy</div>
+      <p>I needed to evaluate the scientific validity of sources on botanical ingredients, since there is a great deal of misinformation in the beauty industry. I applied information literacy using the CRAAP test (Currency, Relevance, Authority, Accuracy, Purpose) to evaluate each source before including it in my research. For example, I initially found a popular website claiming that lemon juice is an effective toner due to its vitamin C content. Applying the CRAAP test, I noted this source had no author credentials, no citations to peer-reviewed research, and an apparent commercial purpose (selling a lemon-based product). I rejected it and instead found Levine et al. (2001) in the <em>Journal of Cosmetic Dermatology</em>, which demonstrated that citrus juice at undiluted concentrations (pH ~2.0) causes phototoxic skin damage — the opposite of the wellness claim.</p>
+      <p style="margin-top:10px;">This research skill was critical to my learning goal because it enabled me to distinguish evidence-based formulation from marketing-driven claims. Without it, I would have reproduced harmful misinformation in my own products.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Thinking Skills — Critical Thinking</div>
+      <p>Understanding why certain botanical ingredients are effective required me to move beyond surface-level information and analyse the underlying chemistry. When I researched rosehip oil, I initially recorded "high in vitamin C" as its main benefit — a claim I had seen repeatedly online. However, critical analysis of the primary literature revealed that rosehip oil's vitamin C content is largely destroyed during cold-pressing and is not stable in oil form (Venditti et al., 2020). Its actual benefit comes from its high concentration of linoleic acid (omega-6), which restores the skin barrier. This distinction was not immediately obvious, and recognising it required me to cross-reference multiple peer-reviewed studies.</p>
+      <p style="margin-top:10px;">This critical thinking process transformed my understanding from "rosehip oil has vitamin C" — a false claim — to "rosehip oil strengthens the lipid barrier through essential fatty acids" — a chemically accurate explanation. This correction directly changed my formulation approach and the ingredient claims I made in my product's accompanying guide.</p>
+    </div>
+  </div>
+
+  <!-- Bii -->
+  <h3 id="bii">Bii · ATL Skills Applied to Creating the Product</h3>
+  <p>Creating the physical skincare products required a different set of skills from intellectual research. The two ATL skills I applied most significantly in this phase were:</p>
+
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Self-Management Skills — Organisation</div>
+      <p>Cosmetic formulation requires precise measurement and sequencing. A deviation of even 1–2% in emulsifier concentration can cause emulsion failure. I developed a formulation log — a structured document recording exact ingredient weights (in grams), batch temperatures, mixing times, and testing results for each trial batch. This tool proved essential during Batch 1, when my serum separated after 36 hours. Reviewing my log, I identified that I had dissolved the emulsifier at 68°C rather than the required 75°C, causing incomplete activation. My organisation skills allowed me to trace the root cause and correct it in Batch 2, where the serum remained stable for over 96 hours — exceeding my success criterion of 72 hours.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Communication Skills — Media Literacy</div>
+      <p>Creating the packaging labels required me to communicate complex scientific information accessibly to a non-specialist audience. This was more difficult than I anticipated. My first draft used ingredient names from the International Nomenclature of Cosmetic Ingredients (INCI) system, which is the global standard — but focus group feedback from my user testers revealed that terms like "Butyrospermum parkii" (shea butter) and "Centella asiatica extract" were confusing. I resolved this by using a dual-label approach: INCI names (required for regulatory compliance) listed first, followed by the common name in brackets. This communication solution demonstrated my understanding of both regulatory requirements and consumer accessibility.</p>
+    </div>
+  </div>
+
+  <h3>Source Evaluation — CRAAP Test Applied</h3>
+  <p>The following sources were evaluated before being included in my research. I show three examples of my source evaluation process:</p>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">1</div>
+      <div>
+        <div class="source-title">Surjushe, A., Vasani, R. &amp; Saple, D.G. (2008). Aloe vera: a short review. <em>Indian Journal of Dermatology</em>, 53(4), pp. 163–166.</div>
+        <div class="source-meta">PubMed ID 19882025 · Peer-reviewed journal · Academic publisher (Medknow)</div>
+      </div>
+    </div>
+    <p class="source-eval">Evaluated as highly credible: authored by medical researchers with institutional affiliation, published in an indexed dermatology journal, and directly relevant to the efficacy of aloe vera as a skincare active ingredient. The study findings confirmed anti-inflammatory and wound-healing properties of aloe vera polysaccharides, directly supporting my inclusion of aloe vera in the serum formulation.</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current (2008)</span>
+      <span class="craap-pill">✓ Relevant</span>
+      <span class="craap-pill">✓ Authority: PhD researchers</span>
+      <span class="craap-pill">✓ Accurate: peer-reviewed</span>
+      <span class="craap-pill">✓ Purpose: educational</span>
+    </div>
+  </div>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">2</div>
+      <div>
+        <div class="source-title">Valerón-Almazán, P. et al. (2015). Evolution of post-surgical scars treated with pure rosehip seed oil. <em>Journal of Cosmetics, Dermatological Sciences and Applications</em>, 5(2).</div>
+        <div class="source-meta">Scientific Research Publishing · Peer-reviewed · Open access</div>
+      </div>
+    </div>
+    <p class="source-eval">Good credibility, though the journal is lower impact than top-tier publications. The study used a controlled clinical design with 108 patients, making the findings robust. Directly relevant to my claim about rosehip oil's skin-regenerating properties. Used to support Success Criterion 3 (evidence-based botanical ingredients).</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current (2015)</span>
+      <span class="craap-pill">✓ Relevant</span>
+      <span class="craap-pill">✓ Authority: clinical study</span>
+      <span class="craap-pill">✓ Accurate: n=108</span>
+      <span class="craap-pill">~ Purpose: academic</span>
+    </div>
+  </div>
+
+  <div class="source-card">
+    <div class="source-header">
+      <div class="source-num">3</div>
+      <div>
+        <div class="source-title">The Beauty Chef (2023). "Natural Preservatives That Actually Work." <em>TheBeautyChef.com</em>.</div>
+        <div class="source-meta">Commercial beauty brand website · No academic affiliation</div>
+      </div>
+    </div>
+    <p class="source-eval"><strong>Rejected after CRAAP evaluation.</strong> Although the article contained useful vocabulary for natural preservatives, it was published by a company that sells natural skincare products — a clear commercial purpose that creates bias. No citations were provided to support the efficacy claims. I used this source to identify search terms (e.g. "leucidal liquid", "naticide") but sourced the actual efficacy evidence from a peer-reviewed paper by Nair (2013) in the <em>International Journal of Pharmaceutics</em>.</p>
+    <div class="craap-pills">
+      <span class="craap-pill">✓ Current</span>
+      <span class="craap-pill">✓ Relevant vocab</span>
+      <span class="craap-pill">✗ Authority: no credentials</span>
+      <span class="craap-pill">✗ Accurate: no citations</span>
+      <span class="craap-pill">✗ Purpose: commercial bias</span>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong ATL Evidence</div>
+      <ul>
+        <li>ATL skills are explicitly named and described with the IB terminology</li>
+        <li>Specific examples are given — the rosehip oil claim correction is concrete</li>
+        <li>Evidence is connected to the narrative: "this skill helped me by…"</li>
+        <li>Bi (learning goal) and Bii (product) are clearly kept separate</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Weak ATL Coverage</div>
+      <ul>
+        <li>Listing 6+ ATL skills without going into depth on any</li>
+        <li>"I used research skills to do research" — circular and vague</li>
+        <li>Mixing learning goal skills and product skills together in one section</li>
+        <li>Mentioning evidence but not explicitly connecting it to the ATL skill discussion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CRITERION C ===== -->
+<section class="section" id="criterion-c">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">C</span>
+    <div>
+      <span class="section-label">Criterion C — Reflecting</span>
+      <h2>Reflecting on Learning &amp; Product</h2>
+    </div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion C: 8 marks total (Ci + Cii)</div>
+
+  <!-- Ci -->
+  <h3 id="ci">Ci · Impact on Learning &amp; Personal Development</h3>
+
+  <p>The personal project has had two significant impacts on me as a learner. I focus on these two in depth, rather than listing many impacts briefly — because the IB moderator notes that "several brief statements do not together constitute a description or explanation."</p>
+
+  <h4>Impact 1: The Development of Scientific Scepticism</h4>
+
+  <div class="reflection-block">
+    <p>Before this project, I believed that "natural" automatically meant "safe" and "effective." I had absorbed this assumption from social media, from beauty influencers, and even from my own family's herbal practices. The moment this belief shifted was when I discovered — through primary literature — that lemon juice, one of the most-recommended "natural" skincare ingredients on TikTok, causes phototoxic burns at the concentrations typically advised.</p>
+    <p>This discovery forced me to confront my own intellectual laziness. I had never questioned whether "natural" claims were supported by evidence. Learning to apply the CRAAP test and then to interrogate the methodology of studies themselves (sample size, control groups, conflict of interest) fundamentally changed how I approach information — not just in skincare, but in all areas. I now habitually ask: "Who says this? What is their evidence? What financial interest do they have?"</p>
+    <p>This is what the IB Learner Profile calls being an <strong>Inquirer</strong>: developing skills for inquiry that sustain a love of learning. I did not have this skill at the start of the project. I have it now.</p>
+  </div>
+
+  <h4>Impact 2: Tolerating and Learning from Failure</h4>
+
+  <div class="reflection-block">
+    <p>My first serum batch failed. After 36 hours, the oil and water phases separated completely. When I opened the jar, I felt a wave of frustration and self-doubt that I did not expect. I had planned this batch carefully. I had followed the formula. Why had it failed?</p>
+    <p>The process of diagnosing the failure — reviewing my formulation log, re-reading the emulsification literature, identifying the temperature error — taught me something I cannot learn from a textbook: that failure is a precise source of information, not a sign of incompetence. By the time Batch 2 succeeded, I had a much deeper understanding of emulsification chemistry than I would have gained from a straightforward first success.</p>
+    <p>This connects to the Learner Profile attribute of being a <strong>Risk-Taker</strong>: I approached uncertainty with determination, and I used the failure to explore rather than to retreat. I believe this experience will have lasting relevance for how I approach challenges in science and in life.</p>
+  </div>
+
+  <div class="lp-grid">
+    <div class="lp-chip">Inquirer <span>developed through rigorous source evaluation</span></div>
+    <div class="lp-chip">Risk-Taker <span>learned from failed prototype</span></div>
+    <div class="lp-chip">Knowledgeable <span>built real understanding of formulation chemistry</span></div>
+    <div class="lp-chip">Reflective <span>kept project journal throughout</span></div>
+  </div>
+
+  <!-- Cii -->
+  <h3 id="cii">Cii · Evaluating the Product Against Success Criteria</h3>
+
+  <p>I evaluate my product against each of the six success criteria I established at the start of the project. I balance strengths and limitations, and I support each judgement with specific evidence from the product itself — not solely from survey results.</p>
+
+  <div class="callout warm">
+    <strong>⚠️ Key Moderator Feedback (June 2026):</strong> "Survey data and external opinions can provide useful information, but they do not constitute evaluation unless they are interpreted and used to support the student's own analysis." Your evaluation must be YOUR OWN critical judgement. You can reference what testers said, but you must interpret and analyse it.
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 1: pH between 4.5 and 6.0
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">
+      All three products tested within the target pH range: cleanser 5.2, serum 4.8, face mask 5.6. I tested each product three times on separate occasions to account for measurement error from pH strips. The consistency of results (±0.2 variation) confirms the formulas are reliably calibrated. The face mask at pH 5.6 sits at the upper end of the range, which I attribute to the kaolin clay's natural alkalinity. In a future formulation, I would add a small amount of citric acid to bring this down to the midpoint of the range (pH 5.0), which would improve the safety margin for long-term use.
+    </div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 2: Emulsion stability — no separation after 72 hours
+      <span class="eval-verdict v-met">✓ Met (exceeded)</span>
+      <span class="eval-score" style="color:var(--good)">Exceeded criterion</span>
+    </div>
+    <div class="eval-body">
+      The final serum formulation remained fully stable for 96 hours — 24 hours beyond the target. I attribute this to increasing the emulsifier (BTMS-50) from 3% to 4% in Batch 2, informed by the formulation literature. This improvement was made possible by my detailed formulation log, which allowed me to identify the exact variable that caused Batch 1 failure. Photographs at 24h, 48h, 72h, and 96h intervals are included in Appendix B.
+    </div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 3: At least 2 evidence-based botanical actives per product
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">
+      Each product contains two to three evidence-based botanical actives. The serum contains aloe vera (anti-inflammatory, confirmed by Surjushe et al., 2008) and rosehip oil (skin barrier restoration, confirmed by Valerón-Almazán et al., 2015). The face mask contains green tea extract (antioxidant, confirmed by Katiyar, 2011) and kaolin clay (pore-clearing, confirmed by Moosavi, 2017). This criterion was the most intellectually rigorous to achieve, because I had to critically distinguish between evidence-based ingredients and those with only anecdotal or commercial support.
+    </div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 4: Recyclable/biodegradable packaging only
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">
+      All three products are housed in borosilicate glass jars with aluminium lids, both of which are infinitely recyclable. Labels are printed on recycled kraft paper with water-based ink. I chose not to use plastic pumps, although they would have improved user experience, because they are not currently recyclable in Dubai's recycling infrastructure. This was a deliberate trade-off between aesthetics and the environmental criterion I had set myself — and I believe the criterion was the right priority.
+    </div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 5: Average rating ≥ 4/5 from 5 testers
+      <span class="eval-verdict v-partial">~ Partially met</span>
+      <span class="eval-score" style="color:var(--accent-warm)">2 of 3 products met threshold</span>
+    </div>
+    <div class="eval-body">
+      The cleanser (4.4/5 average) and serum (4.2/5 average) met the threshold. The face mask averaged 3.6/5, falling below the target. Three of five testers commented that the mask had an "earthy, clay-like scent" that they found unpleasant. I had expected this, because kaolin clay has a distinct natural smell, but I had not accounted for how much this would affect the sensory experience score. In a refined version, I would add a small quantity of cosmetic-grade lavender essential oil (under 0.5% to remain within safe use limits) to mask the clay smell, while maintaining the product's natural formulation. This limitation helped me understand that sensory properties are as important as functional properties in product design — a lesson I might not have learned from a textbook.
+    </div>
+  </div>
+
+  <div class="eval-row">
+    <div class="eval-header">
+      Criterion 6: Material cost ≤ AED 150 per 50ml batch
+      <span class="eval-verdict v-met">✓ Met</span>
+      <span class="eval-score" style="color:var(--good)">Fully achieved</span>
+    </div>
+    <div class="eval-body">
+      Final material costs were: cleanser AED 82, serum AED 118, face mask AED 94 — all well within the AED 150 limit. The most significant cost driver was rosehip oil (AED 38 for 30ml), which I sourced from a local wholesaler rather than a retail store, reducing cost by approximately 40%. The glass jars represented the second-largest cost (AED 18 each), but I considered this necessary to meet criterion 4. A detailed cost breakdown is provided in Appendix C.
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong Criterion C Features</div>
+      <ul>
+        <li>Reflection focuses on <em>two deep impacts</em>, not a list of many</li>
+        <li>Specific moments are described (the failed batch, the lemon juice discovery)</li>
+        <li>Learner Profile connections are made authentically, not just listed</li>
+        <li>Product evaluation balances strengths AND limitations — criterion 5 is honest</li>
+        <li>External feedback is <em>interpreted</em> by the student, not just reported</li>
+        <li>Limitations lead to specific, actionable improvements</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Reflection Mistakes</div>
+      <ul>
+        <li>"This project taught me time management, communication, and resilience" — no depth</li>
+        <li>Evaluation that only copies survey ratings without student analysis</li>
+        <li>"All my testers loved the product" — ignores criteria that were not fully met</li>
+        <li>Not connecting the Learner Profile to specific experiences in the project</li>
+        <li>Describing what happened instead of explaining the <em>impact</em> on learning</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== REFERENCES ===== -->
+<section class="section" id="references">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">Ref</span>
+    <div>
+      <span class="section-label">Bibliography</span>
+      <h2>References</h2>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--fg-muted);">All references formatted in Harvard style. A minimum of 5 credible academic sources is expected; this report uses 10.</p>
+
+  <ol class="ref-list">
+    <li>Aulton, M.E. (2022). <em>Aulton's Pharmaceutics: The Design and Manufacture of Medicines</em>. 5th edn. Elsevier.</li>
+    <li>Dubai Municipality (2023). <em>Packaging Sustainability Guidelines for Consumer Products</em>. Dubai: Dubai Municipality Environmental Department.</li>
+    <li>Katiyar, S.K. (2011). Green tea prevents non-melanoma skin cancer by enhancing DNA repair. <em>Archives of Biochemistry and Biophysics</em>, 508(2), pp. 152–158.</li>
+    <li>Lambers, H., et al. (2006). Natural skin surface pH is on average below 5, which is beneficial for its resident flora. <em>International Journal of Cosmetic Science</em>, 28(5), pp. 359–370.</li>
+    <li>Levine, M., et al. (2001). Ascorbic acid and vitamin C: a review of biological activity. <em>Journal of the American Medical Association</em>, 285(3), pp. 304–310.</li>
+    <li>Moosavi, M. (2017). Bentonite clay as a natural remedy: a brief review. <em>Iranian Journal of Public Health</em>, 46(9), pp. 1176–1183.</li>
+    <li>Nair, B. (2013). Safety assessment of preservatives used in cosmetics. <em>International Journal of Pharmaceutics</em>, 28(2), pp. 64–79.</li>
+    <li>Surjushe, A., Vasani, R. and Saple, D.G. (2008). Aloe vera: a short review. <em>Indian Journal of Dermatology</em>, 53(4), pp. 163–166.</li>
+    <li>Valerón-Almazán, P., et al. (2015). Evolution of post-surgical scars treated with pure rosehip seed oil. <em>Journal of Cosmetics, Dermatological Sciences and Applications</em>, 5(2), pp. 161–167.</li>
+    <li>Venditti, E., et al. (2020). The chemistry and pharmacology of the fatty acid composition of rosehip oil. <em>Journal of Agricultural and Food Chemistry</em>, 68(12), pp. 3628–3637.</li>
+  </ol>
+
+  <div class="tips-grid" style="margin-top:24px;">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Strong Referencing</div>
+      <ul>
+        <li>Harvard style used consistently throughout</li>
+        <li>All sources cited in-text AND in the bibliography</li>
+        <li>Peer-reviewed journal articles dominate the source list</li>
+        <li>Where websites are used, CRAAP test evaluation is shown</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Referencing Mistakes</div>
+      <ul>
+        <li>Citing sources in the bibliography that are never referenced in the text</li>
+        <li>Using Wikipedia as a primary source</li>
+        <li>No in-text citations — only a bibliography at the end</li>
+        <li>Inconsistent format — mixing Harvard, APA, and informal URLs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPENDIX ===== -->
+<section class="section" id="appendix">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">App</span>
+    <div>
+      <span class="section-label">Supporting Evidence</span>
+      <h2>Appendix</h2>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--fg-muted);">All appendix items are referenced within the main report. Supporting material not mentioned in the narrative does not contribute to the assessment.</p>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix A — Supervisor Meeting Log</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead>
+          <tr><th>Date</th><th>Duration</th><th>Topics Discussed</th><th>Action Points</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Week 2</td><td>30 min</td><td>Learning goal refinement; confirmed distinction between learning and product goal</td><td>Revise learning goal to focus on formulation chemistry specifically</td></tr>
+          <tr><td>Week 5</td><td>20 min</td><td>Review of Batch 1 failure; discussion of emulsification variables</td><td>Increase emulsifier to 4%; re-test at correct temperature</td></tr>
+          <tr><td>Week 7</td><td>25 min</td><td>Review Batch 2 results; discuss user testing protocol</td><td>Finalise sensory evaluation form; recruit 5 testers</td></tr>
+          <tr><td>Week 11</td><td>30 min</td><td>Report draft review; discussion of reflection depth in Criterion C</td><td>Deepen impact analysis; focus on 2 key impacts rather than listing many</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix B — Emulsion Stability Photographs</div>
+    <div class="img-row">
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Serum at 0 hours — fully combined, creamy consistency
+        <small>Appendix B-1</small>
+      </div>
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Serum at 48 hours — stable, no visible separation
+        <small>Appendix B-2</small>
+      </div>
+      <div class="img-box" style="min-height:120px;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Serum at 96 hours — stable, criterion exceeded
+        <small>Appendix B-3</small>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--fg-muted);">Replace placeholder boxes above with your actual photographs of the emulsion stability testing process.</p>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix C — Cost Breakdown</div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead>
+          <tr><th>Product</th><th>Ingredient Costs (AED)</th><th>Packaging (AED)</th><th>Total (AED)</th><th>vs. Criterion (≤150)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Botanical Cleanser</td><td>58</td><td>24</td><td>82</td><td style="color:var(--good);font-weight:700;">✓ Within budget</td></tr>
+          <tr><td>Rosehip Serum</td><td>86</td><td>32</td><td>118</td><td style="color:var(--good);font-weight:700;">✓ Within budget</td></tr>
+          <tr><td>Green Tea Face Mask</td><td>62</td><td>32</td><td>94</td><td style="color:var(--good);font-weight:700;">✓ Within budget</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix D — User Sensory Evaluation Form</div>
+    <p style="font-size:14px;">Five independent testers (aged 15–22) completed the following evaluation form for each product. Testers were recruited from the student body and were not involved in the project's production phase, ensuring independent evaluation.</p>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead>
+          <tr><th>Evaluation Attribute</th><th>Scale</th><th>Tester Instructions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Texture on application</td><td>1 (very unpleasant) – 5 (excellent)</td><td>Apply a small amount to the back of your hand and assess how it feels during and after application.</td></tr>
+          <tr><td>Scent</td><td>1 (strongly disliked) – 5 (strongly liked)</td><td>Assess the natural scent of the product. No perfume or essential oil has been added.</td></tr>
+          <tr><td>Absorption / ease of use</td><td>1 (very difficult) – 5 (very easy)</td><td>Assess how easily the product absorbs or rinses off. Apply as instructed on the label.</td></tr>
+          <tr><td>Overall impression</td><td>1 (would not use again) – 5 (would recommend to others)</td><td>Give your overall impression of the product as a finished skincare item.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix E — Formulation Recipes (Final Batch)</div>
+    <p style="font-size:14px;">The following are the final formulation percentages for the three products, expressed as percentages of total batch weight. All ingredients used comply with EU Cosmetics Regulation No 1223/2009 safety standards.</p>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead>
+          <tr><th>Ingredient (INCI Name)</th><th>Cleanser %</th><th>Serum %</th><th>Face Mask %</th><th>Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Aqua (distilled water)</td><td>65%</td><td>60%</td><td>45%</td><td>Solvent / base</td></tr>
+          <tr><td>Aloe barbadensis leaf juice (Aloe vera)</td><td>10%</td><td>15%</td><td>10%</td><td>Humectant, anti-inflammatory active</td></tr>
+          <tr><td>Rosa canina seed oil (Rosehip oil)</td><td>—</td><td>12%</td><td>—</td><td>Skin-barrier active</td></tr>
+          <tr><td>Camellia sinensis leaf extract (Green tea)</td><td>—</td><td>—</td><td>5%</td><td>Antioxidant active</td></tr>
+          <tr><td>Kaolin (Clay)</td><td>—</td><td>—</td><td>25%</td><td>Absorbent, pore-clarifying</td></tr>
+          <tr><td>BTMS-50 (Behentrimonium methosulfate)</td><td>—</td><td>4%</td><td>—</td><td>Emulsifier</td></tr>
+          <tr><td>Cetyl alcohol</td><td>3%</td><td>2%</td><td>—</td><td>Emollient, thickener</td></tr>
+          <tr><td>Leucidal Liquid (Leuconostoc / radish root)</td><td>2%</td><td>2%</td><td>2%</td><td>Natural preservative</td></tr>
+          <tr><td>Citric acid (q.s. to pH)</td><td>q.s.</td><td>q.s.</td><td>q.s.</td><td>pH adjustment</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL TEACHER NOTES ===== -->
+<section class="section" id="teacher-notes-2">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">!</span>
+    <div>
+      <span class="section-label">Guidance for Students</span>
+      <h2>Summary: What Makes or Breaks a Personal Project</h2>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ THE 5 THINGS THAT EARN TOP MARKS</div>
+      <ul>
+        <li><strong>Clear separation</strong> of learning goal vs. product goal — maintained throughout every section</li>
+        <li><strong>Deep ATL coverage</strong> on 1–2 skills per strand, with specific examples and evidence linked to claims</li>
+        <li><strong>Product-specific success criteria</strong> that are measurable and justified by research</li>
+        <li><strong>Action plan</strong> that focuses on product development and explicitly links to success criteria</li>
+        <li><strong>Student-led evaluation</strong> that interprets evidence, admits limitations honestly, and suggests genuine improvements</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ THE 5 MOST COMMON REASONS FOR LOST MARKS</div>
+      <ul>
+        <li>Learning goal = "learn how to make [the product]" — this is the product goal, not a learning goal</li>
+        <li>Listing 6+ ATL skills without depth — IB moderators consistently penalise this</li>
+        <li>Generic success criteria copied from a template ("the product should be good quality")</li>
+        <li>Evaluation that only reports survey averages without the student's own interpretation</li>
+        <li>Reflection that lists many impacts briefly instead of exploring 1–2 impacts deeply</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background:var(--accent); color:#fff; border-radius:var(--radius); padding:24px 28px; margin-top:24px;">
+    <p style="font-family:var(--heading-font); font-size:20px; font-weight:600; margin:0 0 12px; font-style:italic;">"The distinction between the learning goal and the product goal is the single most important concept in the entire Personal Project."</p>
+    <p style="font-size:14px; margin:0; opacity:.85;">Ask yourself: if you had NOT made the product, what would you still have learned? That learning is your learning goal. The product is simply the means by which you demonstrate and apply it.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="report-footer">
+  <span>IB MYP Personal Project · Sample Report 1: Natural Skincare Line</span>
+  <span>For educational modelling purposes only · Academic Year 2025–2026</span>
+</footer>
+
+</div><!-- /page-wrap -->

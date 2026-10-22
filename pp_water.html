@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<title>Water Conservation Campaign — PP Sample 4</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --bg:          #F4F8FA;
+  --bg-alt:      #E8F2F7;
+  --surface:     #FFFFFF;
+  --border:      #C8DDE8;
+  --fg:          #0E1E26;
+  --fg-muted:    #556878;
+  --accent:      #0B5C80;      /* ocean teal */
+  --accent-warm: #2D9E6B;      /* leaf green */
+  --accent-lt:   #DFF0F8;
+  --good:        #1A7A42;
+  --warn:        #B84A0A;
+  --heading-font:'Lexend', 'Arial', sans-serif;
+  --body-font:   'Source Serif 4', Georgia, serif;
+  --ui-font:     'DM Sans', system-ui, sans-serif;
+  --radius:      6px;
+  --shadow:      0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#061219; --bg-alt:#0D1E27; --surface:#102030; --border:#1C3346;
+    --fg:#DFF0F8; --fg-muted:#6A94A8; --accent:#38A8D4; --accent-warm:#40C880;
+    --accent-lt:#082035; --good:#40C870; --warn:#E87040; color-scheme:dark;
+    --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#061219; --bg-alt:#0D1E27; --surface:#102030; --border:#1C3346;
+  --fg:#DFF0F8; --fg-muted:#6A94A8; --accent:#38A8D4; --accent-warm:#40C880;
+  --accent-lt:#082035; --good:#40C870; --warn:#E87040; color-scheme:dark;
+  --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body-font);font-size:12pt;line-height:1.75;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+
+.toc-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--accent);padding:0 max(24px,env(safe-area-inset-left,0px));display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.toc-bar::-webkit-scrollbar{display:none}
+.toc-bar a{font-family:var(--ui-font);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;padding:14px 16px;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.toc-bar a:hover{color:#fff;border-bottom-color:var(--accent-warm)}
+.toc-bar .logo-chip{font-family:var(--heading-font);font-size:15px;font-weight:700;color:#fff;padding:14px 20px 14px 0;margin-right:12px;border-right:1px solid rgba(255,255,255,.2);white-space:nowrap}
+
+.cover{background:linear-gradient(140deg,var(--accent) 0%,#0D3E5C 100%);color:#fff;padding:56px max(40px,env(safe-area-inset-left,0px)) 48px;position:relative;overflow:hidden}
+.cover::before{content:'💧';font-size:200px;position:absolute;top:-20px;right:-10px;opacity:.06;line-height:1}
+.cover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent-warm),#1A8C58)}
+.cover-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.cover-eyebrow{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:14px}
+.cover h1{font-family:var(--heading-font);font-size:clamp(34px,6.5vw,66px);font-weight:700;line-height:1.05;margin:0 0 16px;text-wrap:balance}
+.cover h1 span{color:var(--accent-warm)}
+.cover-subtitle{font-size:17px;color:rgba(255,255,255,.75);font-style:italic;margin-bottom:28px;max-width:600px}
+.cover-meta{display:flex;flex-wrap:wrap;gap:8px 28px;font-family:var(--ui-font);font-size:13px;color:rgba(255,255,255,.7)}
+.cover-meta strong{color:#fff}
+
+.spec-tiles{max-width:960px;margin:20px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-family:var(--ui-font)}
+.spec-tile{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;text-align:center}
+.spec-tile .s-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:6px}
+.spec-tile .s-val{font-size:22px;font-weight:700;color:var(--accent);font-family:var(--heading-font);line-height:1}
+.spec-tile .s-sub{font-size:11px;color:var(--fg-muted);margin-top:3px}
+.spec-tile .s-warn{font-size:10px;color:var(--warn);margin-top:4px}
+
+.disclaimer{max-width:960px;margin:16px auto 0;background:#FFF3CD;border:1px solid #E8A000;border-left:5px solid #E8A000;border-radius:var(--radius);padding:16px 22px;font-family:var(--ui-font);font-size:13px;line-height:1.65}
+.disclaimer strong{color:#7A5000;display:block;margin-bottom:6px;font-size:14px}
+.disclaimer p{margin:0 0 6px}
+.disclaimer p:last-child{margin:0}
+
+.sup-note{max-width:960px;margin:12px auto 0;background:color-mix(in srgb,var(--accent) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 20px;font-family:var(--ui-font);font-size:13px;line-height:1.7}
+.sup-note strong{color:var(--accent);display:block;margin-bottom:4px}
+
+.page-wrap{max-width:960px;margin:0 auto;padding-bottom:80px}
+.section{padding:48px 0 0}
+.section+.section{border-top:1px solid var(--border);margin-top:48px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.section-num{font-family:var(--heading-font);font-size:56px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;user-select:none}
+.section-label{font-family:var(--ui-font);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-warm);display:block;margin-bottom:4px}
+h2{font-family:var(--heading-font);font-size:clamp(22px,3.5vw,36px);font-weight:700;margin:0;line-height:1.1;text-wrap:balance}
+h3{font-family:var(--heading-font);font-size:22px;font-weight:700;margin:36px 0 12px;color:var(--accent)}
+h4{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin:24px 0 8px}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+.criterion-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px 4px 8px;border-radius:20px;margin-bottom:20px}
+.criterion-tag .dot{width:6px;height:6px;background:var(--accent-warm);border-radius:50%}
+
+.callout{border-left:3px solid var(--accent);background:var(--accent-lt);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout.warm{border-left-color:var(--accent-warm);background:color-mix(in srgb,var(--accent-warm) 8%,var(--bg))}
+
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.tip-card{border-radius:var(--radius);padding:18px 20px;font-size:14px;line-height:1.6}
+.tip-card.good{background:color-mix(in srgb,var(--good) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+.tip-card.bad{background:color-mix(in srgb,var(--warn) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--warn) 25%,transparent)}
+.tip-card .tip-header{display:flex;align-items:center;gap:8px;font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.tip-card.good .tip-header{color:var(--good)}
+.tip-card.bad .tip-header{color:var(--warn)}
+.tip-card ul{margin:0;padding-left:16px}
+.tip-card li{margin-bottom:5px}
+
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-family:var(--heading-font);font-size:32px;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);margin-top:4px}
+.stat-src{font-family:var(--ui-font);font-size:10px;color:var(--fg-muted);margin-top:2px;font-style:italic}
+
+.timeline{position:relative;padding-left:28px;margin:24px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--accent-warm);opacity:.4}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent-warm);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent-warm)}
+.tl-week{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:4px}
+.tl-title{font-family:var(--heading-font);font-size:17px;font-weight:700;margin-bottom:4px;color:var(--accent)}
+.tl-desc{font-size:14px;color:var(--fg-muted);margin:0}
+
+.criteria-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;overflow-x:auto;display:block}
+.criteria-table th,.criteria-table td{padding:11px 14px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.criteria-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.criteria-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cb{font-family:var(--ui-font);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.cb-reach{background:#F0FBF0;color:#2D7A2D}
+.cb-qual{background:#FCF0FF;color:#6B2D9A}
+.cb-mat{background:#F0F8FF;color:#1A5FAA}
+.cb-cost{background:#FFF5EC;color:#AA5000}
+
+.atl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.atl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.atl-skill-name{font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px}
+.atl-card p{font-size:14px;margin:0}
+
+.source-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow);font-size:14px}
+.source-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.source-num{background:var(--accent);color:#fff;font-family:var(--ui-font);font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.source-title{font-weight:600;line-height:1.4}
+.source-eval{color:var(--fg-muted);font-style:italic;margin-top:6px}
+.craap-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.craap-pill{font-family:var(--ui-font);font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--accent-lt);color:var(--accent)}
+
+.reflection-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:20px 0;box-shadow:var(--shadow);font-style:italic;font-size:15.5px;line-height:1.8;position:relative}
+.reflection-block::before{content:'"';font-family:var(--heading-font);font-size:80px;color:var(--border);position:absolute;top:0;left:16px;line-height:1}
+.reflection-block p{padding-left:20px}
+
+.eval-row{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.eval-header{display:flex;align-items:center;gap:12px;background:var(--bg-alt);padding:12px 16px;font-family:var(--ui-font);font-size:13px;font-weight:600}
+.eval-body{padding:14px 16px;font-size:14.5px}
+.eval-verdict{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui-font);font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;margin-left:8px}
+.v-met{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.v-partial{background:color-mix(in srgb,var(--accent-warm) 15%,transparent);color:var(--accent-warm)}
+
+.lp-grid{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.lp-chip{background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:20px;padding:6px 14px;font-family:var(--ui-font);font-size:13px;font-weight:600;color:var(--accent)}
+.lp-chip span{color:var(--fg-muted);font-weight:400;font-size:12px;margin-left:6px}
+
+.ref-list{counter-reset:refs;list-style:none;padding:0;margin:0}
+.ref-list li{counter-increment:refs;display:flex;gap:12px;margin-bottom:12px;font-size:14px;line-height:1.6}
+.ref-list li::before{content:counter(refs);min-width:24px;height:24px;background:var(--bg-alt);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ui-font);font-size:11px;font-weight:700;color:var(--fg-muted);flex-shrink:0;margin-top:2px}
+
+.appendix-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.appendix-title{font-family:var(--ui-font);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.appendix-item p{font-size:14px}
+.img-box{background:var(--bg-alt);border:1px dashed var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--fg-muted);font-family:var(--ui-font);font-size:13px;gap:8px}
+.img-box svg{opacity:.4}
+.img-box small{font-size:11px;opacity:.7}
+.img-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0}
+.img-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.log-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0}
+.log-table th,.log-table td{padding:10px 14px;border:1px solid var(--border);text-align:left;vertical-align:top}
+.log-table th{background:var(--bg-alt);font-family:var(--ui-font);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.report-footer{border-top:1px solid var(--border);margin-top:64px;padding:24px 0;font-family:var(--ui-font);font-size:12px;color:var(--fg-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){.cover{padding:36px 0 32px}.tips-grid,.atl-grid,.img-row{grid-template-columns:1fr}.img-row-2{grid-template-columns:1fr}.stat-row{grid-template-columns:repeat(2,1fr)}}
+@media print{.toc-bar{display:none}}
+</style>
+
+<style>
+.home-bar{background:#1a1a1a;padding:0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:16px;font-family:'DM Sans',system-ui,sans-serif}
+.home-bar a.home-link{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;opacity:.85;transition:opacity .2s}
+.home-bar a.home-link:hover{opacity:1}
+.home-bar .divider{color:rgba(255,255,255,.25);font-size:16px;line-height:1}
+.home-bar .current-title{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="home-bar">
+  <a class="home-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    All Samples
+  </a>
+  <span class="divider">/</span>
+  <span class="current-title">Sample 04 — Water Conservation Campaign</span>
+</div>
+<nav class="toc-bar">
+  <span class="logo-chip">MYP Personal Project</span>
+  <a href="#intro">Introduction</a>
+  <a href="#criterion-a">Criterion A</a>
+  <a href="#criterion-b">Criterion B</a>
+  <a href="#criterion-c">Criterion C</a>
+  <a href="#references">References</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<div class="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">IB MYP Year 5 · Personal Project Report · Sample 4 of 5</p>
+    <h1>Every Drop <span>Counts</span></h1>
+    <p class="cover-subtitle">A printed and physical water conservation awareness campaign for secondary school students in the UAE, designed using behaviour-change communication principles</p>
+    <div class="cover-meta">
+      <div><strong>Category:</strong> Science &amp; Environment</div>
+      <div><strong>Global Context:</strong> Globalization &amp; Sustainability</div>
+      <div><strong>Supervisor:</strong> [Supervisor Name]</div>
+      <div><strong>Candidate Number:</strong> [000XXX-00000]</div>
+      <div><strong>School:</strong> [Your School Name]</div>
+    </div>
+  </div>
+</div>
+
+<div class="spec-tiles">
+  <div class="spec-tile"><div class="s-label">Word Count</div><div class="s-val">1,500–3,500</div><div class="s-sub">words (body text only)</div><div class="s-warn">References &amp; appendices excluded</div></div>
+  <div class="spec-tile"><div class="s-label">Page Limit</div><div class="s-val">Max 15</div><div class="s-sub">pages (report body)</div><div class="s-warn">Confirm with your supervisor</div></div>
+  <div class="spec-tile"><div class="s-label">Font Size</div><div class="s-val">Min 11pt</div><div class="s-sub">12pt recommended</div><div class="s-warn">Margins: min 2 cm all sides</div></div>
+  <div class="spec-tile"><div class="s-label">Citations</div><div class="s-val">Harvard</div><div class="s-sub">in-text + bibliography</div><div class="s-warn">Min 5 academic sources</div></div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ IMPORTANT — FOR REFERENCE ONLY. DO NOT COPY.</strong>
+  <p>This is a model report published as a student reference resource to illustrate the quality of work expected in an IB MYP Personal Project. <strong>Students must NOT copy, paraphrase, or reproduce any part of this report.</strong> Your Personal Project must be entirely your own original, creative, and innovative work.</p>
+  <p>Following this sample and reading the checklist does <strong>not</strong> guarantee any particular grade. Meet regularly with your Personal Project supervisor, submit all drafts on time, act on feedback, and follow your supervisor's instructions above all else.</p>
+</div>
+
+<div class="sup-note">
+  <strong>📌 Reading note for students</strong>
+  Notice: (1) The product here is physical/printed campaign materials (posters, pledge cards, information booklet) — not a website or video. (2) The learning goal is about behaviour-change communication theory — not "how to make a poster." (3) The student conducts a before/after survey of student attitudes to measure product impact — a rigorous evaluation method. This is one way to demonstrate Criterion C Cii with evidence.
+</div>
+
+<div class="page-wrap">
+
+<section class="section" id="intro">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">00</span>
+    <div><span class="section-label">Overview</span><h2>Introduction &amp; Personal Interest</h2></div>
+  </div>
+  <p>I grew up in a family that had moved between three countries before I was twelve. In one of them, a period of restricted water access lasted three weeks. I remember the water tank on the roof, the scheduled filling times, the careful rationing my mother organised at mealtimes. When I arrived in the UAE and saw sprinklers running in the midday heat, or read that the UAE has one of the highest per-capita water consumption rates in the world, I experienced a kind of cognitive dissonance I could not explain. How could a country in one of the most water-scarce regions on Earth be simultaneously one of the highest consumers of water per person?</p>
+  <p>This question was the seed of my project. Through initial research, I discovered that the UAE relies almost entirely on energy-intensive desalination for its freshwater supply, making it one of the most vulnerable countries in the world to the dual pressures of water scarcity and energy cost. I also discovered, however, that individual and institutional behaviour change — not just infrastructure — is identified in the literature as one of the most cost-effective short-term responses to water stress.</p>
+  <p>This brought me to my learning goal: to develop an understanding of how behaviour-change communication (BCC) theory can be used to design materials that shift awareness and habits around water conservation in adolescent populations — and to apply that understanding to produce a physical awareness campaign for secondary school students.</p>
+  <div class="callout">
+    <strong>Key distinction for markers:</strong> The learning goal is about <em>behaviour-change communication theory</em> and how it applies to environmental issues. The product goal is producing the campaign materials. Students who write "my goal was to make a water conservation campaign" have merged product and learning — one of the most common reasons for Criterion A marks being withheld.
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card good">
+      <div class="tip-header">✓ Good Practice Here</div>
+      <ul>
+        <li>Personal interest grounded in a real lived experience — not just "I care about the environment"</li>
+        <li>Statistics are cited: UAE water consumption data is evidence, not assertion</li>
+        <li>Introduction moves from personal experience → local/global context → academic framework</li>
+      </ul>
+    </div>
+    <div class="tip-card bad">
+      <div class="tip-header">✗ Common Mistakes</div>
+      <ul>
+        <li>"I chose water conservation because I want to save the planet" — no personal trigger or intellectual question</li>
+        <li>Opening with product description: "I made posters about water…"</li>
+        <li>Omitting any connection to an academic discipline (here: BCC theory)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="criterion-a">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">A</span>
+    <div><span class="section-label">Criterion A — Planning</span><h2>Planning the Personal Project</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion A: 8 marks total (Ai + Aii + Aiii)</div>
+
+  <h3 id="ai">Ai · Learning Goal &amp; Global Context</h3>
+  <h4>Learning Goal</h4>
+  <p>My learning goal is to understand how behaviour-change communication (BCC) theory — including models such as the Health Belief Model and the Stages of Change framework adapted for environmental behaviour — can be applied to design materials that measurably shift awareness and self-reported intention to act on water conservation issues in a secondary school student population in the UAE.</p>
+  <p>Specifically, I wanted to understand: (1) what makes environmental communication effective versus ineffective with adolescent audiences; (2) whether fear-based or positive messaging produces better attitude change in this population; (3) how visual design choices (colour, typography, imagery) interact with message content to produce or undermine credibility and engagement.</p>
+
+  <h4>UAE Water Context — Key Statistics</h4>
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-val">550L</div><div class="stat-label">Average UAE daily water use per person</div><div class="stat-src">vs. global avg ~170L (WHO, 2021)</div></div>
+    <div class="stat-card"><div class="stat-val">98%</div><div class="stat-label">UAE freshwater from desalination</div><div class="stat-src">Al-Zubari et al. (2017)</div></div>
+    <div class="stat-card"><div class="stat-val">1.5%</div><div class="stat-label">Usable groundwater remaining</div><div class="stat-src">UAE Ministry of Climate Change (2019)</div></div>
+    <div class="stat-card"><div class="stat-val">3×</div><div class="stat-label">UAE water cost per litre vs. OECD average</div><div class="stat-src">World Bank (2020)</div></div>
+  </div>
+
+  <h4>Global Context: Globalization &amp; Sustainability</h4>
+  <p>I selected <strong>Globalization and Sustainability</strong>, with a focus on environmental stewardship at the local level as a response to global resource stress. Water scarcity is a global crisis, but its experience is radically unequal: the UAE's geography and economy have insulated its residents from immediate deprivation while simultaneously producing some of the world's highest per-capita consumption. My project explores the tension between local abundance (perceived) and global scarcity (real) — and asks whether communication can bridge that gap in a school community made up of students from over 70 countries, many of whom have very different lived experiences of water access.</p>
+
+  <h3 id="aii">Aii · Intended Product &amp; Success Criteria</h3>
+  <h4>Intended Product</h4>
+  <p>My intended product is a physical water conservation awareness campaign, consisting of: (1) <strong>six A2 printed posters</strong> designed using BCC principles (two targeting knowledge, two targeting attitude, two targeting intention/habit); (2) a <strong>printed 8-page information booklet</strong> (A5, saddle-stitched) with UAE-specific water facts and practical behaviour-change tips; (3) a <strong>classroom pledge card</strong> (A6, printed on card stock), which students sign to commit to one specific water-conservation behaviour change. All materials are designed in a cohesive visual system — consistent colour palette, typography, and iconography — and are physically printed and displayed in school.</p>
+
+  <div class="img-row-2">
+    <div class="img-box" style="min-height:130px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18"/></svg>
+      Photograph of displayed campaign posters in school
+      <small>Replace with actual poster photographs</small>
+    </div>
+    <div class="img-box" style="min-height:130px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Printed booklet and pledge card — physical product
+      <small>Replace with actual product photographs</small>
+    </div>
+  </div>
+
+  <h4>Success Criteria — ACCESSFM Framework</h4>
+  <div style="overflow-x:auto;">
+    <table class="criteria-table">
+      <thead>
+        <tr><th>#</th><th>Criterion</th><th>ACCESSFM</th><th>Measurable Standard</th><th>Evidence Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Each poster must be traceable to one of the three BCC message types (knowledge / attitude / intention) and include at least one BCC technique from the literature (e.g., social norming, loss framing, identity affirmation)</td><td><span class="cb cb-qual">Function</span></td><td>Annotation guide maps each poster to BCC technique + source</td><td>Singhal &amp; Rogers (2004); World Health Organization BCC guidelines</td></tr>
+        <tr><td>2</td><td>Campaign materials must demonstrate measurable shift in student awareness: pre- and post-survey score ≥15% increase in correct responses to UAE water facts quiz</td><td><span class="cb cb-reach">Customer</span></td><td>Anonymous survey of ≥15 students before and after 2-week display</td><td>Before-after survey (Appendix B)</td></tr>
+        <tr><td>3</td><td>Student self-reported intention to change a water-related behaviour must increase: ≥50% of post-survey respondents commit to at least one specific behaviour change on the pledge card</td><td><span class="cb cb-reach">Customer</span></td><td>Pledge card return rate + behaviour listed on card</td><td>Pledge card collection (Appendix B)</td></tr>
+        <tr><td>4</td><td>All six posters must use the same visual system: consistent colour palette (maximum 4 colours), one display typeface, one body typeface, and a consistent icon set</td><td><span class="cb cb-qual">Aesthetics</span></td><td>Visual style guide document; verified by design-technology teacher</td><td>Style guide (Appendix C)</td></tr>
+        <tr><td>5</td><td>Total production cost must not exceed AED 200 (printing, materials)</td><td><span class="cb cb-cost">Cost</span></td><td>Itemised receipts</td><td>Cost breakdown (Appendix D)</td></tr>
+        <tr><td>6</td><td>The booklet text must be readable at an appropriate level for secondary students (Flesch-Kincaid Grade 7–9)</td><td><span class="cb cb-qual">Customer</span></td><td>Flesch-Kincaid test run on body text of booklet (Microsoft Word readability tool)</td><td>Readability test (Appendix E)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="aiii">Aiii · Action Plan</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 1–2</div><div class="tl-title">Research — BCC Theory &amp; UAE Water Context</div><p class="tl-desc">Read primary sources on behaviour-change communication, effective environmental messaging for adolescents, and UAE-specific water data. Apply CRAAP test to all sources. Conduct baseline student knowledge survey to understand starting point.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 3</div><div class="tl-title">Message Mapping — BCC Framework to Content</div><p class="tl-desc">Map the 6 posters to BCC message types. Draft key messages for each. Identify BCC technique for each. Get supervisor feedback on message strategy before designing.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 4–5</div><div class="tl-title">Visual Design — Style Guide &amp; Poster Mockups</div><p class="tl-desc">Develop visual system: colour palette (inspired by water/desert duality of UAE), typography, iconography. Design all 6 posters and booklet layout. Get DT teacher feedback on readability and visual hierarchy.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 6</div><div class="tl-title">Readability Check &amp; Revision</div><p class="tl-desc">Run Flesch-Kincaid test on booklet text. Revise sentences where FK grade falls above 9. Re-test. Finalise all files for print.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Week 7</div><div class="tl-title">Printing &amp; Physical Assembly</div><p class="tl-desc">Print posters, booklets, and pledge cards. Mount posters. Saddle-stitch booklets. Verify physical quality of all materials before display.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 8–9</div><div class="tl-title">Campaign Display &amp; Data Collection</div><p class="tl-desc">Display posters. Distribute booklets and pledge cards to target group. Collect pledges. Run post-survey after 2 weeks of display.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-week">Weeks 10–12</div><div class="tl-title">Report Writing &amp; Evaluation</div><p class="tl-desc">Analyse before/after survey data. Calculate shift against success criteria. Write full PP report (Criteria A, B, C). Final supervisor meeting and submission.</p></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-b">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">B</span>
+    <div><span class="section-label">Criterion B — Applying Skills</span><h2>Applying ATL Skills</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion B: 8 marks total (Bi + Bii)</div>
+
+  <h3 id="bi">Bi · ATL Skills Applied to the Learning Goal</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Research Skills — Distinguishing Effective from Ineffective Environmental Messaging</div>
+      <p>My most significant research finding contradicted my initial assumption. I had assumed that presenting alarming statistics about water scarcity — images of dried riverbeds, data on desalination costs — would be the most effective approach for a conservation campaign. The literature suggests the opposite for adolescent audiences. Moser and Dilling (2011) found that high-fear environmental messages often produce "psychological distancing" in adolescents: rather than motivating action, they trigger a feeling of helplessness that reduces engagement. Instead, research on effective environmental BCC with young people (Slater, 2006; Steg and Vlek, 2009) suggests that positive identity affirmation ("students like you are making a difference") and specific, achievable behaviour suggestions (rather than global problem framing) produce stronger intention-to-act scores. This finding directly changed my message strategy: I moved from alarm-based to identity-based and solution-focused messaging, with the fear-based framing appearing only in contextual information (the booklet) rather than the primary calls to action (the posters).</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Communication Skills — Adapting Academic Content for a Non-Specialist Audience</div>
+      <p>The booklet required me to translate academic research into language appropriate for a 13–17 year old reader with no background in environmental science or communication theory. This required more skill than I had anticipated. My first draft of the section on desalination was written at FK Grade 11.2 — too complex. I learned that long noun phrases ("the energy-intensive process of reverse osmosis desalination") were the primary source of difficulty, and replaced them with shorter analogies ("desalination is like filtering seawater to make it drinkable — a process that takes as much energy as running a large air conditioner all day"). After revision, the FK grade fell to 8.3, within my target range. This process of audience analysis and iterative revision is, I now recognise, a form of Communication skill in the ATL framework: understanding my reader's needs and rewriting until the text serves them.</p>
+    </div>
+  </div>
+
+  <h3 id="bii">Bii · ATL Skills Applied to Creating the Product</h3>
+  <div class="atl-grid">
+    <div class="atl-card">
+      <div class="atl-skill-name">Creative Thinking — Solving the Colour Paradox</div>
+      <p>An early design problem: my campaign's visual identity needed to communicate "water" (blue) and "UAE environment" (desert, sand, gold/orange) — but blue and orange are high-contrast complementary colours that can feel aggressive or commercial rather than calm and informative, if not handled carefully. I experimented with five different palette combinations before settling on a deep ocean teal (dark enough to work as a text background) and a soft sand tone (warm but not orange) as the secondary. The design teacher who reviewed my prototypes pointed out that this palette worked specifically because the teal read as "water depth" rather than "bright blue," which felt more serious and less like a corporate logo. Making a considered creative decision — and being able to articulate why it worked — was a thinking skill I had not expected the project to require.</p>
+    </div>
+    <div class="atl-card">
+      <div class="atl-skill-name">Self-Management — Planning for Print Production Constraints</div>
+      <p>I designed the campaign materials in a screen-first environment (laptop with RGB colour), but the final product required print (CMYK). When I received the first print proof of Poster 1, the teal appeared significantly greener and less saturated than on screen — a known issue with RGB-to-CMYK colour conversion that I had not anticipated. I had to learn about colour profile management mid-project, convert my files from RGB to CMYK in my design software, and adjust the colour values to approximate the intended appearance in print. I also learned to request a single test print before producing all six posters — a professional practice known as "proof checking" that I would not have thought to do without this experience. Managing this unexpected technical constraint without derailing the overall timeline was a self-management challenge that required both problem-solving and flexible scheduling.</p>
+    </div>
+  </div>
+
+  <h3>Source Evaluation — CRAAP Test Applied</h3>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">1</div><div>
+      <div class="source-title">Moser, S. and Dilling, L. (2011). Communicating Climate Change: Closing the Science-Action Gap. In: Dryzek, J.S., Norgaard, R.B. and Schlosberg, D. (eds.) <em>The Oxford Handbook of Climate Change and Society</em>. Oxford: OUP.</div>
+    </div></div>
+    <p class="source-eval">Established academic chapter on the effectiveness of environmental communication — directly relevant to my learning goal's question about what works with adolescent audiences. Published in a major academic handbook; Susanne Moser is a leading researcher in climate communication. Slightly older (2011) but cited heavily in more recent literature; core findings on psychological distancing have been replicated in subsequent studies. High credibility.</p>
+    <div class="craap-pills"><span class="craap-pill">~ Current (2011)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: Oxford Handbook</span><span class="craap-pill">✓ Accurate: widely cited</span><span class="craap-pill">✓ Purpose: academic</span></div>
+  </div>
+  <div class="source-card">
+    <div class="source-header"><div class="source-num">2</div><div>
+      <div class="source-title">Al-Zubari, W.K., et al. (2017). An index for assessing the sustainability of water resources management in the GCC countries. <em>Ecological Indicators</em>, 80, pp. 499–516.</div>
+    </div></div>
+    <p class="source-eval">Peer-reviewed journal article in a reputable environmental science journal (Ecological Indicators, Elsevier). First author is a regional water expert based in Bahrain, giving regional authority in addition to academic credibility. The specific statistic on UAE desalination dependency (98%) is cited from this source. The article's 2017 date means data may be slightly older, but the desalination dependency figure is consistent with more recent sources (UAE Ministry of Climate Change, 2019). Accepted.</p>
+    <div class="craap-pills"><span class="craap-pill">✓ Current (2017)</span><span class="craap-pill">✓ Relevant</span><span class="craap-pill">✓ Authority: Elsevier journal</span><span class="craap-pill">✓ Accurate: corroborated</span><span class="craap-pill">✓ Purpose: academic</span></div>
+  </div>
+</section>
+
+<section class="section" id="criterion-c">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">C</span>
+    <div><span class="section-label">Criterion C — Reflecting</span><h2>Reflecting on Learning &amp; Product</h2></div>
+  </div>
+  <div class="criterion-tag"><span class="dot"></span> Criterion C: 8 marks total (Ci + Cii)</div>
+
+  <h3 id="ci">Ci · Impact on Learning &amp; Personal Development</h3>
+  <h4>Impact 1: Learning Changes What I See, Not Just What I Know</h4>
+  <div class="reflection-block">
+    <p>Before this project, I experienced advertising and public communication as a largely unconscious background to daily life — posters I passed without noticing, messages that influenced me without my awareness. Studying BCC theory changed that. I now read public communication analytically: when I see a road-safety campaign poster, I can identify which technique it is using (fear appeal? social norm? identity affirmation?). When I see an environmental charity advertisement using photographs of suffering animals, I can connect it to the literature on emotional appeals — and I can also predict, based on Moser and Dilling's findings, why it might actually be less effective at generating donations than an image of people successfully solving the problem.</p>
+    <p>This analytical lens did not exist for me before this project. It is not a piece of knowledge I added — it is a permanent change in how I receive and interpret a category of human communication. The IB Learner Profile describes a <strong>Knowledgeable</strong> learner as one who can connect knowledge to the real world with conceptual understanding; this project gave me a concept (BCC theory) that I now apply automatically to real-world situations I encounter every day.</p>
+  </div>
+  <h4>Impact 2: The Discomfort of Simplification</h4>
+  <div class="reflection-block">
+    <p>The most intellectually uncomfortable moment of the project came when I was writing the knowledge-based posters. My research showed that effective BCC messages are simple, specific, and single-issue: one fact, one behaviour, one ask. But the water crisis in the UAE is not simple. It involves desalination economics, groundwater depletion, agricultural water use, geopolitical vulnerability, and climate change. Reducing this to "Turn off the tap while brushing your teeth" felt dishonest — almost insulting to the complexity of the problem.</p>
+    <p>I discussed this tension with my supervisor, who pointed me to a passage in Rogers (2003) on the "diffusion of innovations" — the idea that effective communication must meet people where they are, not where the communicator thinks they should be. A message that captures the full complexity of a problem is, for most audiences, a message that does nothing. I came to accept, reluctantly, that the responsible communication choice was simplification — and to address the complexity in the booklet, where a reader who wanted more depth could find it. This was an uncomfortable lesson: that doing good communication sometimes means letting go of intellectual rigour at the surface level, in service of a goal that the intellectual rigour, alone, could not achieve.</p>
+  </div>
+  <div class="lp-grid">
+    <div class="lp-chip">Knowledgeable <span>connected BCC theory to real-world analysis of campaigns</span></div>
+    <div class="lp-chip">Open-Minded <span>reversed initial assumption about fear-based messaging</span></div>
+    <div class="lp-chip">Principled <span>wrestled with simplification vs. honesty in communication</span></div>
+    <div class="lp-chip">Communicator <span>adapted academic content for a non-specialist audience</span></div>
+  </div>
+
+  <h3 id="cii">Cii · Evaluating the Product Against Success Criteria</h3>
+  <div class="callout warm"><strong>Reminder:</strong> Evaluate honestly. If a criterion was not met, say so clearly and explain why — and what you would change.</div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 1: BCC technique traceable for each poster<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">The annotation guide (Appendix C) maps each poster to a specific BCC technique: Posters 1–2 use "social normalisation" framing ("In the UAE, students who…"); Posters 3–4 use "loss aversion" framing for attitude change ("Every time you…, a litre of desalination energy is…"); Posters 5–6 use "implementation intention" framing, naming a specific cue, behaviour, and outcome. Each annotation includes the source that describes the technique. Verified by supervisor at Meeting 4.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 2: ≥15% increase in correct responses (knowledge survey)<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Pre-survey (n=18): average correct responses 3.2/8 (40%). Post-survey (n=17, one student absent): average correct responses 5.8/8 (73%). Increase of 33 percentage points — well above the 15% threshold. The largest gains were on UAE-specific statistics: the desalination dependency figure (98%) went from 22% correct to 88% correct. The lowest gain was on the "daily per-capita consumption" question, where only 52% were correct post-survey, possibly because the number (550L) is counterintuitively large and harder to retain than a simpler statistic.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 3: ≥50% of post-survey respondents pledge a behaviour change<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Of 17 post-survey respondents, 13 (76%) returned a completed pledge card with a specific behaviour listed. The most common pledges were: "turn off tap while brushing teeth" (6), "take showers under 4 minutes" (4), and "report dripping taps in school" (3). I note a significant limitation: signing a pledge card in a school setting may create social desirability bias — students may sign because they feel they should, not because they genuinely intend to change behaviour. A more rigorous evaluation would follow up 4 weeks later to ask whether the pledged behaviour had been maintained; this was outside my project timeline.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 4: Consistent visual system across all materials<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">The style guide (Appendix C) documents the colour system (3 colours used consistently), typography (Lexend for headings and body text, chosen for accessibility and readability), and icon set (custom line icons in consistent stroke weight). The design-technology teacher confirmed that all six posters and the booklet adhere to the style guide. One deviation: the pledge card uses a slightly different layout than the booklet, but the DT teacher confirmed this was contextually appropriate (different format, different purpose) rather than a consistency failure.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 5: Production cost ≤ AED 200<span class="eval-verdict v-partial">~ Partially met</span></div><div class="eval-body">Total: AED 214. This exceeded the target by AED 14 (7%) due to an unanticipated cost: the first print run of two posters required reprinting after the colour-management correction (RGB-to-CMYK conversion), and I paid for both prints. The reprinting cost AED 22, which I had not budgeted for. Had I conducted a proof check before printing all materials, I would have avoided this cost and met the budget criterion. This was a planning failure I would correct in a future project by always including a 10–15% contingency budget and proof-checking before full print runs.</div></div>
+
+  <div class="eval-row"><div class="eval-header">Criterion 6: Booklet readability FK Grade 7–9<span class="eval-verdict v-met">✓ Met</span></div><div class="eval-body">Final FK grade after revision: 8.1. Test run via Microsoft Word's built-in readability tool on the 1,247-word booklet body text. Screenshot evidence in Appendix E. Initial draft FK grade was 11.2; revision reduced this by simplifying sentence structure, reducing noun phrase complexity, and replacing passive voice constructions with active voice.</div></div>
+
+  <div class="tips-grid">
+    <div class="tip-card good"><div class="tip-header">✓ Strong Reflection</div><ul>
+      <li>Criterion 3 acknowledges social desirability bias — shows sophisticated understanding of evaluation methodology</li>
+      <li>Criterion 5 is honestly reported as partially unmet, with a specific corrective action for the future</li>
+      <li>Ci Impact 2 demonstrates genuine intellectual discomfort (simplification vs. honesty) — this is the kind of reflection IB moderators describe as "substantial"</li>
+    </ul></div>
+    <div class="tip-card bad"><div class="tip-header">✗ What Loses Marks</div><ul>
+      <li>"Everyone liked my posters" — subjective and no evidence</li>
+      <li>Listing criteria without any evaluative comment</li>
+      <li>Claiming budget was met when it was not — examiners notice inconsistencies</li>
+      <li>Ci describing only positive personal experiences — no evidence of genuine challenge or transformation</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="section" id="references">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">Ref</span>
+    <div><span class="section-label">Bibliography</span><h2>References</h2></div>
+  </div>
+  <ol class="ref-list">
+    <li>Al-Zubari, W.K., et al. (2017). An index for assessing the sustainability of water resources management in the GCC countries. <em>Ecological Indicators</em>, 80, pp. 499–516.</li>
+    <li>Ajzen, I. (1991). The theory of planned behaviour. <em>Organizational Behavior and Human Decision Processes</em>, 50(2), pp. 179–211.</li>
+    <li>Moser, S. and Dilling, L. (2011). Communicating Climate Change: Closing the Science-Action Gap. In: Dryzek, J.S., Norgaard, R.B. and Schlosberg, D. (eds.) <em>The Oxford Handbook of Climate Change and Society</em>. Oxford: OUP, pp. 161–174.</li>
+    <li>Prochaska, J.O. and DiClemente, C.C. (1983). Stages and processes of self-change of smoking: Toward an integrative model of change. <em>Journal of Consulting and Clinical Psychology</em>, 51(3), pp. 390–395.</li>
+    <li>Rogers, E.M. (2003). <em>Diffusion of Innovations</em>. 5th edn. New York: Free Press.</li>
+    <li>Singhal, A. and Rogers, E.M. (2004). <em>Combating AIDS: Communication Strategies in Action</em>. New Delhi: Sage. [BCC framework adapted for environmental contexts]</li>
+    <li>Slater, M.D. (2006). Specification and misspecification of theoretical foundations and logic models for health communication campaigns. <em>Health Communication</em>, 20(2), pp. 149–157.</li>
+    <li>Steg, L. and Vlek, C. (2009). Encouraging pro-environmental behaviour: An integrative review and research agenda. <em>Journal of Environmental Psychology</em>, 29(3), pp. 309–317.</li>
+    <li>UAE Ministry of Climate Change and Environment (2019). <em>UAE State of Environment Report</em>. Abu Dhabi: UAE Government.</li>
+    <li>World Health Organization (2021). <em>Progress on Household Drinking Water, Sanitation and Hygiene</em>. Geneva: WHO/UNICEF.</li>
+  </ol>
+</section>
+
+<section class="section" id="appendix">
+  <div class="section-header">
+    <span class="section-num" aria-hidden="true">App</span>
+    <div><span class="section-label">Supporting Evidence</span><h2>Appendix</h2></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix A — Supervisor Meeting Log</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Meeting</th><th>Date</th><th>Topics Discussed</th><th>Action Points</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Week 2</td><td>Confirmed learning goal (BCC theory) vs. product goal (campaign materials); discussed UAE water context and agreed on 6 poster + booklet + pledge card structure</td><td>Conduct baseline knowledge survey before designing any materials</td></tr>
+        <tr><td>2</td><td>Week 4</td><td>Reviewed poster message map; discussed shift from fear-based to identity/solution-based messaging following literature finding</td><td>Revise messages 3 and 4 to use loss-framing rather than fear-appeal; annotate all 6 against BCC technique</td></tr>
+        <tr><td>3</td><td>Week 7</td><td>Reviewed print proofs; RGB/CMYK colour issue identified and addressed; confirmed booklet FK score 8.1</td><td>Proof check future prints; revise cost tracking to include reprint cost; update budget variance in Criterion 5</td></tr>
+        <tr><td>4</td><td>Week 10</td><td>Reviewed before/after survey data; discussed social desirability bias as a limitation in Cii</td><td>Include limitation discussion in Criterion 3 evaluation; deepen Ci Impact 2 reflection on simplification tension</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix B — Before/After Survey Results Summary</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Question</th><th>Pre-Survey Correct (%)</th><th>Post-Survey Correct (%)</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>UAE freshwater mainly comes from desalination?</td><td>44%</td><td>88%</td><td style="color:var(--good)">+44%</td></tr>
+        <tr><td>UAE daily water use vs. global average?</td><td>17%</td><td>71%</td><td style="color:var(--good)">+54%</td></tr>
+        <tr><td>Percentage of UAE groundwater remaining?</td><td>33%</td><td>76%</td><td style="color:var(--good)">+43%</td></tr>
+        <tr><td>Identify one behaviour that saves water at home?</td><td>78%</td><td>94%</td><td style="color:var(--good)">+16%</td></tr>
+        <tr><td>Daily per-capita consumption in litres (UAE)?</td><td>11%</td><td>52%</td><td style="color:var(--accent-warm)">+41% (below 60%)</td></tr>
+        <tr><td><strong>AVERAGE</strong></td><td><strong>40%</strong></td><td><strong>73%</strong></td><td style="color:var(--good)"><strong>+33% ✓ (target ≥15%)</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix C — Visual Style Guide &amp; BCC Annotation Map (Placeholders)</div>
+    <div class="img-row-2">
+      <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>Colour palette swatch sheet — 3 campaign colours<small>Appendix C-1</small></div>
+      <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>BCC technique annotation map for all 6 posters<small>Appendix C-2</small></div>
+    </div>
+    <p style="font-size:12px;color:var(--fg-muted);">Replace with your actual style guide and annotation documents.</p>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix D — Materials Cost Breakdown</div>
+    <div style="overflow-x:auto;"><table class="log-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Cost (AED)</th></tr></thead>
+      <tbody>
+        <tr><td>A2 poster printing (6 posters + 2 reprints)</td><td>8 prints</td><td>112</td></tr>
+        <tr><td>A5 booklet printing + saddle-stitching (25 copies)</td><td>25</td><td>62</td></tr>
+        <tr><td>A6 pledge card printing (card stock, 30 copies)</td><td>30</td><td>24</td></tr>
+        <tr><td>Poster mounting foam (A2 boards)</td><td>6</td><td>16</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td></td><td style="color:var(--warn);font-weight:700;"><strong>214</strong> ⚠ AED 14 over budget (reprint cost)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="appendix-item">
+    <div class="appendix-title">Appendix E — Readability Test Screenshot</div>
+    <div class="img-box" style="min-height:100px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>Microsoft Word readability statistics screenshot: Flesch-Kincaid Grade Level 8.1<small>Replace with your actual screenshot from Word readability tool</small></div>
+  </div>
+</section>
+
+<footer class="report-footer">
+  <span>IB MYP Personal Project · Sample Report 4: Water Conservation Campaign</span>
+  <span>For student reference only · Do not copy · Academic Year 2025–2026</span>
+</footer>
+</div>
